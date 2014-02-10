@@ -1,0 +1,35 @@
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+                  Prefix Verb   URI Pattern                       Controller#Action
+                    root GET    /                                 users#index
+             users_index GET    /users/index(.:format)            users#index
+              users_show GET    /users/show(.:format)             users#show
+                   users GET    /users(.:format)                  users#index
+                    user GET    /users/:id(.:format)              users#show
+                articles GET    /articles(.:format)               articles#index
+                         POST   /articles(.:format)               articles#create
+             new_article GET    /articles/new(.:format)           articles#new
+            edit_article GET    /articles/:id/edit(.:format)      articles#edit
+                 article GET    /articles/:id(.:format)           articles#show
+                         PATCH  /articles/:id(.:format)           articles#update
+                         PUT    /articles/:id(.:format)           articles#update
+                         DELETE /articles/:id(.:format)           articles#destroy
+                 follows POST   /follows(.:format)                follows#create
+                  follow DELETE /follows/:id(.:format)            follows#destroy
+        new_user_session GET    /users/sign_in(.:format)          devise/sessions#new
+            user_session POST   /users/sign_in(.:format)          devise/sessions#create
+    destroy_user_session DELETE /users/sign_out(.:format)         devise/sessions#destroy
+           user_password POST   /users/password(.:format)         devise/passwords#create
+       new_user_password GET    /users/password/new(.:format)     devise/passwords#new
+      edit_user_password GET    /users/password/edit(.:format)    devise/passwords#edit
+                         PATCH  /users/password(.:format)         devise/passwords#update
+                         PUT    /users/password(.:format)         devise/passwords#update
+cancel_user_registration GET    /users/cancel(.:format)           users/registrations#cancel
+       user_registration POST   /users(.:format)                  users/registrations#create
+   new_user_registration GET    /users/sign_up(.:format)          users/registrations#new
+  edit_user_registration GET    /users/edit(.:format)             users/registrations#edit
+                         PATCH  /users(.:format)                  users/registrations#update
+                         PUT    /users(.:format)                  users/registrations#update
+                         DELETE /users(.:format)                  users/registrations#destroy
+       user_confirmation POST   /users/confirmation(.:format)     devise/confirmations#create
+   new_user_confirmation GET    /users/confirmation/new(.:format) devise/confirmations#new
+                         GET    /users/confirmation(.:format)     devise/confirmations#show

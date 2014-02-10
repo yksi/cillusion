@@ -1,0 +1,30 @@
+%div
+  -if user_signed_in?
+    %H1= "Welcome to illusion system, #{current_user.first_name}. Let's try this site."
+    =link_to "Calendar", articles_path, class: "btn btn-default"
+    =link_to "New article", new_article_path, class: "btn btn-default"
+    %br
+    %br
+    %br
+    =link_to "Profile", current_user, class: "btn btn-success btn-lg"
+    .page-header
+      illusion members:
+      .row
+        -@users.each do |u|
+          .col-sm-6.col-md-4
+            .thumbnail
+              =image_tag u.avatar.url(:thumb)
+              .caption
+                %h5="#{u.fullname}(#{u.email})"
+                -if u.get_count == 0
+                  %h4{style: "color:#f00;"}="unactive user"
+                -if u.get_count > 0 && u.get_count < 10
+                  %h4{style: "color:#00f;"}="active user"
+                -if u.get_count >= 10
+                  %h4{style: "color:#0f0;"}="awesome user"
+                =link_to "View #{u.first_name} profile...", u , class: "btn btn-default"
+  -else
+    %div{align: "center"}  
+      %h3= "Please login or register to have access to calendar and create custom articles"
+
+      =image_tag "logosa.jpg"

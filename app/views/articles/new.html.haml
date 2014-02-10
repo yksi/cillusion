@@ -1,0 +1,23 @@
+%script{src: "http://js.nicedit.com/nicEdit-latest.js", type: "text/javascript"}
+:javascript
+  //<![CDATA[
+          bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
+    //]]>
+=javascript_include_tag "datepicker"
+%div
+  %h1 Create new article
+  =form_for @article do |f|
+    -if @article.errors.any?
+      .panel.panel-danger 
+        .panel-heading
+          Errors
+        .panel-body
+          -@article.errors.full_messages.each do |ue|
+            %h5= "-> #{ue}"
+    = f.text_field :theme, placeholder: "Theme...", class: "form-control", style: "width: 650px;"
+    %br
+    = f.text_area :content, style: "width: 650px; height: 300px;",  placeholder: "article content..."
+    %br
+    %div
+      = f.text_field :date, id: "datepicker", "readonly" => "", placeholder: "article date..."
+      = f.submit "Save", class: "btn btn-success"
