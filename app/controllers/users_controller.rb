@@ -10,14 +10,6 @@ class UsersController < ApplicationController
     end
   end
   
-  def follow(user)
-    current_user.toggle_follow!(user)
-  end
-  
-  def unfollow(user)
-    current_user.unfollow!(user)
-  end
-
   def index
     @users = User.all
   end

@@ -8,10 +8,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
   has_many :user_articles, class_name: 'Article', foreign_key: 'user_id'
-  has_many :followers, class_name: 'Follower', foreign_key: 'follower_id'
-  mount_uploader :avatar, AvatarUploader
-  acts_as_follower
-  acts_as_followable
+  
 
   validates :first_name, presence: true, length: {in: 2..30}
   validates :last_name, presence: true, length: {in: 2..30}
