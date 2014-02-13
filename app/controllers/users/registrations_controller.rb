@@ -40,7 +40,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def show
     super
-    @post = Post.find(params[:created_post_id])
   end
 
   protected

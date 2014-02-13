@@ -1,4 +1,5 @@
 require 'factory_girl_rails'
+require 'faker'
 
 describe User do
   it "is valid with my info" do
@@ -17,16 +18,17 @@ describe User do
   context "Factory" do
     it "makes 8 users" do
       i = 0
-      @users = Array.new(8)
-      emails = Array.new(8)
-      @users.each do |s| 
-        s =  FactoryGirl.build(:user)
-        s.get_short_info_as_string
-        emails.insert(i, s.email)
+      8.times do 
+        User.new do |t|
+          t.first_name = Faker::Name.first_name
+          t.last_name = Faker::Name.last_name
+          t.email = Faker::Internet.email
+          t.save
+          t.get_short_info_as_string          
+        end
         i+=1
       end
-      p emails.include?("user8@examle.com")
-      expect(@users).to_not eq nil
+      expect(i).to eq 8
     end
   end
 
@@ -39,4 +41,7 @@ describe User do
       # user_with_articles.articles.length
     end
   end
+
+  end
+
 end

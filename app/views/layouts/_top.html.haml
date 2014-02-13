@@ -2,6 +2,9 @@
   .navbar-header
     %a.navbar-brand{href: root_path} illusion
   .collapse.navbar-collapse
+    %ul.nav.navbar-nav
+      %li
+        =link_to "Search article", articles_search_path
     .nav.navbar-right.navbar-nav
       -if user_signed_in?
         %li.dropdown
