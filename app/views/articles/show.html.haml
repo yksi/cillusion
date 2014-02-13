@@ -8,13 +8,13 @@
   = link_to "Delete", @article, method: :delete
 %br
   = form_for [@article, @comment] do |f|
-    = f.text_area :content
+    = f.text_area :content, class: 'form-control', style: "resize:vertical"
     = f.hidden_field :article_id, value: @article.id
     = f.submit "Add comment"
 %br
   - @article.comments.order(created_at: :asc).each do |comment|
-    .panel.panel-info
-      .panel-heading
-        %h5{align: "right"}="#{comment.return_created_at_as_nice_string} by #{comment.user.fullname}"
-      .panel-body
-        = comment.content
+    .well
+      = comment.content
+      %hr
+      %h5{align: "right"}="#{comment.return_created_at_as_nice_string} by #{comment.user.fullname}"
+      

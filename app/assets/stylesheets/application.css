@@ -10,7 +10,7 @@
  *
  *= require_self
  *= require bootstrap/bootstrap
- *= require jquery_custom/jquery-custom
+ *= require als/absolution
  */
 
 body
@@ -22,3 +22,5 @@ body
 .container-fluid .row-fluid [class*="span"] {
     margin-left:0px;
 }
+
+body { padding-top: 70px; }

@@ -11,7 +11,7 @@ Illusion::Application.routes.draw do
 
 
   # devise_for :users, controllers: { registrations: 'users/registrations'}
-  devise_for :users, controllers: { registrations: 'users/registrations'}
+  devise_for :users, controllers: { registrations: 'users/registrations', confirmations: 'users/confirmations'}
   resources :users, :only => [:index, :show]
   resources :articles
   resources :follows, only: [:create, :destroy]
