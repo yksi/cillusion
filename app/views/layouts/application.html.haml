@@ -1,0 +1,39 @@
+!!!
+%html{lang: "en"}
+  %head
+    %meta{charset: "utf-8"}
+    %title= "illusion"
+    = stylesheet_link_tag  "application"
+    = javascript_include_tag "application", "flash_modal"
+    = csrf_meta_tag
+  %body
+    = render "layouts/top"
+    %br
+    .container
+      .row
+        -if user_signed_in?
+          .col-md-9.col-md-push-3 
+            = yield
+          .col-md-3.col-md-pull-9
+            = render "layouts/left_column"
+        -else
+          = yield
+
+-if flash.each.count > 0
+  .modal.fade#flash
+    .modal-dialog
+      .modal-content
+        .modal-header{href: "left"}
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} 
+          = image_tag "notice.png"
+        .modal-body
+          - flash.each do |name, msg|
+            - if msg.class == Array
+              %ul
+                - msg.each do |message|
+                  %li
+                    =label_tag message, id: "flash_#{name}"
+            - else 
+              = label_tag msg
+        .modal-footer
+          %button.btn.btn-default{"data-dismiss" => "modal", type: "button"} Ok

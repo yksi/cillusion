@@ -1,0 +1,23 @@
+=javascript_include_tag "tabs_activate"
+-if user_signed_in?
+  %ul.nav.nav-tabs
+    %li
+      %a{"data-toggle" => "tab", :href => "#home"} New articles 
+    %li
+      %a{"data-toggle" => "tab", :href => "#profile"} New profiles
+  .tab-content
+    #home.tab-pane.active
+      %ul.nav.nav-pills.nav-stacked
+        -Article.order(created_at: :desc)[0..9].each do |a|
+          %li
+            =link_to  a do
+              #{a.theme} 
+              %p{style: "color: #0000FF; font-size: 12pt"}= "#{User.find(a.user_id).fullname}"
+    #profile.tab-pane
+      %ul.nav.nav-pills.nav-stacked
+        -User.order(created_at: :desc).each do |u|
+          %li
+            =link_to u do
+              =image_tag u.avatar.small.url
+              #{u.fullname} 
+          
