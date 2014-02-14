@@ -1,13 +1,13 @@
 Illusion::Application.routes.draw do
   
 
+  get "articles/search"
   get "comments/index"
   get "comments/new"
   get "comments/show"
   root "users#index"
   get "users/index"
   get "users/show"
-  get "articles/search"
 
 
   # devise_for :users, controllers: { registrations: 'users/registrations'}

@@ -1,12 +1,9 @@
-= form_tag articles_search_path, method: 'get' do
-  = text_field_tag :search, params[:search]
-  = submit_tag "Search"
-- if @articles.count > 0 
-  - for article in @articles.each
+- if @articles.count > 0
+  - @articles.each do |article|
     = link_to article.theme, article
     %br
 - else 
-  %h5{style: "color:#aaa"}= "No articles found ..."
+  %h5{style: "color:#aaa"}= "No articles found..."
 
 
 

@@ -1,17 +1,20 @@
 = javascript_include_tag "tooltip"
-%nav.navbar.navbar-default.navbar-fixed-top
+.navbar.navbar-default.navbar-fixed-top
   .container-fluid  
     .navbar-header
-      %a.navbar-brand{href: root_path} illusion
+      = link_to root_path, class: "navbar-brand" do
+        = image_tag "logo_min.png"
     .collapse.navbar-collapse
-      %ul.nav.navbar-nav
-        - if user_signed_in?
-          %li
-            = link_to "Search article", articles_search_path
+      - if user_signed_in?
+        .navbar-form.navbar-left
+          .form-group
+            = form_tag articles_search_path, method: 'get' do
+              = text_field_tag :search, params[:search], class: "form-control", placeholder: "Search article..."
+              = submit_tag "Search", name: nil
       .nav.navbar-right.navbar-nav
         -if user_signed_in?
           %li
-            = link_to new_article_path, id: "add", "data-placement" => "left", "data-toggle" => "tooltip", title: "Create article", type: "button" do
+            = link_to new_article_path, id: "add", "data-placement" => "top", "data-toggle" => "tooltip", title: "Create article", type: "button" do
               = image_tag "add.png"
           %li.dropdown
             %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}

@@ -1,9 +1,12 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
+
+require "omniauth-facebook"
 Devise.setup do |config|
   #custom
   config.allow_insecure_token_lookup = true
 
+  config.omniauth :facebook, "APP_ID", "APP_SECRET"
 
 
   # The secret key used by Devise. Devise uses this key to generate

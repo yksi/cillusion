@@ -13,9 +13,9 @@ class Article < ActiveRecord::Base
 
   def self.search(search)
     if search
-      find(:all, conditions: ['lower(theme) LIKE ?', "%#{search}"])
+      self.find(:all, conditions: ['lower(theme) LIKE ?', "%#{search}%"])
     else
-      find(:all)
+      self.find(:all)
     end
   end
 
