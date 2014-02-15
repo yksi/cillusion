@@ -15,6 +15,7 @@ gem 'fog'
 gem "mini_magick", "~> 3.6.0"
 gem "mailcatcher"
 gem 'unf'
+gem 'turbolinks'
 
 group :development do
   gem 'better_errors'
@@ -40,6 +41,7 @@ end
 
 gem 'omniauth-facebook'
 gem 'certified'
+gem 'carrierwave-dropbox'
 
 
 # Use ActiveModel has_secure_password
