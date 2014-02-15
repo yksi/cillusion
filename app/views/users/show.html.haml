@@ -14,13 +14,7 @@
       %br
       -if @user==current_user
         =link_to "Edit profile", edit_user_registration_path
-      %br
-      %br
-      %br
-      %br
-      %br
-      %br
-  %div
+  %div{style: "margin-top: 320"}
     Articles:
     %br
     -@articles.each do |a|
