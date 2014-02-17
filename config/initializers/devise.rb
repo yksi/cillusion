@@ -6,7 +6,7 @@ Devise.setup do |config|
   #custom
   config.allow_insecure_token_lookup = true
 
-  config.omniauth :facebook, "APP_ID", "APP_SECRET"
+  config.omniauth :facebook, "455173291275789", "cce2d296eee55c7004737599e7cfe376"
 
 
   # The secret key used by Devise. Devise uses this key to generate

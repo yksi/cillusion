@@ -8,5 +8,4 @@ class Comment < ActiveRecord::Base
     self.created_at.strftime("%d %B %Y.")
   end
 
-  #attr_accessible :article, :user, :content
 end

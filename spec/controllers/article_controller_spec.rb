@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ArticleController do
+describe ArticlesController do
 
   describe "GET 'search'" do
     it "returns http success" do

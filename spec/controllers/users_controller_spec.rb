@@ -4,7 +4,7 @@ require 'factory_girl_rails'
     context "Controller test" do
       it "redirect after create" do
         user = FactoryGirl.create(:user)
-        expect(response).to redirect_to new_user_session_path
+        expect(response).to be_success
       end
     end
   end

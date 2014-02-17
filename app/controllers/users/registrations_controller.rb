@@ -1,6 +1,6 @@
 class Users::RegistrationsController < Devise::RegistrationsController
+  
   before_filter :configure_permitted_parameters, if: :devise_controller?
-
 
   def new
     @user = User.new

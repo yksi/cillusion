@@ -23,19 +23,17 @@
 
 -if flash.each.count > 0
   .modal.fade#flash
-    .modal-dialog
-      .modal-content
-        .modal-header{href: "left"}
-          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} 
-          = image_tag "notice.png"
+    .modal-dialog.modal-sm
+      .modal-content 
         .modal-body
+          = image_tag "notice.png"
+          %button.btn.btn-default{"data-dismiss" => "modal", type: "button", style: "float:right"} Ok
           - flash.each do |name, msg|
             - if msg.class == Array
               %ul
                 - msg.each do |message|
                   %li
-                    =label_tag message, id: "flash_#{name}"
+                    %h4{align: "center"}= label_tag message, id: "flash_#{name}"
             - else 
-              = label_tag msg
-        .modal-footer
-          %button.btn.btn-default{"data-dismiss" => "modal", type: "button"} Ok
+              %h4{align: "center"}= label_tag msg
+          
