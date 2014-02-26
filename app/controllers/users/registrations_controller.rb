@@ -10,7 +10,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @user = User.new(sign_up_params)
     if @user.save
       sign_up(:user, @user)
-      UserMailer.welcome_email(@user).deliver
       redirect_to @user
     else
       render :new

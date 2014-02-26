@@ -1,0 +1,33 @@
+.comment
+{
+  width: auto;
+  height: auto;
+  float: right;
+
+  /*create leaf*/
+
+  border-bottom-left-radius: 21px;
+  border-bottom-right-radius: 11px;
+  border-top-left-radius: 11px;
+  border-top-right-radius: 23px;
+
+  /*end of create leaf*/
+
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=68)";
+  filter: alpha(opacity=68);
+  -moz-opacity: 0.68;
+  -khtml-opacity: 0.68;
+  opacity: 0.68;
+  border: 1px #ffffff solid;
+
+  background-color: #9df6d4;
+
+  padding: 14px;
+
+  color: #511f20;
+  font-size: inherit;
+  font-weight: inherit;
+  font-family: 'Times New Roman', Times, serif;
+  font-style: inherit;
+
+}

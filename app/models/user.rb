@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
 
   mount_uploader :avatar, AvatarUploader
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :confirmable
+         :recoverable, :rememberable, :trackable, :validatable
   devise :omniauthable, :omniauth_providers => [:facebook]
   
   has_many :user_articles, class_name: 'Article', foreign_key: 'user_id'

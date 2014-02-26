@@ -1,6 +1,7 @@
 Illusion::Application.routes.draw do
   
 
+  get "users/admin_panel"
   get "articles/search"
   get "comments/index"
   get "comments/new"

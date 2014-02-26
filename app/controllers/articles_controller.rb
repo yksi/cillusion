@@ -30,7 +30,6 @@ class ArticlesController < ApplicationController
 
   def destroy
   	@article.destroy
-    UserMailer.welcome_email(User.find(@article.user_id)).deliver
   	redirect_to root_path
   end
 

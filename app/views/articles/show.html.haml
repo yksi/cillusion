@@ -1,9 +1,11 @@
+= stylesheet_link_tag "comment"
+= javascript_include_tag "comment"
 %div{class: "row"}
   %div{class: 'small-8 large-centered columns'}  
     %h2= "#{@article.theme}"
     #{@article.content.html_safe}
 %br
-%div{class: "row panel"}  
+%div
   %h5{align: "right"}= "#{@article.created_at.strftime("%d %b. %Y")} by #{User.find(@article.user_id).fullname}"
   = link_to "Delete", @article, method: :delete
 %br
@@ -13,8 +15,9 @@
     = f.submit "Add comment"
 %br
   - @article.comments.order(created_at: :asc).each do |comment|
-    .well
-      = comment.content
-      %hr
+    %div{align: "right", class: "comment"}
       %h5{align: "right"}="#{comment.return_created_at_as_nice_string} by #{comment.user.fullname}"
+      %br
+      %h4= comment.content
+      
       

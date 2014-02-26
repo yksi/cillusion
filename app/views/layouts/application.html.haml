@@ -14,7 +14,7 @@
     .container
       .row
         -if user_signed_in?
-          .col-md-9.col-md-push-3 
+          .col-md-9.col-md-push-3.container_pull 
             = yield
           .col-md-3.col-md-pull-9
             = render "layouts/left_column"

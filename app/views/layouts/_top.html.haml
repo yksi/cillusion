@@ -18,7 +18,7 @@
               = image_tag "add.png"
           %li.dropdown
             %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-              = image_tag current_user.avatar.small.url, class: "img-rounded"
+              = image_tag current_user.avatar.small.url, class: "img-circle"
               #{current_user.fullname}
               %b.caret
             %ul.dropdown-menu
