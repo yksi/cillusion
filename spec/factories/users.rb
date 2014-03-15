@@ -7,7 +7,6 @@ FactoryGirl.define do
     content Faker::Lorem.paragraphs
     date Time.now + 1.day
     created_at Time.now
-    user
   end
 
   factory :user do 

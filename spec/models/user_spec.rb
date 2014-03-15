@@ -15,30 +15,11 @@ describe User do
     end
   end
 
-  context "Factory" do
-    it "makes 8 users" do
-      i = 0
-      8.times do 
-        User.new do |t|
-          t.first_name = Faker::Name.first_name
-          t.last_name = Faker::Name.last_name
-          t.email = Faker::Internet.email
-          t.save
-          t.get_short_info_as_string          
-        end
-        i+=1
-      end
-      expect(i).to eq 8
-    end
-  end
-
-  context "USER CAN CREATE POSTS" do
-    it "must be valid" do
-      user_with_articles = FactoryGirl.build(:user_with_articles)
-      # user_with_articles do |article|
-      #   article.print_info
-      # end
-      # user_with_articles.articles.length
+  context "USER" do
+    it "can create article" do
+      @user = FactoryGirl.create(:user)
+      @article = FactoryGirl.create(:article)
+      @article.user = @user
     end
   end
 
