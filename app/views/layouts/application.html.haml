@@ -10,6 +10,19 @@
     = favicon_link_tag 'favicon.ico' 
   %body
     = render "layouts/top"
+    .container  
+      -if flash.each.count > 0
+        .alert.alert-info
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", type: "button"} ×
+          - flash.each do |name, msg|
+            - if msg.class == Array
+              %ul
+                - msg.each do |message|
+                  %li
+                    %h4{align: "center"}= label_tag message, id: "flash_#{name}"
+            - else 
+              %h4{align: "center"}= label_tag msg
+
     %br
     .container
       .row
@@ -20,20 +33,4 @@
             = render "layouts/left_column"
         -else
           = yield
-
--if flash.each.count > 0
-  .modal.fade#flash
-    .modal-dialog.modal-sm
-      .modal-content 
-        .modal-body
-          = image_tag "notice.png"
-          %button.btn.btn-default{"data-dismiss" => "modal", type: "button", style: "float:right"} Ok
-          - flash.each do |name, msg|
-            - if msg.class == Array
-              %ul
-                - msg.each do |message|
-                  %li
-                    %h4{align: "center"}= label_tag message, id: "flash_#{name}"
-            - else 
-              %h4{align: "center"}= label_tag msg
           

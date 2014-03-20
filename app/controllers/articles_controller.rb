@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
 
   before_action :require_article, only: [:show, :edit, :destroy, :update]
+  before_action :require_category, only: [:index, :edit, :new] 
 
   def index
   	@articles = current_user.user_articles.all
@@ -23,6 +24,7 @@ class ArticlesController < ApplicationController
   def show
     @comments = @article.comments.all
     @comment = Comment.new
+    @me = current_user == @article.user
   end
 
   def edit
@@ -48,11 +50,15 @@ class ArticlesController < ApplicationController
   private
 
   def article_params
-  	params.require(:article).permit(:content, :date, :user_id, :theme)
+  	params.require(:article).permit(:content, :date, :user_id, :theme, :category)
   end
 
   def require_article
     @article = Article.find(params[:id])
+  end
+
+  def require_category
+    @category = ["Programming", "News", "Wiki", "How To", "My Life", "Science", "Math", "Other"] 
   end
 
 end

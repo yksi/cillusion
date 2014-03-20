@@ -1,9 +1,10 @@
 = stylesheet_link_tag "comment"
 = javascript_include_tag "comment"
-%div{class: "row"}
-  %div{class: 'small-8 large-centered columns'}  
-    %h2= "#{@article.theme}"
-    #{@article.content.html_safe}
+- if @me
+  = link_to "EDIT", edit_article_path
+%div
+  %h2= "#{@article.theme} (#{@article.category})"
+  #{@article.content.html_safe}
 %br
 %div
   %h5{align: "right"}= "#{@article.created_at.strftime("%d %b. %Y")} by #{User.find(@article.user_id).fullname}"
