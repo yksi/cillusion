@@ -1,3 +1,4 @@
+- content_for :title, "#{@articles.count} articles found"
 - if @articles.count > 0
   - @articles.each do |article|
     = link_to article.theme, article
