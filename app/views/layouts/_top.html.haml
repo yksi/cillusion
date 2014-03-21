@@ -7,10 +7,9 @@
     .collapse.navbar-collapse
       - if user_signed_in?
         .navbar-form.navbar-left
-          .form-group
-            = form_tag articles_search_path, method: 'get' do
+          .form-group#search_form
+            = form_tag articles_search_path, method: 'get', class: 'navbar-search pull-left' do
               = text_field_tag :search, params[:search], class: "form-control", placeholder: "Search article..."
-              = submit_tag "Search", name: nil
       .nav.navbar-right.navbar-nav
         -if user_signed_in?
           %li

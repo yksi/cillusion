@@ -42,6 +42,7 @@ end
 gem 'omniauth-facebook'
 gem 'certified'
 gem 'carrierwave-dropbox'
+gem 'friendly_id', '~> 5.0.3'
 
 
 # Use ActiveModel has_secure_password
