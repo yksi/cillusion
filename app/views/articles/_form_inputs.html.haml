@@ -1,21 +1,29 @@
 %script{src: "http://js.nicedit.com/nicEdit-latest.js", type: "text/javascript"}
-:javascript
-  bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
+= stylesheet_link_tag "als/absolution"
 = javascript_include_tag "datepicker"
 = form_for @article do |f|
-  -if @article.errors.any?
-    .panel.panel-danger 
-      .panel-heading
-        Errors
-      .panel-body
-        -@article.errors.full_messages.each do |ue|
-          %h5= "-> #{ue}"
-  = f.text_field :theme, placeholder: "Theme...", class: "form-control", style: "width: 650px;"
-  %br
-  = f.select :category, @category
-  %br
-  = f.text_area :content, style: "width: 650px; height: 300px;",  placeholder: "article content..."
-  %br
-  %div
-    = f.text_field :date, id: "datepicker", "readonly" => "", placeholder: "article date..."
-  = f.submit "Save", class: "btn btn-success"
+  .col-xs-12.col-sm-6.col-md-8  
+    -if @article.errors.any?
+      .panel.panel-danger 
+        .panel-heading
+          Errors
+        .panel-body
+          -@article.errors.full_messages.each do |ue|
+            %h5= "-> #{ue}"
+    = f.text_field :theme, placeholder: "Theme...", class: "form-control", style: "width: 650px;"
+    %br
+    = f.cktext_area :content, :id => 'sometext'
+    %br
+    %div
+      = stylesheet_link_tag "als/absolution"
+  .col-xs-6.col-md-4
+    - if !current_page?(new_article_path)
+      = link_to @article, method: :delete, class: "btn btn-danger" do
+        %i.fa.fa-times= " Remove"
+    = button_tag(type: "submit", class: "btn btn-success") do
+      %i.fa.fa-check= " Save"
+    %hr
+    = label_tag "Category:"
+    = f.select :category, @category
+    %br= label_tag "Photo:"
+    = f.file_field :photo

@@ -1,6 +1,7 @@
 Illusion::Application.routes.draw do
   
 
+  mount Ckeditor::Engine => '/ckeditor'
   get "browse/index"
   get "browse/users"
   get "browse/articles"

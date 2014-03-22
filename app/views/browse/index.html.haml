@@ -6,6 +6,8 @@
       %a{"data-toggle" => "tab", :href => "#articles"} Articles
     %li
       %a{"data-toggle" => "tab", :href => "#users"} Users
+    %li
+      %a{"data-toggle" => "tab", :href => "#comments"} Comments
   .tab-content
     #articles.tab-pane.active
       %ul.nav.nav-pills.nav-stacked
@@ -24,3 +26,13 @@
               = image_tag u.avatar.small.url, class: "img-rounded"
               #{u.fullname}
               %p{align: "right"}= "#{u.user_articles.count} articles, #{u.comments.count} comments"
+    #comments.tab-pane
+      %ul.nav.nav-pills.nav-stacked
+        - @comments.each do |c|
+          %li
+            = link_to "#" do
+              = c.cut_content
+              %p{align: "right"}
+                = "on #{c.my_article}"
+                = image_tag c.user.avatar.url(:small), class: "img-circle"
+                = "#{c.user.fullname}"

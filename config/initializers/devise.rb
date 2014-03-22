@@ -3,8 +3,6 @@
 
 require "omniauth-facebook"
 Devise.setup do |config|
-  #custom
-  config.allow_insecure_token_lookup = true
 
   config.omniauth :facebook, "455173291275789", "cce2d296eee55c7004737599e7cfe376"
 

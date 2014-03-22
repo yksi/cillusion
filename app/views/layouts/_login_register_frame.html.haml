@@ -1,3 +1,4 @@
+= stylesheet_link_tag "als/absolution"
 %div{title: "Welcome to illusion webservice", id: "dialog"}
   = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
     = f.email_field :email, :autofocus => true, placeholder: "Type your email here...", class: 'form-control'
@@ -8,7 +9,7 @@
         = f.check_box :remember_me
         Remember me
         %div{align: "left"}
-          = f.submit "Sign in"
+          = f.submit "Sign in", class: "btn btn-success"
         %br
         %div{align: "center"}   
           = link_to "Create Profile", new_user_registration_path, class: "btn btn-warning"

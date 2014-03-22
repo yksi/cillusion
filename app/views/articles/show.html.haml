@@ -1,27 +1,30 @@
 - content_for :title, @article.theme[0..15]
 = stylesheet_link_tag "comment"
 = javascript_include_tag "comment"
-- if @me
-  %p{align: "right"}
-    = link_to edit_article_path, class: "btn btn-warning" do
-      %i.fa.fa-edit= " Edit"
-%div
-  %h2= "#{@article.theme} (#{@article.category})"
-  #{@article.content.html_safe}
-%br
-%div
-  %h5{align: "right"}= "#{@article.created_at.strftime("%d %b. %Y")} by #{User.find(@article.user_id).fullname}"
-  = link_to "Delete", @article, method: :delete
-%br
-  = form_for [@article, @comment] do |f|
-    = f.text_area :content, class: 'form-control', style: "resize:vertical"
-    = f.hidden_field :article_id, value: @article.id
-    = f.submit "Add comment"
-%br
-  - @article.comments.order(created_at: :asc).each do |comment|
-    %div.comment
-      %h5{align: "right"}="#{comment.return_created_at_as_nice_string} by #{comment.user.fullname}"
+.page-header
+  .row
+    .col-xs-12.col-sm-6.col-md-8   
+      %div  
+        %h1= "#{@article.theme} (#{@article.category})"
+        #{@article.content.html_safe}
       %br
-      %h4= comment.content
-      
+    .col-xs-6.col-md-4
+      = link_to edit_article_path, class: "btn btn-warning" do
+        %i.fa.fa-edit= " Edit"
+      %br
+      %br
+      .thumbnail  
+        = image_tag @article.photo.url
+      = form_for [@article, @comment] do |f|
+        = f.text_area :content, class: 'form-control', style: "resize:vertical"
+        = f.hidden_field :article_id, value: @article.id
+        = f.submit "Add comment", class: "btn btn-success btn-block"
+      %br
+      - @article.comments.order(created_at: :asc).each do |comment|
+        %div.comment
+          %h5{align: "right"}="#{comment.return_created_at_as_nice_string} by #{comment.user.fullname}"
+          %br
+          %h4= comment.content
+        %br 
+%h5.text-right= "#{@article.created_at.strftime("%d %b. %Y")} by #{User.find(@article.user_id).fullname}"
       
