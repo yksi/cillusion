@@ -2,7 +2,9 @@
 = stylesheet_link_tag "comment"
 = javascript_include_tag "comment"
 - if @me
-  = link_to "EDIT", edit_article_path
+  %p{align: "right"}
+    = link_to edit_article_path, class: "btn btn-warning" do
+      %i.fa.fa-edit= " Edit"
 %div
   %h2= "#{@article.theme} (#{@article.category})"
   #{@article.content.html_safe}
@@ -17,7 +19,7 @@
     = f.submit "Add comment"
 %br
   - @article.comments.order(created_at: :asc).each do |comment|
-    %div{align: "right", class: "comment"}
+    %div.comment
       %h5{align: "right"}="#{comment.return_created_at_as_nice_string} by #{comment.user.fullname}"
       %br
       %h4= comment.content

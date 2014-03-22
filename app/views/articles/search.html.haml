@@ -1,10 +1,22 @@
 - content_for :title, "#{@articles.count} articles found"
 - if @articles.count > 0
-  - @articles.each do |article|
-    = link_to article.theme, article
+  .table-responsive  
+    %table.table-bordered.table-hover
+      %tr
+        %th Article
+        %th Created by User
+        %th Created at
+      %tr
+        - @articles.each do |article|
+          %td
+            = link_to "#{article.theme}", article.theme
+          %td
+            = link_to "#{article.user.fullname}", article.user
+          %td= article.created_at
+
     %br
 - else 
-  %h5{style: "color:#aaa"}= "No articles found..."
+  %h5.text-muted= "No articles found..."
 
 
 

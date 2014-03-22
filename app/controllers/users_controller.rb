@@ -13,6 +13,7 @@ class UsersController < ApplicationController
   
   def index
     @users = User.all
+    @articles = Article.order(created_at: :desc)
   end
 
 

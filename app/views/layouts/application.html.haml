@@ -2,7 +2,7 @@
 %html{lang: "en"}
   %head
     %meta{charset: "utf-8"}
-    %title= "#{yield(:title)}|illusion"
+    %title= "#{yield(:title)} | illusion"
     = stylesheet_link_tag  "application"
     = javascript_include_tag "application", "flash_modal"
     = csrf_meta_tag
@@ -25,12 +25,5 @@
 
     %br
     .container
-      .row
-        -if user_signed_in?
-          .col-md-9.col-md-push-3.container_pull 
-            = yield
-          .col-md-3.col-md-pull-9
-            = render "layouts/left_column"
-        -else
-          = yield
+      = yield
           

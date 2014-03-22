@@ -1,0 +1,26 @@
+- content_for :title, "Browse"
+= javascript_include_tag "browse"
+-if user_signed_in?
+  %ul.nav.nav-tabs
+    %li
+      %a{"data-toggle" => "tab", :href => "#articles"} Articles
+    %li
+      %a{"data-toggle" => "tab", :href => "#users"} Users
+  .tab-content
+    #articles.tab-pane.active
+      %ul.nav.nav-pills.nav-stacked
+        - @articles.each do |a|
+          %li
+            = link_to  a do
+              = a.theme
+              %p{align: "right"}
+                = image_tag a.user.avatar.url(:small), class: "img-circle"
+                = "#{a.user.fullname}"
+    #users.tab-pane
+      %ul.nav.nav-pills.nav-stacked
+        - @users.each do |u|
+          %li
+            = link_to u do
+              = image_tag u.avatar.small.url, class: "img-rounded"
+              #{u.fullname}
+              %p{align: "right"}= "#{u.user_articles.count} articles, #{u.comments.count} comments"

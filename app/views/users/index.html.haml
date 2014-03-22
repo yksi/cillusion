@@ -1,29 +1,20 @@
 - content_for :title, "Users"
 %div
-  = image_tag "logo.png"
-  -if user_signed_in?
-    = link_to "http://illusion.wikia.com/wiki/Main_Page" do       
-      %H4="Don't know how to use website? Go to our WIKI"       
+  -if user_signed_in?       
     .page-header
-      illusion members:
+      %h2= "Recently added articles"
       .row
-        -@users.each do |u|
-          .col-sm-6.col-md-4
+        - @articles.each do |article|
+          .col-sm-1.col-md-2
             .thumbnail
-              =image_tag u.avatar.url(:thumb)
-              .caption
-                %h5="#{u.fullname}(#{u.email})"
-                -if u.get_count == 0
-                  %h4{style: "color:#f00;"}="unactive user"
-                -if u.get_count > 0 && u.get_count < 10
-                  %h4{style: "color:#00f;"}="active user"
-                -if u.get_count >= 10
-                  %h4{style: "color:#0f0;"}="awesome user"
-                =link_to "View #{u.first_name} profile...", u , class: "btn btn-default"
-  -else
+              = link_to article do
+                = image_tag article.user.avatar.url(:thumb), class: "img-rounded"
+                .caption
+                  %h4= "#{article.theme}"
+                  %h5= article.user.fullname 
+  - else
     %div{align: "center"}
       <iframe width="640" height="390" src="//www.youtube.com/embed/_gUatp_9NHc" frameborder="0" allowfullscreen></iframe>
       %h3= "Please login or register to have access to calendar and create custom articles"
-      = link_to "http://illusion.wikia.com/wiki/Main_Page" do       
-        %H4="Don't know how to use website? Go to our WIKI" 
-      =image_tag "logosa.jpg"
+= link_to "http://illusion.wikia.com/wiki/Main_Page" do       
+  %H4= "Don't know how to use website? Go to our WIKI"

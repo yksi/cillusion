@@ -3,21 +3,24 @@
   .container-fluid  
     .navbar-header
       = link_to root_path, class: "navbar-brand" do
-        = image_tag "logo_min.png"
+        CILLUSION
     .collapse.navbar-collapse
       - if user_signed_in?
         .navbar-form.navbar-left
           .form-group#search_form
             = form_tag articles_search_path, method: 'get', class: 'navbar-search pull-left' do
+              %i.fa.fa-search
               = text_field_tag :search, params[:search], class: "form-control", placeholder: "Search article..."
+                
+      .nav.navbar-center.navbar-nav
+        %li= link_to "Browse", browse_index_path 
       .nav.navbar-right.navbar-nav
         -if user_signed_in?
           %li
             = link_to new_article_path, id: "add", "data-placement" => "top", "data-toggle" => "tooltip", title: "Create article", type: "button" do
-              = image_tag "add.png"
+              %i.fa.fa-plus= " New Article"
           %li.dropdown
             %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-              = image_tag current_user.avatar.small.url, class: "img-circle"
               #{current_user.fullname}
               %b.caret
             %ul.dropdown-menu

@@ -1,8 +1,8 @@
 %script{src: "http://js.nicedit.com/nicEdit-latest.js", type: "text/javascript"}
 :javascript
   bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
-=javascript_include_tag "datepicker"
-=form_for @article do |f|
+= javascript_include_tag "datepicker"
+= form_for @article do |f|
   -if @article.errors.any?
     .panel.panel-danger 
       .panel-heading

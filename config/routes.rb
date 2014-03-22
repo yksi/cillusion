@@ -1,6 +1,10 @@
 Illusion::Application.routes.draw do
   
 
+  get "browse/index"
+  get "browse/users"
+  get "browse/articles"
+  get "browse/statistic"
   get "users/admin_panel"
   get "articles/search"
   get "comments/index"
