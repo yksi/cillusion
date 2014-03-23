@@ -8,7 +8,7 @@
           .col-sm-1.col-md-2
             .thumbnail
               = link_to article do
-                = image_tag article.user.avatar.url(:thumb), class: "img-rounded"
+                = image_tag article.photo.url, class: "img-rounded"
                 .caption
                   %h4= "#{article.theme}"
                   %h5= article.user.fullname 

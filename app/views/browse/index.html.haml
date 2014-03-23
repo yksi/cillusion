@@ -10,14 +10,15 @@
       %a{"data-toggle" => "tab", :href => "#comments"} Comments
   .tab-content
     #articles.tab-pane.active
-      %ul.nav.nav-pills.nav-stacked
+      %ul.media-list
         - @articles.each do |a|
-          %li
-            = link_to  a do
-              = a.theme
-              %p{align: "right"}
-                = image_tag a.user.avatar.url(:small), class: "img-circle"
-                = "#{a.user.fullname}"
+          %li.well
+            = link_to a do
+              = image_tag a.photo.url(:thumb), align: "left", class: "img-circle"
+              %h4= "#{a.theme}"
+            %em.text-muted= "#{strip_tags(a.content)[0..200]} ...."
+            %em.text-primary.text-right= link_to "#{a.user.fullname}", a.user
+            %em.text-right= "at #{a.return_created_at_as_nice_string}"
     #users.tab-pane
       %ul.nav.nav-pills.nav-stacked
         - @users.each do |u|

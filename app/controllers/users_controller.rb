@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
 
+  helper_method :follow, :unfollow
+
+
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
@@ -29,6 +32,11 @@ class UsersController < ApplicationController
 
   def destroy 	
   end 
+
+  def follows
+    @user = User.find(params[:id])
+    current_user.follow(@user)
+  end
 
   
 end

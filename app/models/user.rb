@@ -6,10 +6,13 @@ class User < ActiveRecord::Base
   devise :omniauthable, :omniauth_providers => [:facebook]
   
   has_many :user_articles, class_name: 'Article', foreign_key: 'user_id'
-  has_many :comments, class_name: 'Comment', foreign_key: 'user_id'  
+  has_many :comments, class_name: 'Comment', foreign_key: 'user_id'
 
   validates :first_name, presence: true, length: {in: 2..30}
   validates :last_name, presence: true, length: {in: 2..30}
+
+  acts_as_followable
+  acts_as_follower
 
   def fullname
     return "#{self.first_name} #{self.last_name}"

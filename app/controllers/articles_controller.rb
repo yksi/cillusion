@@ -1,5 +1,4 @@
 class ArticlesController < ApplicationController
-
   before_action :require_article, only: [:show, :edit, :destroy, :update]
   before_action :require_category, only: [:index, :edit, :new] 
 

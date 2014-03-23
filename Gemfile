@@ -45,7 +45,6 @@ gem 'carrierwave-dropbox'
 gem 'friendly_id', '~> 5.0.3'
 gem "font-awesome-rails"
 gem 'ckeditor', '~> 4.0.10'
-
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

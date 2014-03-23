@@ -27,3 +27,4 @@
     = f.select :category, @category
     %br= label_tag "Photo:"
     = f.file_field :photo
+    = image_tag @article.photo.url

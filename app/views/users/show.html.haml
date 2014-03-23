@@ -1,13 +1,20 @@
 - content_for :title, @user.fullname
+- @ID =  @user.id
 .container
   %div
     %p
-      %h1= "#{@user.fullname}"
-      =image_tag @user.avatar.url(:thumb), align: "left", hspace: "20", vspace: "20"
+      %h1.col-md-3= "#{@user.fullname}"
+      - if !@user.followed_by?(current_user)
+        .col.md-3= link_to "Follow", follows_path , method: :post, class: "btn btn-success"
+      - else
+        = link_to "Unfollow", follow_path, method: :post, class: "btn btn-danger", id: @user.id
+      =image_tag @user.avatar.url(:thumb), align: "right", hspace: "20", vspace: "20"
       %br
-      Age: #{@user.age}
+      - if @user.age
+        Age: #{@user.age}
       %br
-      Hometown: #{@user.hometown}
+      - if @user.hometown
+        Hometown: #{@user.hometown}
       %br
       Registered: #{@user.created_at.strftime("%d %B %Y")}   
       %br
