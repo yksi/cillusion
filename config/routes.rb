@@ -1,5 +1,5 @@
 Illusion::Application.routes.draw do
-  
+
 
   mount Ckeditor::Engine => '/ckeditor'
   get "browse/index"
@@ -25,8 +25,12 @@ Illusion::Application.routes.draw do
   resources :articles do
     resources :comments
   end
-  
-  
+
+  resources :users do
+    resources :follows
+  end
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -68,7 +72,7 @@ Illusion::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'

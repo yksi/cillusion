@@ -1,8 +1,5 @@
 class UsersController < ApplicationController
 
-  helper_method :follow, :unfollow
-
-
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
@@ -13,7 +10,17 @@ class UsersController < ApplicationController
       render "edit"
     end
   end
-  
+
+  def follow
+    @user = User.find(params[:id])
+    current_user.follow!(@user)
+  end
+
+  def unfollow
+    @user = User.find(params[:id])
+    current_user.unfollow(@user)
+  end
+
   def index
     @users = User.all
     @articles = Article.order(created_at: :desc)
@@ -23,20 +30,18 @@ class UsersController < ApplicationController
   def show
 		@user = User.find(params[:id])
 		@articles = @user.user_articles.all
-		@user_created_at = @user.created_at.strftime("%d %B %Y")    
+		@user_created_at = @user.created_at.strftime("%d %B %Y")
 	end
 
 	def edit
 		@user = User.find(params[:id])
 	end
 
-  def destroy 	
-  end 
+  def destroy
+  end
 
   def follows
     @user = User.find(params[:id])
     current_user.follow(@user)
   end
-
-  
 end

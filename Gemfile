@@ -25,8 +25,6 @@ group :development do
   gem "factory_girl_rails", "~> 4.2.1"
   gem 'sqlite3'
 end
-
-gem "socialization"
 gem 'pg'
 gem 'devise-async'
 
