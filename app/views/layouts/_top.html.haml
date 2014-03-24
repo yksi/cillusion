@@ -1,6 +1,5 @@
-= javascript_include_tag "tooltip"
-.navbar.navbar-default.navbar-fixed-top
-  .container-fluid  
+.navbar.navbar-inverse.navbar-fixed-top
+  .container-fluid
     .navbar-header
       = link_to root_path, class: "navbar-brand" do
         CILLUSION
@@ -9,28 +8,29 @@
         .navbar-form.navbar-left
           .form-group#search_form
             = form_tag articles_search_path, method: 'get', class: 'navbar-search pull-left' do
-              %i.fa.fa-search
+              %i.fa.fa-search.fa-inverse.fa-lg
               = text_field_tag :search, params[:search], class: "form-control", placeholder: "Search article..."
-                
       .nav.navbar-center.navbar-nav
-        %li= link_to "Browse", browse_index_path 
+        %li.active
+          = link_to browse_index_path do
+            %i.fa.fa-inverse.fa-book.fa-lg= " Browse"
       .nav.navbar-right.navbar-nav
         -if user_signed_in?
           %li
-            = link_to new_article_path, id: "add", "data-placement" => "top", "data-toggle" => "tooltip", title: "Create article", type: "button" do
-              %i.fa.fa-plus= " New Article"
+            = link_to new_article_path do
+              %i.fa.fa-plus.fa-lg.text= " New Article"
           %li.dropdown
             %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
               #{current_user.fullname}
               %b.caret
             %ul.dropdown-menu
               %li
-                = link_to "My Account", current_user 
+                = link_to "My Account", current_user
               %li
                 = link_to "My Calendar", articles_path
               %li
-                = link_to "Logout", destroy_user_session_path, method: :delete        
+                = link_to "Logout", destroy_user_session_path, method: :delete
         -else
-          %li= link_to "Sign up", "#",  id: "dialog_link"
-          = javascript_include_tag "dialogs"
-          = render "layouts/login_register_frame"
+          %li
+            %a{href: "#", "data-target" => "#modal-login", "data-toggle" => "modal"} Sign up
+= render "layouts/login_register_frame"

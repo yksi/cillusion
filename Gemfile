@@ -26,7 +26,6 @@ group :development do
   gem 'sqlite3'
 end
 
-gem "socialization"
 gem 'pg'
 gem 'devise-async'
 

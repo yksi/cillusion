@@ -1,16 +1,19 @@
-= stylesheet_link_tag "als/absolution"
-%div{title: "Welcome to illusion webservice", id: "dialog"}
-  = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-    = f.email_field :email, :autofocus => true, placeholder: "Type your email here...", class: 'form-control'
-    %br
-    = f.password_field :password, placeholder: "Type your password here...", class: 'form-control'
-    - if devise_mapping.rememberable?
-      = label_tag do
-        = f.check_box :remember_me
-        Remember me
-        %div{align: "left"}
+#modal-login.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
+        %h4#myModalLabel.modal-title{align: "center"} Sign in/ Sign up
+      .modal-body
+        = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+          = f.email_field :email, :autofocus => true, placeholder: "Type your email here...", class: 'form-control'
+          %br
+          = f.password_field :password, placeholder: "Type your password here...", class: 'form-control'
+          - if devise_mapping.rememberable?
+            = label_tag do
+              = f.check_box :remember_me
+              Remember me
+          %br
           = f.submit "Sign in", class: "btn btn-success"
-        %br
-        %div{align: "center"}   
-          = link_to "Create Profile", new_user_registration_path, class: "btn btn-warning"
-          %button.btn.btn-default#close_dialog= "Close"
+      .modal-footer
+        = link_to "Create Profile", new_user_registration_path, class: "btn btn-warning"

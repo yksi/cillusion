@@ -2,7 +2,7 @@
 -if user_signed_in?
   %ul.nav.nav-tabs
     %li
-      %a{"data-toggle" => "tab", :href => "#home"} New articles 
+      %a{"data-toggle" => "tab", :href => "#home"} New articles
     %li
       %a{"data-toggle" => "tab", :href => "#profile"} New profiles
   .tab-content
@@ -12,7 +12,7 @@
           %li
             = link_to  a do
               = image_tag a.user.avatar.url(:small), class: "img-circle"
-              = a.theme 
+              = a.theme
               %p{style: "color: #0000FF; font-size: 12pt"}= "#{a.user.fullname}"
     #profile.tab-pane
       %ul.nav.nav-pills.nav-stacked
@@ -20,5 +20,4 @@
           %li
             = link_to u do
               = image_tag u.avatar.small.url
-              #{u.fullname} 
-          
+              #{u.fullname}

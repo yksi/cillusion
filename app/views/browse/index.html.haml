@@ -2,7 +2,7 @@
 = javascript_include_tag "browse"
 -if user_signed_in?
   %ul.nav.nav-tabs
-    %li
+    %li.active
       %a{"data-toggle" => "tab", :href => "#articles"} Articles
     %li
       %a{"data-toggle" => "tab", :href => "#users"} Users
@@ -10,6 +10,12 @@
       %a{"data-toggle" => "tab", :href => "#comments"} Comments
   .tab-content
     #articles.tab-pane.active
+      .page-header
+        = form_tag articles_search_path, method: 'get', class: 'navbar-search pull-left' do
+          %i.fa.fa-search.fa-inverse.fa-lg
+          = text_field_tag :search, params[:search], class: "form-control", placeholder: "Search article..."
+      %br
+      %hr
       %ul.media-list
         - @articles.each do |a|
           %li.well

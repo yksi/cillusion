@@ -7,6 +7,12 @@ class User < ActiveRecord::Base
 
   has_many :user_articles, class_name: 'Article', foreign_key: 'user_id'
   has_many :comments, class_name: 'Comment', foreign_key: 'user_id'
+  has_many :followed_users, through: :relationships, source: :followed
+  has_many :relationships, foreign_key: "follower_id", dependent: :destroy
+  has_many :reverse_relationships, foreign_key: "followed_id",
+                                   class_name:  "Relationship",
+                                   dependent:   :destroy
+  has_many :followers, through: :reverse_relationships
 
   validates :first_name, presence: true, length: {in: 2..30}
   validates :last_name, presence: true, length: {in: 2..30}
@@ -29,6 +35,18 @@ class User < ActiveRecord::Base
     else
       true
     end
+  end
+
+  def following?(other_user)
+    relationships.find_by(followed_id: other_user.id)
+  end
+
+  def follow!(other_user)
+    relationships.create!(followed_id: other_user.id)
+  end
+
+  def unfollow!(other_user)
+    relationships.find_by(followed_id: other_user.id).destroy
   end
 
   def self.find_for_facebook_oauth(auth)

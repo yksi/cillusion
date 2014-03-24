@@ -1,35 +1,63 @@
-%div{class: "small-8 large-centered columns"}
-  %h2
-    Edit #{resource_name.to_s.humanize}
+.col-md-6.col-md-offset-3
   = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
-    = devise_error_messages!
-    %div
-      = f.label :email
-      %br
-      = f.email_field :email, :autofocus => true
-      %br
+    -if @user.errors.any?
+      .panel.panel-danger
+        .panel-heading
+          Errors: #{@user.errors.full_messages.count}
+        .panel-body
+          -@user.errors.full_messages.each do |ue|
+            %ul
+              %li= "#{ue}"
+    .well
+      %h2 Main profile settings
+      .row
+        .col-md-6
+          First name:
+          = f.text_field :first_name, class: "form-control"
+        .col-md-6
+          Last name;
+          = f.text_field :last_name, class: "form-control"
+      Email:
+      = f.email_field :email, :autofocus => true, class: "form-control"
+    .well
+      %h2 Additional profile settings
+      Choose your profile photo
       = f.file_field :avatar
-      %br 
       = f.hidden_field :avatar_cache
-    - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-      %div
+      Gender
+      %br
+      -[true, false].map do |gender|
+        =f.radio_button :sex, gender
+        - if gender == true
+          Male
+        - else
+          Female
+      %br
+      Hometown
+      = f.text_field :hometown, class: "form-control"
+    %br
+    .well
+      %h2 Password change
+      - if devise_mapping.confirmable? && resource.pending_reconfirmation?
         Currently waiting confirmation for: #{resource.unconfirmed_email}
-    %div
-      = f.label :password
-      %i (leave blank if you don't want to change it)
+      %em.text-danger (leave blank if you don't want to change it)
       %br
-      = f.password_field :password, :autocomplete => "off"
-    %div
-      = f.label :password_confirmation
+      New Password
+      = f.password_field :password, :autocomplete => "off", class: "form-control"
+      Password confirmation
+      = f.password_field :password_confirmation, class: "form-control"
+    .well
+      %h2 Save changes
+      Current Password
+      %em.text-muted (we need your current password to confirm your changes)
       %br
-      = f.password_field :password_confirmation
-    %div
-      = f.label :current_password
-      %i (we need your current password to confirm your changes)
+      = f.password_field :current_password, class: "form-control"
       %br
-      = f.password_field :current_password
-    %div= f.submit "Update"
-  %h3 Cancel my account
-  %p
-    Unhappy? #{button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete}
-  = link_to "Back", :back
+      %br
+      %div{align: "center"}
+        = f.submit "Save changes", class: "btn btn-success btn-lg"
+  .well.text-center
+    %h3 Also you can cansel your account
+    = link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, class: "btn btn-danger"
+  = link_to :back, class: "btn btn-primary" do
+    %i.fa.fa-inverse.fa-angle-left= " back"

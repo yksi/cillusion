@@ -1,4 +1,4 @@
-- content_for :title, "Users"
+- content_for :title, "Main"
 %div
   -if user_signed_in?
     .page-header
@@ -15,6 +15,3 @@
   - else
     %div{align: "center"}
       <iframe width="640" height="390" src="//www.youtube.com/embed/_gUatp_9NHc" frameborder="0" allowfullscreen></iframe>
-      %h3= "Please login or register to have access to calendar and create custom articles"
-= link_to "http://illusion.wikia.com/wiki/Main_Page" do
-  %H4= "Don't know how to use website? Go to our WIKI"

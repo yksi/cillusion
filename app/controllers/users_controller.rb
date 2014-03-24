@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :find_user, only: [:update, :show, :edit, :follows, :followers]
 
   def update
     @user = User.find(params[:id])
@@ -11,16 +12,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def follow
-    @user = User.find(params[:id])
-    current_user.follow!(@user)
-  end
-
-  def unfollow
-    @user = User.find(params[:id])
-    current_user.unfollow(@user)
-  end
-
   def index
     @users = User.all
     @articles = Article.order(created_at: :desc)
@@ -31,6 +22,17 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 		@articles = @user.user_articles.all
 		@user_created_at = @user.created_at.strftime("%d %B %Y")
+    @users = @user.followers
+    @complete = 40
+    if @user.hometown
+      @complete += 20
+    end
+    if @user.age
+      @complete += 20
+    end
+    if @user.avatar
+      @complete += 20
+    end
 	end
 
 	def edit
@@ -43,5 +45,15 @@ class UsersController < ApplicationController
   def follows
     @user = User.find(params[:id])
     current_user.follow(@user)
+  end
+
+  def followers
+    @users = @user.followers
+  end
+
+  private
+
+  def find_user
+    @user = User.find(params[:id])
   end
 end
