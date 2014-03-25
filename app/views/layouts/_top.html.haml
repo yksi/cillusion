@@ -16,22 +16,12 @@
               = text_field_tag :search, params[:search], class: "form-control", placeholder: "Search article..."
       .nav.navbar-center.navbar-nav
         - if user_signed_in?
-          - if current_page?(controller: 'browse', action: 'index')
-            %li.active
-              = link_to browse_index_path do
-                %i.fa.fa-inverse.fa-book.fa-lg= " Browse"
-          - else
-            %li
-              = link_to browse_index_path do
-                %i.fa.fa-inverse.fa-book.fa-lg= " Browse"
-          - if current_page?(controller: 'browse', action: 'timeline')
-            %li.active
-              = link_to browse_timeline_path do
-                %i.fa.fa-inverse.fa-lg.fa-clock-o= "News"
-          - else
-            %li
-              = link_to browse_timeline_path do
-                %i.fa.fa-inverse.fa-lg.fa-clock-o= "News"
+          %li
+            = link_to browse_index_path do
+              %i.fa.fa-inverse.fa-book.fa-lg= " Browse"
+          %li
+            = link_to browse_timeline_path do
+              %i.fa.fa-inverse.fa-lg.fa-clock-o= "News"
       .nav.navbar-right.navbar-nav
         -if user_signed_in?
           %li
@@ -46,7 +36,7 @@
                 = link_to current_user do
                   %i.fa.fa-inverse.fa-home= " My Account"
               %li
-                = link_to edit_user_registration_path do
+                = link_to edit_user_registration_path(current_user) do
                   %i.fa.fa-inverse.fa-gear= " Account settings"
               %li
                 = link_to articles_path do
