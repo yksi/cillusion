@@ -3,8 +3,8 @@
 = javascript_include_tag "comment"
 .page-header
   .row
-    .col-xs-12.col-sm-6.col-md-8   
-      %div  
+    .col-xs-12.col-sm-6.col-md-8
+      %div
         %h1= "#{@article.theme} (#{@article.category})"
         #{@article.content.html_safe}
       %br
@@ -13,7 +13,7 @@
         %i.fa.fa-edit= " Edit"
       %br
       %br
-      .thumbnail  
+      .thumbnail
         = image_tag @article.photo.url
       = form_for [@article, @comment] do |f|
         = f.text_area :content, class: 'form-control', style: "resize:vertical"
@@ -25,6 +25,6 @@
           %h5{align: "right"}="#{comment.return_created_at_as_nice_string} by #{comment.user.fullname}"
           %br
           %h4= comment.content
-        %br 
+        %br
 %h5.text-right= "#{@article.created_at.strftime("%d %b. %Y")} by #{User.find(@article.user_id).fullname}"
-      
+

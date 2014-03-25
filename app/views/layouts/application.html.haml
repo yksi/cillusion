@@ -25,6 +25,7 @@
               %i.fa.fa-inverse.fa-angle-double-right.fa-lg
     .container
       -if flash.each.count > 0
+        %br
         .alert.alert-info
           %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", type: "button"} ×
           - flash.each do |name, msg|
@@ -32,9 +33,9 @@
               %ul
                 - msg.each do |message|
                   %li
-                    %h4{align: "center"}= label_tag message, id: "flash_#{name}"
+                    = label_tag message, id: "flash_#{name}"
             - else
-              %h4{align: "center"}= label_tag msg
+              = label_tag msg
     %br
     .container
       = yield

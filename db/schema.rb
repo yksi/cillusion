@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140324180913) do
+ActiveRecord::Schema.define(version: 20140325161923) do
 
   create_table "articles", force: true do |t|
     t.integer  "user_id"
@@ -80,6 +80,16 @@ ActiveRecord::Schema.define(version: 20140324180913) do
 
   add_index "mentions", ["mentionable_id", "mentionable_type"], name: "fk_mentionables", using: :btree
   add_index "mentions", ["mentioner_id", "mentioner_type"], name: "fk_mentions", using: :btree
+
+  create_table "messages", force: true do |t|
+    t.string   "theme"
+    t.text     "content"
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "read"
+  end
 
   create_table "relationships", force: true do |t|
     t.integer  "follower_id"

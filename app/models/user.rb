@@ -13,9 +13,12 @@ class User < ActiveRecord::Base
                                    class_name:  "Relationship",
                                    dependent:   :destroy
   has_many :followers, through: :reverse_relationships
+  has_many :recieved_messages, class_name: 'Message', foreign_key: 'recipient_id'
+  has_many :sent_messages, class_name: 'Message', foreign_key: 'sender_id'
 
   validates :first_name, presence: true, length: {in: 2..30}
   validates :last_name, presence: true, length: {in: 2..30}
+
 
   def fullname
     return "#{self.first_name} #{self.last_name}"

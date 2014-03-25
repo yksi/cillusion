@@ -21,7 +21,10 @@
               %i.fa.fa-inverse.fa-book.fa-lg= " Browse"
           %li
             = link_to browse_timeline_path do
-              %i.fa.fa-inverse.fa-lg.fa-clock-o= "News"
+              %i.fa.fa-inverse.fa-lg.fa-clock-o= " News"
+          %li
+            =link_to messages_path do
+              %i.fa.fa-envelope.fa-lg.fa-inverse=  " Messages"
       .nav.navbar-right.navbar-nav
         -if user_signed_in?
           %li

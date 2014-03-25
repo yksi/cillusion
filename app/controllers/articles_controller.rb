@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :require_article, only: [:show, :edit, :destroy, :update]
-  before_action :require_category, only: [:index, :edit, :new] 
+  before_action :require_category, only: [:index, :edit, :new]
 
   def index
   	@articles = current_user.user_articles.all
@@ -31,7 +31,7 @@ class ArticlesController < ApplicationController
 
   def destroy
   	@article.destroy
-  	redirect_to root_path
+  	redirect_to current_user
   end
 
   def update
@@ -57,7 +57,7 @@ class ArticlesController < ApplicationController
   end
 
   def require_category
-    @category = ["Programming", "News", "Wiki", "How To", "My Life", "Science", "Math", "Other"] 
+    @category = ["Programming", "News", "Wiki", "How To", "My Life", "Science", "Math", "Other"]
   end
 
 end

@@ -22,6 +22,7 @@ class UsersController < ApplicationController
 
 
   def show
+    @message = Message.new
 		@user = User.find(params[:id])
 		@articles = @user.user_articles.all
 		@user_created_at = @user.created_at.strftime("%d %B %Y")

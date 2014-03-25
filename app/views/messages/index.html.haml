@@ -1,0 +1,69 @@
+-if user_signed_in?
+  %ul.nav.nav-tabs
+    %li.active
+      %a{"data-toggle" => "tab", :href => "#inbox"} Inbox
+    %li
+      %a{"data-toggle" => "tab", :href => "#outbox"} Outbox
+  .tab-content
+    #inbox.tab-pane.active
+      .page-header
+        - if @resieved_messages.any?
+          %table.table.table-bordered
+            %tr
+              %th From
+              %th Theme
+              %th Received at
+              %th Actions
+            - @resieved_messages.each do |message|
+              %tr
+                %td= User.find(message.sender_id).fullname
+                %td
+                  %a.btn.btn-primary{href: "#", "data-target" => "##{message.id}", "data-toggle" => "modal"}= message.theme
+                %td= message.created_at.strftime("%H:%M %d %B %Y.")
+                %td
+                  = link_to message, method: :delete, class: "btn btn-sm btn-danger" do
+                    %i.fa.fa-inverse.fa-lg.fa-times= " Delete"
+              .modal.fade{"aria-hidden" => "true", role: "dialog", tabindex: "-1", id: "#{message.id}"}
+                .modal-dialog
+                  .modal-content
+                    .modal-header
+                      %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"}
+                        %i.fa.fa-times
+                      %h4#myModalLabel.modal-title{align: "center"}= message.theme
+                    .modal-body
+                      .col-md-8.col-md-offset-2= message.content
+                    .modal-footer
+                      %em.text-muted= "From #{User.find(message.sender_id).fullname} #{message.created_at.strftime("%H:%M %d %B %Y.")}"
+        - else
+          %h1.text-muted You have not any received messages.
+    #outbox.tab-pane
+      .page-header
+        - if @sent_messages.any?
+          %table.table.table-bordered
+            %tr
+              %th To
+              %th Theme
+              %th Received at
+              %th Actions
+            - @sent_messages.each do |message|
+              %tr
+                %td= User.find(message.recipient_id).fullname
+                %td
+                  %a.btn.btn-primary{href: "#", "data-target" => "##{message.id}", "data-toggle" => "modal"}= message.theme
+                %td= message.created_at.strftime("%H:%M %d %B %Y.")
+                %td
+                  = link_to message, method: :delete, class: "btn btn-sm btn-danger" do
+                    %i.fa.fa-inverse.fa-lg.fa-times= " Delete"
+              .modal.fade{"aria-hidden" => "true", role: "dialog", tabindex: "-1", id: "#{message.id}"}
+                .modal-dialog
+                  .modal-content
+                    .modal-header
+                      %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"}
+                        %i.fa.fa-times
+                      %h4#myModalLabel.modal-title{align: "center"}= message.theme
+                    .modal-body
+                      .col-md-8.col-md-offset-2= message.content
+                    .modal-footer
+                      %em.text-muted= "To #{User.find(message.recipient_id).fullname} #{message.created_at.strftime("%H:%M %d %B %Y.")}"
+        - else
+          %h1.text-muted You have not any sent messages.
