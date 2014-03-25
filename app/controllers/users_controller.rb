@@ -15,6 +15,9 @@ class UsersController < ApplicationController
   def index
     @users = User.all
     @articles = Article.order(created_at: :desc)
+    if user_signed_in?
+      redirect_to browse_timeline_path
+    end
   end
 
 
@@ -30,7 +33,7 @@ class UsersController < ApplicationController
     if @user.age
       @complete += 20
     end
-    if @user.avatar
+    if @user.avatar?
       @complete += 20
     end
 	end

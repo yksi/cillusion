@@ -1,0 +1,36 @@
+- content_for :title,  "Timeline"
+= stylesheet_link_tag "timeline"
+%ul.timeline
+  - @resourses.each do |r|
+    - if r.class.name == 'Relationship'
+      %li
+        - @followed_user = User.find(r.followed_id)
+        - @follower_user = User.find(r.follower_id)
+        .timeline-badge.danger
+          %i.fa.fa-lg.fa-users
+        .timeline-panel
+          .timeline-body
+            = link_to @follower_user.fullname, @follower_user
+            followed
+            = link_to @followed_user.fullname, @followed_user
+            %em.text-muted= "#{time_ago_in_words(r.created_at)} ago."
+    - if r.class.name == 'Article'
+      %li.timeline-inverted
+        .timeline-badge.warning
+          %i.fa.fa-lg.fa-book
+        .timeline-panel
+          .timeline-body
+            = link_to r.user.fullname, r.user
+            created article
+            = link_to r.theme, r
+            %em.text-muted= "#{time_ago_in_words(r.created_at)} ago."
+    - if r.class.name == 'User'
+      %li
+        .timeline-badge.primary
+          %i.fa.fa-lg.fa-home
+        .timeline-panel
+          .timeline-body
+            = link_to r.fullname, r
+            signed up
+            %em.text-muted= "#{time_ago_in_words(r.created_at)} ago."
+  %br

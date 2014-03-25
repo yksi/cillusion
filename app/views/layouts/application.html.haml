@@ -38,3 +38,16 @@
     %br
     .container
       = yield
+    - if yield(:title) == "Main"
+      .jumbotron.main-d
+        .container
+          - if user_signed_in?
+            - @name = current_user.first_name
+          - else
+            - @name = "Guest"
+          %h1{align: "center"}= "Create your Articles"
+          %p= "Howdy, #{@name}. Welcome to Cillusion web-services. Create the article and get new Followers, read articles from other users and enjoy the service."
+          %div{align: "right"}
+            = link_to "http://illusion.wikia.com/wiki/Main_Page", class: "btn btn-success" do
+              Cillusion Wiki
+              %i.fa.fa-inverse.fa-angle-double-right.fa-lg
