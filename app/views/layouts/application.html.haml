@@ -21,10 +21,15 @@
             = image_tag "logo.png"
             %h1{style: "color:white;"}= "Create your Articles"
           %p{style: "color:white;"}= "Howdy, #{@name}. Welcome to Cillusion web-services. Create the article and get new Followers, read articles from other users and enjoy the service."
-          %div{align: "right"}
-            = link_to "http://illusion.wikia.com/wiki/Main_Page", class: "btn btn-success" do
-              Cillusion Wiki
-              %i.fa.fa-inverse.fa-angle-double-right.fa-lg
+          .row
+            .col-md-6.col-md-offset-6
+              .row
+                .col-md-6
+                  = link_to "Create Profile", new_user_registration_path, class: "btn btn-default"
+                .col-md-6
+                  = link_to "http://illusion.wikia.com/wiki/Main_Page", class: "btn btn-success" do
+                    Cillusion Wiki
+                    %i.fa.fa-inverse.fa-angle-double-right.fa-lg
     .container
       -if flash.each.count > 0
         %br
@@ -41,3 +46,4 @@
     %br
     .container
       = yield
+    = render 'layouts/bottom'
