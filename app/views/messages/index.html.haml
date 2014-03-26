@@ -41,7 +41,8 @@
                         %i.fa.fa-times
                       %h4#myModalLabel.modal-title{align: "center"}= message.theme
                     .modal-body
-                      .col-md-8.col-md-offset-2= message.content
+                      %p
+                        %pre= message.content
                     .modal-footer
                       %em.text-muted= "From #{User.find(message.sender_id).fullname} #{message.created_at.strftime("%H:%M %d %B %Y.")}"
         - else
@@ -72,7 +73,8 @@
                         %i.fa.fa-times
                       %h4#myModalLabel.modal-title{align: "center"}= message.theme
                     .modal-body
-                      .col-md-8.col-md-offset-2= message.content
+                      %p
+                        %pre= message.content
                     .modal-footer
                       %em.text-muted= "To #{User.find(message.recipient_id).fullname} #{message.created_at.strftime("%H:%M %d %B %Y.")}"
         - else
