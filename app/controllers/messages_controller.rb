@@ -14,10 +14,20 @@ class MessagesController < ApplicationController
     end
   end
 
+  def update
+    @message = Message.find(params[:id])
+    if @message.update_attributes!(message_update_params)
+      flash[:notice] = "You have been mark as read message #{@message.theme}."
+    else
+      flash[:notice] = "Sorry. An erroe occupied while mark as read."
+    end
+    redirect_to messages_path
+  end
+
   def destroy
     @message = Message.find(params[:id])
     @message.destroy
-    redirect_to "#{messages_path}#outbox"
+    redirect_to messages_path
   end
 
   private
@@ -28,5 +38,9 @@ class MessagesController < ApplicationController
 
   def message_params
     params.require(:message).permit(:sender_id, :recipient_id, :theme, :content)
+  end
+
+  def message_update_params
+    params.fetch(:message, {}).permit(:read)
   end
 end

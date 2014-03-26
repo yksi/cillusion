@@ -41,8 +41,9 @@
         .col-md-6.col-md-offset-3
           .progress.progress-stripped.active
             .progress-bar.progress-bar-info{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{@complete}", role: "progressbar", style: "width: #{@complete}%;"} #{@complete} %
-      %a.btn.btn-primary{href: "#", "data-target" => "#modal-message", "data-toggle" => "modal"}
-        %i.fa.fa-envelope.fa-lg.fa-inverse=  " Private message"
+      - if @user != current_user
+        %a.btn.btn-primary{href: "#", "data-target" => "#modal-message", "data-toggle" => "modal"}
+          %i.fa.fa-envelope.fa-lg.fa-inverse=  " Private message"
       %br
       %br
   %h1 Articles:
@@ -80,6 +81,7 @@
       .modal-body
         = form_for @message do |f|
           = f.hidden_field :recipient_id, value: @user.id
+          = f.hidden_field :read, value: false
           %br
           = f.text_field :theme, class: "form-control", placeholder: "Theme"
           %br

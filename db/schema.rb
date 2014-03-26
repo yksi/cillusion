@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140325161923) do
+ActiveRecord::Schema.define(version: 20140326092010) do
 
   create_table "articles", force: true do |t|
     t.integer  "user_id"
@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(version: 20140325161923) do
     t.integer  "recipient_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "read"
+    t.boolean  "read",         default: false
   end
 
   create_table "relationships", force: true do |t|

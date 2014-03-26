@@ -9,16 +9,18 @@
         #{@article.content.html_safe}
       %br
     .col-xs-6.col-md-4
-      = link_to edit_article_path, class: "btn btn-warning" do
-        %i.fa.fa-edit= " Edit"
+      - if @user == current_user
+        = link_to edit_article_path, class: "btn btn-warning" do
+          %i.fa.fa-edit= " Edit"
       %br
       %br
       .thumbnail
         = image_tag @article.photo.url
-      = form_for [@article, @comment] do |f|
-        = f.text_area :content, class: 'form-control', style: "resize:vertical"
-        = f.hidden_field :article_id, value: @article.id
-        = f.submit "Add comment", class: "btn btn-success btn-block"
+      - if user_signed_in?
+        = form_for [@article, @comment] do |f|
+          = f.text_area :content, class: 'form-control', style: "resize:vertical"
+          = f.hidden_field :article_id, value: @article.id
+          = f.submit "Add comment", class: "btn btn-success btn-block"
       %br
       - @article.comments.order(created_at: :asc).each do |comment|
         %div.comment
@@ -26,5 +28,6 @@
           %br
           %h4= comment.content
         %br
-%h5.text-right= "#{@article.created_at.strftime("%d %b. %Y")} by #{User.find(@article.user_id).fullname}"
+%h5.text-right= "#{@article.created_at.strftime("%d %b. %Y")} by "
+%h5.text-right= link_to @article.user.fullname, user_path(@article.user)
 

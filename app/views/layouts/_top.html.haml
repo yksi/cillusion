@@ -25,6 +25,12 @@
           %li
             =link_to messages_path do
               %i.fa.fa-envelope.fa-lg.fa-inverse=  " Messages"
+              - @count = 0
+              - current_user.recieved_messages.each do |m|
+                - if m.read == false
+                  - @count += 1
+              - if @count > 0
+                #span.badge= @count
       .nav.navbar-right.navbar-nav
         -if user_signed_in?
           %li

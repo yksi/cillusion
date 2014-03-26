@@ -1,3 +1,4 @@
+- content_for :title, "Messages"
 -if user_signed_in?
   %ul.nav.nav-tabs
     %li.active
@@ -17,12 +18,21 @@
             - @resieved_messages.each do |message|
               %tr
                 %td= User.find(message.sender_id).fullname
-                %td
-                  %a.btn.btn-primary{href: "#", "data-target" => "##{message.id}", "data-toggle" => "modal"}= message.theme
+                - if message.read
+                  %td
+                    %a{href: "#", "data-target" => "##{message.id}a", "data-toggle" => "modal"}= message.theme
+                - else
+                  %td.info
+                    %a{href: "#", "data-target" => "##{message.id}a", "data-toggle" => "modal"}= message.theme
                 %td= message.created_at.strftime("%H:%M %d %B %Y.")
                 %td
-                  = link_to message, method: :delete, class: "btn btn-sm btn-danger" do
-                    %i.fa.fa-inverse.fa-lg.fa-times= " Delete"
+                  .row-fluid
+                    = link_to message, method: :delete, class: "btn btn-sm btn-danger" do
+                      %i.fa.fa-inverse.fa-lg.fa-times= " Delete"
+                    - if !message.read
+                      = form_for message do |f|
+                        = f.hidden_field :read, value: true
+                        = f.submit "Mark as read", class: "btn btn-default btn-sm"
               .modal.fade{"aria-hidden" => "true", role: "dialog", tabindex: "-1", id: "#{message.id}"}
                 .modal-dialog
                   .modal-content
@@ -49,12 +59,12 @@
               %tr
                 %td= User.find(message.recipient_id).fullname
                 %td
-                  %a.btn.btn-primary{href: "#", "data-target" => "##{message.id}", "data-toggle" => "modal"}= message.theme
+                  %a{href: "#", "data-target" => "##{message.id}a", "data-toggle" => "modal"}= message.theme
                 %td= message.created_at.strftime("%H:%M %d %B %Y.")
                 %td
                   = link_to message, method: :delete, class: "btn btn-sm btn-danger" do
                     %i.fa.fa-inverse.fa-lg.fa-times= " Delete"
-              .modal.fade{"aria-hidden" => "true", role: "dialog", tabindex: "-1", id: "#{message.id}"}
+              .modal.fade{"aria-hidden" => "true", role: "dialog", tabindex: "-1", id: "#{message.id}a"}
                 .modal-dialog
                   .modal-content
                     .modal-header

@@ -1,6 +1,3 @@
-%script{src: "http://js.nicedit.com/nicEdit-latest.js", type: "text/javascript"}
-= stylesheet_link_tag "als/absolution"
-= javascript_include_tag "datepicker"
 = form_for @article do |f|
   .col-xs-12.col-sm-6.col-md-8
     -if @article.errors.any?
@@ -14,8 +11,6 @@
     %br
     = f.cktext_area :content, :id => 'sometext'
     %br
-    %div
-      = stylesheet_link_tag "als/absolution"
   .col-xs-6.col-md-4
     - if !current_page?(new_article_path)
       = link_to @article, method: :delete, class: "btn btn-danger" do
