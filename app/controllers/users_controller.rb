@@ -26,7 +26,8 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 		@articles = @user.user_articles.all
 		@user_created_at = @user.created_at.strftime("%d %B %Y")
-    @users = @user.followers
+    @followers = @user.followers
+    @followed = @user.followed_users
     @complete = 40
     if @user.hometown
       @complete += 20

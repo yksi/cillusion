@@ -1,6 +1,6 @@
-- @users.each do |user|
+- @followers.each do |user|
   = link_to user do
-    .col-md-2
-      = image_tag user.avatar.small.url, id: "#smalluser", "data-placement" => "left", "data-toggle" => "tooltip"
-      %h5= "#{user.fullname}"
-%br
+    %p
+      .col-md-2
+        = image_tag user.avatar.small.url, id: "#smalluser", "data-placement" => "left", "data-toggle" => "tooltip"
+        %h5= "#{user.fullname}"

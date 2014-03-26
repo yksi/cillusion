@@ -28,11 +28,11 @@
         = link_to "edit profile page", edit_user_registration_path
         and add information about you.
     .thumbnail{align: "center"}
-      %a{href: following_user_path(@user)}
-        %strong= @user.followed_users.count
-        following
+      %a.text-success{href: "#", "data-target" => "#modal-followed", "data-toggle" => "modal"}
+        %strong= @followed.count
+        followed
       %a.text-success{href: "#", "data-target" => "#modal-followers", "data-toggle" => "modal"}
-        %strong= @user.followers.count
+        %strong= @followers.count
         followers
       %br
       Profile is completed for
@@ -67,10 +67,20 @@
       .modal-header
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"}
           %i.fa.fa-times
-        %h4#myModalLabel.modal-title{align: "center"} Followers
+        %h4#myModalLabel.modal-title{align: "center"}= "#{@user.first_name} followers"
       .modal-body
-        = render "followers"
-      .modal-footer
+        .row
+          = render "followers"
+#modal-followed.modal.fade{"aria-hidden" => "true", role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"}
+          %i.fa.fa-times
+        %h4#myModalLabel.modal-title{align: "center"}= "#{@user.first_name} followed"
+      .modal-body
+        .row
+          = render "followed"
 #modal-message.modal.fade{"aria-hidden" => "true", role: "dialog", tabindex: "-1"}
   .modal-dialog
     .modal-content
