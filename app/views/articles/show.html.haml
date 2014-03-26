@@ -9,7 +9,7 @@
         #{@article.content.html_safe}
       %br
     .col-xs-6.col-md-4
-      - if @user == current_user
+      - if @article.user == current_user
         = link_to edit_article_path, class: "btn btn-warning" do
           %i.fa.fa-edit= " Edit"
       %br
