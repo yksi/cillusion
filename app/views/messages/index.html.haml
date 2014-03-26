@@ -20,10 +20,10 @@
                 %td= User.find(message.sender_id).fullname
                 - if message.read
                   %td
-                    %a{href: "#", "data-target" => "##{message.id}a", "data-toggle" => "modal"}= message.theme
+                    %a{href: "#", "data-target" => "##{message.id}", "data-toggle" => "modal"}= message.theme
                 - else
                   %td.info
-                    %a{href: "#", "data-target" => "##{message.id}a", "data-toggle" => "modal"}= message.theme
+                    %a{href: "#", "data-target" => "##{message.id}", "data-toggle" => "modal"}= message.theme
                 %td= message.created_at.strftime("%H:%M %d %B %Y.")
                 %td
                   .row-fluid
