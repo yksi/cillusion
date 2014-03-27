@@ -44,14 +44,4 @@ gem 'carrierwave-dropbox'
 gem 'friendly_id', '~> 5.0.3'
 gem "font-awesome-rails"
 gem 'ckeditor', '~> 4.0.10'
-# Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
+gem 'will_paginate', '~> 3.0'

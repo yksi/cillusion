@@ -12,7 +12,7 @@ class ArticlesController < ApplicationController
   	if @article.save
       redirect_to @article
     else
-      render :new
+      render :new, alert: "Please fill in all required fields."
     end
   end
 

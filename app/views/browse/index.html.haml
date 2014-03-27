@@ -1,5 +1,4 @@
 - content_for :title, "Browse"
-= javascript_include_tag "browse"
 -if user_signed_in?
   %ul.nav.nav-tabs
     %li.active
@@ -9,7 +8,8 @@
     %li
       %a{"data-toggle" => "tab", :href => "#comments"} Comments
   .tab-content
-    #articles.tab-pane.active
+    #articles.tab-pane.active.animated.bounceInLeft
+      .pull-right= will_paginate @articles
       .page-header
         = form_tag articles_search_path, method: 'get', class: 'navbar-search pull-left' do
           %i.fa.fa-search.fa-inverse.fa-lg
@@ -22,10 +22,11 @@
             = link_to a do
               = image_tag a.photo.url(:thumb), align: "left", class: "img-circle"
               %h4= "#{a.theme}"
-            %em.text-muted= "#{strip_tags(a.content)[0..200]} ...."
+            %em.text-muted= "#{strip_tags(a.content).html_safe[0..200]} ...."
             %em.text-primary.text-right= link_to "#{a.user.fullname}", a.user
             %em.text-right= "at #{a.return_created_at_as_nice_string}"
-    #users.tab-pane
+    #users.tab-pane.animated.bounceInUp
+      %br
       %ul.nav.nav-pills.nav-stacked
         - @users.each do |u|
           %li
@@ -33,7 +34,7 @@
               = image_tag u.avatar.small.url, class: "img-rounded"
               #{u.fullname}
               %p{align: "right"}= "#{u.user_articles.count} articles, #{u.comments.count} comments"
-    #comments.tab-pane
+    #comments.tab-pane.animated.bounceInRight
       %ul.nav.nav-pills.nav-stacked
         - @comments.each do |c|
           %li

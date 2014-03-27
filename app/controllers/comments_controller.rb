@@ -4,9 +4,11 @@ class CommentsController < ApplicationController
 
   def create
     @comment = current_user.comments.create(comment_params)
-    redirect_to @comment.article, notice: "Comment size is too large"
+    redirect_to @comment.article
     if @comment.content.length >= 255
-      flash[:notice] = "Comment size is too large"
+      flash[:alert] = "Comment size is too large"
+    elsif @comment.content.length < 1
+      flash[:alert] = "Comment is empty"
     end
   end
 

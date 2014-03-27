@@ -1,13 +1,17 @@
 class Article < ActiveRecord::Base
   mount_uploader :photo, ArticlePhotoUploader
+  self.per_page = 3
 
   belongs_to :user
-  has_many :comments, class_name: 'Comment', foreign_key: 'article_id'  
+  has_many :comments, class_name: 'Comment', foreign_key: 'article_id'
 
   validates :theme, presence: true
+  validates :category, presence: true
+
+  before_save :default_values
 
   extend FriendlyId
-  friendly_id :theme 
+  friendly_id :theme
 
   def print_info
     p "#{self.theme} - #{self.content} at #{self.date.strftime('%d %B %Y')} by #{User.find(self.user_id)}"
@@ -27,6 +31,10 @@ class Article < ActiveRecord::Base
 
   def return_created_at_as_nice_string
     self.created_at.strftime("%d %B %Y.")
+  end
+
+  def default_values
+    self.category ||= 'Other'
   end
 
 end

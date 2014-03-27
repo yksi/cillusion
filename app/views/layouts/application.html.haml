@@ -4,7 +4,7 @@
     %meta{charset: "utf-8"}
     %title= "#{yield(:title)} | cillusion"
     = stylesheet_link_tag  "application"
-    = javascript_include_tag "application", "flash_modal"
+    = javascript_include_tag "application"
     = csrf_meta_tag
     %link{href: "//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css", rel: "stylesheet"}
     = favicon_link_tag 'favicon.ico'
@@ -33,17 +33,24 @@
     .container
       -if flash.each.count > 0
         %br
-        .alert.alert-info
-          %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", type: "button"} ×
-          - flash.each do |name, msg|
-            - if msg.class == Array
-              %ul
-                - msg.each do |message|
-                  %li
+        - flash.each do |name, msg|
+          - if msg.class == Array
+            %ul
+              - msg.each do |message|
+                %li
+                  .alert.alert-info.animated.flash
+                    %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", type: "button"} ×
                     = label_tag message, id: "flash_#{name}"
-            - else
-              = label_tag msg
+          - else
+            - if flash[:notice]
+              .alert.alert-info.animated.flash#flashes
+                %button.close#target{"aria-hidden" => "true", "data-dismiss" => "alert", type: "button"} ×
+                %i.fa.fa-info.fa-inverse= "   #{msg}"
+            - if flash[:alert]
+              .alert.alert-warning.animated.flash#flashes
+                %button.close.close#target{"aria-hidden" => "true", "data-dismiss" => "alert", type: "button"} ×
+                %i.fa.fa-warning.fa-inverse= " #{msg}"
     %br
-    .container
+    .container.animated.fadeIn
       = yield
     = render 'layouts/bottom'

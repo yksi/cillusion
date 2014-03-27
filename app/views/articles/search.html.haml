@@ -2,7 +2,7 @@
 - if @articles.count > 0
   %ul.media-list
     - @articles.each do |a|
-      %li.well
+      %li.well.animated.bounceInUp
         = link_to a do
           = image_tag a.photo.url(:thumb), align: "left", class: "img-circle"
           %h4= "#{a.theme}"

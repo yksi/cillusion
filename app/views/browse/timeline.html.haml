@@ -3,7 +3,7 @@
 %ul.timeline
   - @resourses.each do |r|
     - if r.class.name == 'Relationship'
-      %li
+      %li.animated.rotateInUpRight
         - @followed_user = User.find(r.followed_id)
         - @follower_user = User.find(r.follower_id)
         .timeline-badge.danger
@@ -15,7 +15,7 @@
             = link_to @followed_user.fullname, @followed_user
             %em.text-muted= "#{time_ago_in_words(r.created_at)} ago."
     - if r.class.name == 'Article'
-      %li.timeline-inverted
+      %li.timeline-inverted.animated.rotateInUpLeft
         .timeline-badge.warning
           %i.fa.fa-lg.fa-book
         .timeline-panel
@@ -25,7 +25,7 @@
             = link_to r.theme, r
             %em.text-muted= "#{time_ago_in_words(r.created_at)} ago."
     - if r.class.name == 'User'
-      %li
+      %li.animated.rotateInUpRight
         .timeline-badge.primary
           %i.fa.fa-lg.fa-home
         .timeline-panel

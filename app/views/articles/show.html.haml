@@ -1,6 +1,5 @@
 - content_for :title, @article.theme[0..15]
 = stylesheet_link_tag "comment"
-= javascript_include_tag "comment"
 .page-header
   .row
     .col-xs-12.col-sm-6.col-md-8
@@ -8,7 +7,7 @@
         %h1= "#{@article.theme} (#{@article.category})"
         #{@article.content.html_safe}
       %br
-    .col-xs-6.col-md-4
+    .col-xs-6.col-md-4.animated
       - if @article.user == current_user
         = link_to edit_article_path, class: "btn btn-warning" do
           %i.fa.fa-edit= " Edit"
@@ -20,14 +19,29 @@
         = form_for [@article, @comment] do |f|
           = f.text_area :content, class: 'form-control', style: "resize:vertical"
           = f.hidden_field :article_id, value: @article.id
-          = f.submit "Add comment", class: "btn btn-success btn-block"
+          = button_tag(type: 'submit', class: "btn btn-success btn-block") do
+            %i.fa.fa-comment.fa.lg.fa-inverse= " Add comment"
       %br
       - @article.comments.order(created_at: :asc).each do |comment|
         %div.comment
-          %h5{align: "right"}="#{comment.return_created_at_as_nice_string} by #{comment.user.fullname}"
+          %h4.text-= comment.content
           %br
-          %h4= comment.content
+          %h5{align: "right"}="#{comment.return_created_at_as_nice_string} by #{comment.user.fullname}"
         %br
 %h5.text-right= "#{@article.created_at.strftime("%d %b. %Y")} by "
 %h5.text-right= link_to @article.user.fullname, user_path(@article.user)
+- if @article.user.user_articles.count > 1 && @article.user != current_user
+  .panel-heading
+    %h4.panel-title
+      %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#collapseOne"}= 'Another articles of this user'
+  #collapseOne.panel-collapse.collapse.off
+    .panel-body
+      - @article.user.user_articles.each do |article|
+        - if article != @article
+          .col-sm-1.col-md-2
+            .thumbnail
+              = link_to article do
+                = image_tag article.photo.url, class: "img-rounded"
+              .caption
+                %h4= "#{article.theme}"
 

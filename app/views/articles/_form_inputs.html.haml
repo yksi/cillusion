@@ -1,17 +1,17 @@
 = form_for @article do |f|
-  .col-xs-12.col-sm-6.col-md-8
+  .col-xs-12.col-sm-6.col-md-8.animated.bounceInLeft
     -if @article.errors.any?
       .panel.panel-danger
         .panel-heading
           Errors
         .panel-body
           -@article.errors.full_messages.each do |ue|
-            %h5= "-> #{ue}"
+            %i.fa.fa-warning= "#{ue}"
     = f.text_field :theme, placeholder: "Theme...", class: "form-control", style: "width: 650px;"
     %br
     = f.cktext_area :content, :id => 'sometext'
     %br
-  .col-xs-6.col-md-4
+  .col-xs-6.col-md-4.animated.bounceInRight
     - if !current_page?(new_article_path)
       = link_to @article, method: :delete, class: "btn btn-danger" do
         %i.fa.fa-times= " Remove"
@@ -19,7 +19,7 @@
       %i.fa.fa-check= " Save"
     %hr
     = label_tag "Category:"
-    = f.select :category, @category
+    = f.select :category, @category, class: "styled-select"
     %br= label_tag "Photo:"
     = f.file_field :photo
     = image_tag @article.photo.url

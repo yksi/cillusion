@@ -1,1 +1,0 @@
-$('#modal-followers').modal('show')

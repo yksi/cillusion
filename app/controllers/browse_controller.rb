@@ -33,7 +33,7 @@ class BrowseController < ApplicationController
   private
 
   def find_articles
-    @articles = Article.order(created_at: :desc)
+    @articles = Article.order(created_at: :desc).paginate(page: params[:page], per_page: 20)
   end
 
   def find_users

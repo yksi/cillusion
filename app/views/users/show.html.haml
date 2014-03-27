@@ -1,7 +1,7 @@
 - content_for :title, @user.fullname
 - @ID =  @user.id
 .container
-  .col-md-6
+  .col-md-6.animated.bounceInLeft
     %h1= "#{@user.fullname}"
     - if @user != current_user
       - if current_user.following?(@user)
@@ -19,7 +19,7 @@
     %br
     Created articles: #{@user.user_articles.count}
     %br
-  .col-md-6{align: "center"}
+  .col-md-6.animated.bounceInRight{align: "center"}
     =image_tag @user.avatar.thumb.url, align: "top", hspace: "20", vspace: "20"
     -if @complete < 100 && @user == current_user
       .alert.alert-info
@@ -51,7 +51,7 @@
   - if @articles.any?
     - @articles.each do |article|
       .col-sm-1.col-md-2
-        .thumbnail
+        .thumbnail.animated.fadeIn
           = link_to article do
             = image_tag article.photo.url, class: "img-rounded"
           .caption

@@ -10,6 +10,7 @@
  *
  *= require_self
  *= require bootstrap/bootstrap
+ *= require animate
  */
 
 body
@@ -19,12 +20,20 @@ body
   padding-top: 45px;
 }
 
-.container-fluid .row-fluid [class*="span"] {
-    margin-left:0px;
-}
-.container { padding-bottom: 15px; }
-#wrap
-{
-  padding-top: 120px;
-}
+.container-fluid .row-fluid [class*="span"] { margin-left:0px; }
 
+.container { padding-bottom: 15px; }
+
+#wrap {  padding-top: 120px; }
+
+.styled-select{
+   background: black;
+   width: 268px;
+   padding: 5px;
+   font-size: 16px;
+   line-height: 1;
+   border: 0;
+   border-radius: 0;
+   height: 34px;
+   -webkit-appearance: none;
+}
