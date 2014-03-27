@@ -56,6 +56,6 @@
                     %i.fa.fa-inverse.fa-times= " Sign out"
           -else
             %li
-              %a{href: "#", "data-target" => "#modal-login", "data-toggle" => "modal"} Sign up
+              %a#target{href: "#", "data-target" => "#modal-login", "data-toggle" => "modal"} Sign up
 - if !user_signed_in?
   = render "layouts/login_register_frame"

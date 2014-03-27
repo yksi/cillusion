@@ -1,17 +1,11 @@
 - content_for :title, "Main"
-%div
-  -if user_signed_in?
-    .page-header
-      %h2= "Recently added articles"
-      .row
-        - @articles.each do |article|
-          .col-sm-1.col-md-2
-            .thumbnail
-              = link_to article do
-                = image_tag article.photo.url, class: "img-rounded"
-                .caption
-                  %h4= "#{article.theme}"
-                  %h5= article.user.fullname
-  - else
-    %div{align: "center"}
-      <iframe width="640" height="390" src="//www.youtube.com/embed/_gUatp_9NHc" frameborder="0" allowfullscreen></iframe>
+.row.text-center
+  .col-md-4
+    .btn-social.btn-danger.text-center#example{"data-container" => "body", "data-content" => "Vivamus sagittis lacus vel augue laoreet rutrum faucibus.", "data-placement" => "left", "data-toggle" => "popover", type: "button"}
+      %i.fa.fa-heart.fa-lg
+  .col-md-4
+    .btn-social.btn-primary.text-center
+      %i.fa.fa-facebook.fa-lg
+  .col-md-4
+    .btn-social.btn-success.text-center
+      %i.fa.fa-twitter.fa-lg

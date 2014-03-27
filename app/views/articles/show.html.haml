@@ -2,21 +2,20 @@
 = stylesheet_link_tag "comment"
 .page-header
   .row
-    .col-xs-12.col-sm-6.col-md-8
+    .col-xs-12.col-sm-6.col-md-8.animated.slideInLeft.verticalLine
       %div
         %h1= "#{@article.theme} (#{@article.category})"
         #{@article.content.html_safe}
       %br
-    .col-xs-6.col-md-4.animated
+    .col-xs-6.col-md-4.animated.slideInRight
       - if @article.user == current_user
-        = link_to edit_article_path, class: "btn btn-warning" do
+        = link_to edit_article_path, class: "btn btn-warning btn-block" do
           %i.fa.fa-edit= " Edit"
-      %br
-      %br
+        %br
       .thumbnail
         = image_tag @article.photo.url
       - if user_signed_in?
-        = form_for [@article, @comment] do |f|
+        = form_for @comment do |f|
           = f.text_area :content, class: 'form-control', style: "resize:vertical"
           = f.hidden_field :article_id, value: @article.id
           = button_tag(type: 'submit', class: "btn btn-success btn-block") do
@@ -24,10 +23,13 @@
       %br
       - @article.comments.order(created_at: :asc).each do |comment|
         %div.comment
+          - if @comment.user_id == current_user
+            .pull-right
+              = link_to comment, method: :delete do
+                %i.fa.fa-times
           %h4.text-= comment.content
           %br
           %h5{align: "right"}="#{comment.return_created_at_as_nice_string} by #{comment.user.fullname}"
-        %br
 %h5.text-right= "#{@article.created_at.strftime("%d %b. %Y")} by "
 %h5.text-right= link_to @article.user.fullname, user_path(@article.user)
 - if @article.user.user_articles.count > 1 && @article.user != current_user

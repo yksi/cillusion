@@ -19,6 +19,7 @@
 //= require bootstrap/bootstrap
 //= require ckeditor/override
 //= require ckeditor/init
+//= require index
 
 
 

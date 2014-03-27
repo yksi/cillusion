@@ -10,47 +10,50 @@
     = favicon_link_tag 'favicon.ico'
   %body
     = render "layouts/top"
-    -if yield(:title) == "Main"
-      .jumbotron.main-d
-        .container
-          - if user_signed_in?
-            - @name = current_user.first_name
-          - else
-            - @name = "Guest"
-          %div{align: "center"}
-            = image_tag "logo.png"
-            %h1{style: "color:white;"}= "Create your Articles"
-          %p{style: "color:white;"}= "Howdy, #{@name}. Welcome to Cillusion web-services. Create the article and get new Followers, read articles from other users and enjoy the service."
-          .row
-            .col-md-6.col-md-offset-6
-              .row
-                .col-md-6
-                  = link_to "Create Profile", new_user_registration_path, class: "btn btn-default"
-                .col-md-6
-                  = link_to "http://illusion.wikia.com/wiki/Main_Page", class: "btn btn-success" do
+    %div#divq
+      -if yield(:title) == "Main"
+        .jumbotron
+          .container
+            - if user_signed_in?
+              - @name = current_user.first_name
+            - else
+              - @name = "Guest"
+            %div{align: "center"}
+              = image_tag "logo.png", class: "animated flipInX"
+              %h1.animated.bounce{style: "color:white;"}= "Create your Articles"
+            %p.animated.fadeIn#div1{style: "color:white;"}= "Howdy, #{@name}. Welcome to Cillusion web-services. Create the article and get new Followers, read articles from other users and enjoy the service."
+            .row
+              .col-md-6.col-md-offset-6
+                .btn-group
+                  = link_to "Create Profile", new_user_registration_path, class: "btn btn-default animated slideInLeft"
+                  %a.btn.btn-warning{href: "#", "data-target" => "#modal-video", "data-toggle" => "modal"} View presentation video
+                  = link_to "http://illusion.wikia.com/wiki/Main_Page", class: "btn btn-success animated slideInRight" do
                     Cillusion Wiki
                     %i.fa.fa-inverse.fa-angle-double-right.fa-lg
-    .container
-      -if flash.each.count > 0
-        %br
-        - flash.each do |name, msg|
-          - if msg.class == Array
-            %ul
-              - msg.each do |message|
-                %li
-                  .alert.alert-info.animated.flash
-                    %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", type: "button"} ×
-                    = label_tag message, id: "flash_#{name}"
-          - else
-            - if flash[:notice]
-              .alert.alert-info.animated.flash#flashes
-                %button.close#target{"aria-hidden" => "true", "data-dismiss" => "alert", type: "button"} ×
-                %i.fa.fa-info.fa-inverse= "   #{msg}"
-            - if flash[:alert]
-              .alert.alert-warning.animated.flash#flashes
-                %button.close.close#target{"aria-hidden" => "true", "data-dismiss" => "alert", type: "button"} ×
-                %i.fa.fa-warning.fa-inverse= " #{msg}"
-    %br
-    .container
-      = yield
-    = render 'layouts/bottom'
+      .container
+        -if flash.each.count > 0
+          %br
+          - flash.each do |name, msg|
+            - if msg.class == Array
+              %ul
+                - msg.each do |message|
+                  %li
+                    .alert.alert-info.animated.flash
+                      %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", type: "button"} ×
+                      = label_tag message, id: "flash_#{name}"
+            - else
+              - if flash[:notice]
+                .alert.alert-info.animated.flash#flash_info
+                  %button.close#close_notice{"aria-hidden" => "true", type: "button"} ×
+                  %i.fa.fa-info.fa-inverse= "   #{msg}"
+              - if flash[:alert]
+                .alert.alert-warning.animated.flash#flash_warning
+                  %button.close.close#close_alert{"aria-hidden" => "true", type: "button"} ×
+                  %i.fa.fa-warning.fa-inverse= " #{msg}"
+      %br
+      .container
+        = yield
+      = render 'layouts/bottom'
+      - if !user_signed_in?
+        = render 'layouts/video'
+

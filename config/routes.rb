@@ -6,6 +6,7 @@ Illusion::Application.routes.draw do
   root "users#index"
   get "users/index"
   get "users/show"
+  get "comments/show"
 
 
   # devise_for :users, controllers: { registrations: 'users/registrations'}
@@ -13,10 +14,7 @@ Illusion::Application.routes.draw do
   resources :users, :only => [:index, :show]
   resources :articles
   resources :follows, only: [:create, :destroy]
-
-  resources :articles do
-    resources :comments
-  end
+  resources :comments
 
   resources :users do
     member do
