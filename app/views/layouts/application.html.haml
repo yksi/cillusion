@@ -51,6 +51,6 @@
                 %button.close.close#target{"aria-hidden" => "true", "data-dismiss" => "alert", type: "button"} ×
                 %i.fa.fa-warning.fa-inverse= " #{msg}"
     %br
-    .container.animated.fadeIn
+    .container
       = yield
     = render 'layouts/bottom'
