@@ -1,6 +1,4 @@
 - content_for :title, @user.fullname
-- @ID =  @user.id
-%a{href: "http://localhost:3000/messages#outbox"} Oubox
 .container
   .col-md-6.animated.bounceInLeft
     %h1= "#{@user.fullname}"
@@ -62,6 +60,7 @@
       %h1.text-muted= "#{@user.first_name} has no created articles yet..."
       - if @user == current_user
         = link_to "Create your first Article", new_article_path, class: "btn btn-success"
+/modals
 = render "followers"
 = render "followed"
 = render "avatar_modal"
