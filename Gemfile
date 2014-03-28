@@ -45,3 +45,5 @@ gem 'friendly_id', '~> 5.0.3'
 gem "font-awesome-rails"
 gem 'ckeditor', '~> 4.0.10'
 gem 'will_paginate', '~> 3.0'
+
+gem 'batman-rails'

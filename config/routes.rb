@@ -1,4 +1,7 @@
 Illusion::Application.routes.draw do
+
+  #get "(*redirect_path)", to: "batman#index", constraints: lambda { |request| request.format == "text/html" }
+
   mount Ckeditor::Engine => '/ckeditor'
   get "browse/index"
   get "browse/timeline"
