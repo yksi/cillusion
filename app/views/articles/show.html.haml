@@ -5,8 +5,8 @@
     .col-xs-12.col-sm-6.col-md-8.animated.slideInLeft.verticalLine
       %div
         .pull-right
-          %a{href: "#", "data-target" => "#modal-full-screen", "data-toggle" => "modal"}
-            %i.fa.fa-arrows-alt.fa-lg
+          %button.close{href: "#", "data-target" => "#modal-full-screen", "data-toggle" => "modal"}
+            %i.fa.fa-arrows-alt
         %h1= "#{@article.theme} (#{@article.category})"
         #{@article.content.html_safe}
       %br

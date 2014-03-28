@@ -24,5 +24,15 @@ $( document ).ready(function() {
     d.innerHTML = ""
   });
 
+  $("[data-toggle=popover]").popover({html:true})
+
+  $('#example').click(function() {
+    $('#example').popover();
+  });
+
+  $(".btn-follow").click(function() {
+    $(".btn-follow").html('Following...')
+  })
+
 });
 
