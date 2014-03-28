@@ -22,11 +22,19 @@
             %i.fa.fa-comment.fa.lg.fa-inverse= " Add comment"
       %br
       - @article.comments.order(created_at: :asc).each do |comment|
+        .panel-collapse.collapse.off{id: "collapse#{comment.id}"}
+          .panel-body
+            .btn-group{align: "center"}
+              %h5 Really delete this comment?
+              = link_to "Yes", comment, method: :delete, rel: "nofollow" , class: "btn btn-danger btn-sm"
+              %a.btn.btn-sm.btn-default{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#collapse#{comment.id}"} No
         %div.comment
-          - if @comment.user_id == current_user
+          - if comment.user == current_user
             .pull-right
-              = link_to comment, method: :delete do
-                %i.fa.fa-times
+              .panel-heading
+                %h4.panel-title
+                  %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#collapse#{comment.id}"}
+                    %i.fa.fa-times
           %h4.text-= comment.content
           %br
           %h5{align: "right"}="#{comment.return_created_at_as_nice_string} by #{comment.user.fullname}"

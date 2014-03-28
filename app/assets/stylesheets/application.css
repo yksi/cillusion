@@ -17,7 +17,7 @@ body
 {
   overflow-x: hidden;
   padding-top: 45px;
-  padding-bottom: 0;
+  padding-bottom: 45px;
 }
 
 .container-fluid .row-fluid [class*="span"] { margin-left:0px; }

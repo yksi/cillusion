@@ -1,5 +1,10 @@
 $( document ).ready(function() {
 
+  $( "#target" ).click(function() {
+    document.getElementById("divq").className = "";
+    $('#divq').addClass(' animated bounceOutLeft')
+  });
+
   $('#modal-login').on('hidden.bs.modal', function () {
     document.getElementById("divq").className = "";
     $('#divq').addClass(' animated bounceInRight')
