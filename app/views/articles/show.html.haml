@@ -4,6 +4,9 @@
   .row
     .col-xs-12.col-sm-6.col-md-8.animated.slideInLeft.verticalLine
       %div
+        .pull-right
+          %a{href: "#", "data-target" => "#modal-full-screen", "data-toggle" => "modal"}
+            %i.fa.fa-arrows-alt.fa-lg
         %h1= "#{@article.theme} (#{@article.category})"
         #{@article.content.html_safe}
       %br
@@ -37,4 +40,4 @@
 %h5.text-right= "#{@article.created_at.strftime("%d %b. %Y")} by "
 %h5.text-right= link_to @article.user.fullname, user_path(@article.user)
 = render 'users/articles'
-
+= render "full_screen"

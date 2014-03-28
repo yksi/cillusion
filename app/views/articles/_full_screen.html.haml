@@ -1,0 +1,9 @@
+#modal-full-screen.modal.fade{"aria-hidden" => "true", role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"}
+          %i.fa.fa-compress.fa.lg
+        %h4#myModalLabel.modal-title{align: "center"}= "#{@article.theme} (#{@article.category})"
+      .modal-body
+        = @article.content.html_safe
