@@ -1,6 +1,15 @@
-- @followed.each do |user|
-  = link_to user do
-    %p
-      .col-md-2
-        = image_tag user.avatar.small.url, id: "#smalluser", "data-placement" => "left", "data-toggle" => "tooltip"
-        %h5= "#{user.fullname}"
+#modal-followed.modal.fade{"aria-hidden" => "true", role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"}
+          %i.fa.fa-times
+        %h4#myModalLabel.modal-title{align: "center"}= "#{@user.first_name} followed"
+      .modal-body
+        .row
+          - @followed.each do |user|
+            = link_to user do
+              %p
+                .col-md-2
+                  = image_tag user.avatar.small.url, id: "#smalluser", "data-placement" => "left", "data-toggle" => "tooltip"
+                  %h5= "#{user.fullname}"

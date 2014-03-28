@@ -15,11 +15,7 @@
       .thumbnail
         = image_tag @article.photo.url
       - if user_signed_in?
-        = form_for @comment do |f|
-          = f.text_area :content, class: 'form-control', style: "resize:vertical"
-          = f.hidden_field :article_id, value: @article.id
-          = button_tag(type: 'submit', class: "btn btn-success btn-block") do
-            %i.fa.fa-comment.fa.lg.fa-inverse= " Add comment"
+        = render 'comments/form'
       %br
       - @article.comments.order(created_at: :asc).each do |comment|
         .panel-collapse.collapse.off{id: "collapse#{comment.id}"}
@@ -40,18 +36,5 @@
           %h5{align: "right"}="#{comment.return_created_at_as_nice_string} by #{comment.user.fullname}"
 %h5.text-right= "#{@article.created_at.strftime("%d %b. %Y")} by "
 %h5.text-right= link_to @article.user.fullname, user_path(@article.user)
-- if @article.user.user_articles.count > 1 && @article.user != current_user
-  .panel-heading
-    %h4.panel-title
-      %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#collapseOne"}= 'Another articles of this user'
-  #collapseOne.panel-collapse.collapse.off
-    .panel-body
-      - @article.user.user_articles.each do |article|
-        - if article != @article
-          .col-sm-1.col-md-2
-            .thumbnail
-              = link_to article do
-                = image_tag article.photo.url, class: "img-rounded"
-              .caption
-                %h4= "#{article.theme}"
+= render 'users/articles'
 

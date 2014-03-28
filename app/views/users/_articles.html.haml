@@ -1,0 +1,14 @@
+- if @article.user.user_articles.count > 1 && @article.user != current_user
+  .panel-heading
+    %h4.panel-title
+      %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#collapseOne"}= 'Another articles of this user'
+  #collapseOne.panel-collapse.collapse.off
+    .panel-body
+      - @article.user.user_articles.each do |article|
+        - if article != @article
+          .col-sm-1.col-md-2
+            .thumbnail
+              = link_to article do
+                = image_tag article.photo.url, class: "img-rounded"
+              .caption
+                %h4= "#{article.theme}"

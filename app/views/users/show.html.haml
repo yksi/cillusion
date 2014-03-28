@@ -1,5 +1,6 @@
 - content_for :title, @user.fullname
 - @ID =  @user.id
+%a{href: "http://localhost:3000/messages#outbox"} Oubox
 .container
   .col-md-6.animated.bounceInLeft
     %h1= "#{@user.fullname}"
@@ -20,7 +21,7 @@
     Created articles: #{@user.user_articles.count}
     %br
   .col-md-6.animated.bounceInRight{align: "center"}
-    =image_tag @user.avatar.thumb.url, align: "top", hspace: "20", vspace: "20"
+    %a{href: "#", "data-target" => "#modal-avatar", "data-toggle" => "modal"}=image_tag @user.avatar.thumb.url, align: "top", hspace: "20", vspace: "20"
     -if @complete < 100 && @user == current_user
       .alert.alert-info
         %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", type: "button"} ×
@@ -61,43 +62,8 @@
       %h1.text-muted= "#{@user.first_name} has no created articles yet..."
       - if @user == current_user
         = link_to "Create your first Article", new_article_path, class: "btn btn-success"
-#modal-followers.modal.fade{"aria-hidden" => "true", role: "dialog", tabindex: "-1"}
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"}
-          %i.fa.fa-times
-        %h4#myModalLabel.modal-title{align: "center"}= "#{@user.first_name} followers"
-      .modal-body
-        .row
-          = render "followers"
-#modal-followed.modal.fade{"aria-hidden" => "true", role: "dialog", tabindex: "-1"}
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"}
-          %i.fa.fa-times
-        %h4#myModalLabel.modal-title{align: "center"}= "#{@user.first_name} followed"
-      .modal-body
-        .row
-          = render "followed"
-#modal-message.modal.fade{"aria-hidden" => "true", role: "dialog", tabindex: "-1"}
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"}
-          %i.fa.fa-times
-        %h4#myModalLabel.modal-title{align: "center"}= "New message to #{@user.fullname}"
-      .modal-body
-        = form_for @message do |f|
-          = f.hidden_field :recipient_id, value: @user.id
-          = f.hidden_field :read, value: false
-          %br
-          = f.text_field :theme, class: "form-control", placeholder: "Theme"
-          %br
-          = f.text_area :content, class: "form-control", placeholder: "Message"
-          %br
-          %div{align: "center"}
-            = f.submit "Send", class: "btn btn-success"
-      .modal-footer
+= render "followers"
+= render "followed"
+= render "avatar_modal"
+= render "messages/form"
 

@@ -11,13 +11,17 @@ $( document ).ready(function() {
   });
 
   $( "#close_notice" ).click(function() {
-    document.getElementById("flash_info").className = "alert alert-info";
+    d = document.getElementById("flash_info")
+    d.className = "alert alert-info";
     $('#flash_info').addClass(' animated bounceOutLeft')
+    d.innerHTML = ""
   });
 
   $( "#close_alert" ).click(function() {
-    document.getElementById("flash_warning").className = "alert alert-warning";
+    d = document.getElementById("flash_warning")
+    d.className = "alert alert-warning";
     $('#flash_warning').addClass(' animated bounceOutLeft')
+    d.innerHTML = ""
   });
 
 });

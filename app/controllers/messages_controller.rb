@@ -3,6 +3,7 @@ class MessagesController < ApplicationController
   def index
     @resieved_messages = current_user.recieved_messages
     @sent_messages = current_user.sent_messages
+    @new_message = Message.new
   end
 
   def create

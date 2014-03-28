@@ -1,0 +1,9 @@
+#modal-avatar.modal.fade{"aria-hidden" => "true", role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"}
+          %i.fa.fa-times
+        %h4#myModalLabel.modal-title{align: "center"}= "#{@user.first_name} profile photo"
+      .modal-body{align: "center"}
+        =image_tag @user.avatar.url
