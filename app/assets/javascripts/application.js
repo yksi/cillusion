@@ -20,6 +20,8 @@
 //= require ckeditor/override
 //= require ckeditor/init
 //= require index
+//= require turbolinks
+//= require jquery.turbolinks
 
 
 

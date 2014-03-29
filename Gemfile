@@ -16,6 +16,7 @@ gem "mini_magick", "~> 3.6.0"
 gem "mailcatcher"
 gem 'unf'
 gem 'turbolinks'
+gem 'jquery-turbolinks'
 
 group :development do
   gem 'better_errors'
