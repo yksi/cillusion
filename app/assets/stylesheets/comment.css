@@ -3,6 +3,7 @@
   width: 100%;
   height: auto;
   float: right;
+  border-radius: 2px;
 
   /*create leaf*/
 /*
@@ -15,14 +16,9 @@
 
   /*end of create leaf*/
 
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=68)";
-  filter: alpha(opacity=68);
-  -moz-opacity: 0.68;
-  -khtml-opacity: 0.68;
-  opacity: 0.68;
-  border: 1px #0B0 solid;
+  border: 1px #000 solid;
 
-  background-color: #9df6d4;
+  background-color: rgba(255, 255, 255, 0.6);
 
   padding: 14px;
 
