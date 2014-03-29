@@ -47,3 +47,5 @@ gem 'ckeditor', '~> 4.0.10'
 gem 'will_paginate', '~> 3.0'
 
 gem 'batman-rails'
+gem 'less-rails'
+gem 'therubyracer'
