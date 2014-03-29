@@ -52,6 +52,14 @@ class User < ActiveRecord::Base
     relationships.find_by(followed_id: other_user.id).destroy
   end
 
+  def user
+    if user
+      user
+    else
+      "Someone"
+    end
+  end
+
   def self.find_for_facebook_oauth(auth)
     where(auth.slice(:provider, :uid)).first_or_create do |user|
       user.provider = auth.provider

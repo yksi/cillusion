@@ -25,14 +25,14 @@ class AvatarUploader < CarrierWave::Uploader::Base
 
   # Process files as they are uploaded:
   process :resize_to_fit => [800, 800]
-  
+
   # def scale(width, height)
   #    #do something
   # end
 
   # Create different versions of your uploaded files:
   version :thumb do
-    process :resize_to_fill => [300, 200]
+    process :resize_to_fill => [300, 300]
   end
 
   version :small do
@@ -46,8 +46,8 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # end
 
 
-   
-   
+
+
   #def cache_dir
   #  "#{Rails.root}/tmp/uploads"
   #end

@@ -57,7 +57,7 @@ class ArticlesController < ApplicationController
   end
 
   def require_category
-    @category = ["Programming", "News", "Wiki", "How To", "My Life", "Science", "Math", "Other"]
+    @category = ["Programming", "Business", "Traveling", "Languages", "Cars", "Technologies", "Gaming", "Films", "Music", "Poetry", "News", "Wiki", "How To", "My Lifestyle", "Science", "Math", "Other"]
   end
 
 end

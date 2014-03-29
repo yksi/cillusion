@@ -1,5 +1,5 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-  
+
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
   def new
@@ -15,7 +15,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       render :new
     end
   end
-  
+
   def update
     if params[:user][:password].blank?
       params[:user].delete("password")
@@ -35,10 +35,41 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def edit
     super
   end
-   
+
 
   def show
     super
+  end
+
+  def destroy
+    @user = User.find(current_user.id)
+    @user.destroy
+    redirect_to root_path, notice: "You successfully removed your profile"
+
+    @user.sent_messages.each do |message|
+      message.destroy
+    end
+
+    @user.recieved_messages.each do |message|
+      message.destroy
+    end
+
+    @user.relationships.each do |relationship|
+      relationship.destroy
+    end
+
+    @user.reverse_relationships.each do |relationship|
+      relationship.destroy
+    end
+
+    @user.user_articles.each do |article|
+      article.destroy
+    end
+
+    @user.comments.each do |comment|
+      comment.destroy
+    end
+
   end
 
   protected
