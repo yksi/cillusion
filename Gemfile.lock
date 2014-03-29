@@ -306,7 +306,6 @@ DEPENDENCIES
   rails_12factor
   rspec-rails (~> 2.14.0)
   selenium-webdriver (~> 2.39.0)
-  sqlite3
   turbolinks
   uglifier (>= 1.0.3)
   unf
