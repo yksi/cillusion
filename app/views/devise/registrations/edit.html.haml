@@ -70,7 +70,7 @@
         %h4#myModalLabel.modal-title{align: "center"}= "Suspend/ Delete profile"
       .modal-body
         If you want to suspend your profile click this button and your profile will suspend
-        .text-center  
+        .text-center
           = form_for current_user do |f|
             = f.hidden_field :paused, value: true
             = f.submit "Suspend", class: "btn btn-primary"

@@ -6,9 +6,11 @@
           - @main_path = browse_timeline_path
         - else
           - @main_path = root_path
+      %button.navbar-toggle{'data-toggle' => 'collapse', 'data-target' => '.NAVCOl'}
+        %i.fa.fa-bars.fa-lg
+      .collapse.navbar-collapse.NAVCOl
         = link_to @main_path, class: "navbar-brand animated bounceInLeft" do
           %i.fa.fa-eye.fa-lg Cillusion
-      .collapse.navbar-collapse
         - if user_signed_in?
           .navbar-form.navbar-left
             .form-group#search_form
