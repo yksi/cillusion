@@ -1,15 +1,11 @@
 class UsersController < ApplicationController
-  before_action :find_user, only: [:update, :show, :edit, :follows, :followers]
+  before_action :find_user, only: [:show, :edit, :follows, :followers]
 
   def update
-    @user = User.find(params[:id])
+    @user = User.find(current_user.id)
     if @user.update_attributes(user_params)
-      set_flash_message :notice, :updated
-      sign_in @user, :bypass => true
-      redirect_to after_update_path_for(@user)
-    else
-      render "edit"
     end
+    redirect_to root_path
   end
 
   def index
@@ -60,5 +56,9 @@ class UsersController < ApplicationController
 
   def find_user
     @user = User.find(params[:id])
+  end
+
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :avatar, :avatar_cache, :age, :sex, :hometown, :email, :password, :pasword_confirmation, :paused)
   end
 end

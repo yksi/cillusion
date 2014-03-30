@@ -9,19 +9,16 @@
     %link{href: "//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css", rel: "stylesheet"}
     = favicon_link_tag 'favicon.ico'
   %body
-    = render "layouts/top"
+    - if !user_signed_in? || !current_user.paused
+      = render "layouts/top"
     %div#divq
       -if yield(:title) == "Main"
         .jumbotron
           .container
-            - if user_signed_in?
-              - @name = current_user.first_name
-            - else
-              - @name = "Guest"
             %div{align: "center"}
               = image_tag "logo.png", class: "animated flipInX"
               %h1.animated.bounce{style: "color:white;"}= "Create your Articles"
-            %p.animated.fadeIn#div1{style: "color:white;"}= "Howdy, #{@name}. Welcome to Cillusion web-services. Create the article and get new Followers, read articles from other users and enjoy the service."
+            %p.animated.fadeIn#div1{style: "color:white;"}= "Howdy, Guest. Welcome to Cillusion web-service. Create the article and get new Followers, read articles from other users and enjoy the service."
             .row
               .col-md-6.col-md-offset-6
                 .btn-group
@@ -52,7 +49,18 @@
                   %i.fa.fa-warning.fa-inverse= " #{msg}"
       %br
       .container
-        = yield
+        -if !user_signed_in? || !current_user.paused
+          = yield
+        - else
+          .row
+            .col-md-3
+              = link_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn-primary btn-block"
+              %br
+              %br
+              = form_for current_user do |f|
+                = f.hidden_field :paused, value: :false
+                = f.submit "Restore profile", class: "btn btn-success btn-block"
+            %h1.text-muted.col-md-9.pander Your profile was suspeded
       - if !user_signed_in?
         = render 'layouts/video'
 

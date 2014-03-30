@@ -58,6 +58,25 @@
         = f.submit "Save changes", class: "btn btn-success btn-lg"
   .well.text-center
     %h3 Also you can cansel your account
-    = link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, class: "btn btn-danger"
+    %a.btn.btn-danger{href: "#", "data-target" => "#modal-suspend", "data-toggle" => "modal"} Suspend
   = link_to :back, class: "btn btn-primary" do
     %i.fa.fa-inverse.fa-angle-left= " back"
+#modal-suspend.modal.fade{"aria-hidden" => "true", role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"}
+          %i.fa.fa-times
+        %h4#myModalLabel.modal-title{align: "center"}= "Suspend/ Delete profile"
+      .modal-body
+        If you want to suspend your profile click this button and your profile will suspend
+        .text-center  
+          = form_for current_user do |f|
+            = f.hidden_field :paused, value: true
+            = f.submit "Suspend", class: "btn btn-primary"
+        %br
+        But if you want to delete your profile altogether, you can select this button to click, but
+        %em.text-danger all your articles, comment, messages, follows will destroy too.
+        %br
+        .text-center
+          = link_to "Destroy", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger"

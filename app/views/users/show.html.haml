@@ -1,69 +1,72 @@
 - content_for :title, @user.fullname
-.container.row
-  .col-md-6.animated.bounceInLeft
-    %h1= "#{@user.fullname}"
-    - if @user != current_user
-      - if current_user.following?(@user)
-        = render 'unfollow'
-      - else
-        = render 'follow'
+- if @user.paused
+  User has been suspended his/her profile
+- else
+  .container.row
+    .col-md-6.animated.bounceInLeft
+      %h1= "#{@user.fullname}"
+      - if @user != current_user
+        - if current_user.following?(@user)
+          = render 'unfollow'
+        - else
+          = render 'follow'
+      %br
+      - if @user.age
+        Age: #{@user.age}
+      %br
+      - if @user.hometown
+        Hometown: #{@user.hometown}
+      %br
+      Registered: #{@user.created_at.strftime("%d %B %Y")}
+      %br
+      Created articles: #{@user.user_articles.count}
+      %br
+    .col-md-6.animated.bounceInRight
+      .pander{align: "center"}
+        %a{href: "#", "data-target" => "#modal-avatar", "data-toggle" => "modal"}=image_tag @user.avatar.thumb.url, align: "top", hspace: "20", vspace: "20"
+        -if @complete < 100 && @user == current_user
+          .alert.alert-info
+            %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", type: "button"} ×
+            %i.fa.fa-warning= " Your profile is not completed yet. Go to"
+            = link_to "edit profile page", edit_user_registration_path
+            and add information about you.
+        .thumbnail{align: "center"}
+          %a.text-success{href: "#", "data-target" => "#modal-followed", "data-toggle" => "modal"}
+            %strong= @followed.count
+            followed
+          %a.text-success{href: "#", "data-target" => "#modal-followers", "data-toggle" => "modal"}
+            %strong= @followers.count
+            followers
+          %br
+          Profile is completed for
+          %br
+          .row
+            .col-md-6.col-md-offset-3
+              .progress.progress-stripped.active
+                .progress-bar.progress-bar-info{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{@complete}", role: "progressbar", style: "width: #{@complete}%;"} #{@complete} %
+          - if @user != current_user
+            %a.btn.btn-primary{href: "#", "data-target" => "#modal-message", "data-toggle" => "modal"}
+              %i.fa.fa-envelope.fa-lg.fa-inverse=  " Private message"
+          %br
+          %br
+    %h1 Articles:
     %br
-    - if @user.age
-      Age: #{@user.age}
-    %br
-    - if @user.hometown
-      Hometown: #{@user.hometown}
-    %br
-    Registered: #{@user.created_at.strftime("%d %B %Y")}
-    %br
-    Created articles: #{@user.user_articles.count}
-    %br
-  .col-md-6.animated.bounceInRight
-    .pander{align: "center"}
-      %a{href: "#", "data-target" => "#modal-avatar", "data-toggle" => "modal"}=image_tag @user.avatar.thumb.url, align: "top", hspace: "20", vspace: "20"
-      -if @complete < 100 && @user == current_user
-        .alert.alert-info
-          %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", type: "button"} ×
-          %i.fa.fa-warning= " Your profile is not completed yet. Go to"
-          = link_to "edit profile page", edit_user_registration_path
-          and add information about you.
-      .thumbnail{align: "center"}
-        %a.text-success{href: "#", "data-target" => "#modal-followed", "data-toggle" => "modal"}
-          %strong= @followed.count
-          followed
-        %a.text-success{href: "#", "data-target" => "#modal-followers", "data-toggle" => "modal"}
-          %strong= @followers.count
-          followers
-        %br
-        Profile is completed for
-        %br
-        .row
-          .col-md-6.col-md-offset-3
-            .progress.progress-stripped.active
-              .progress-bar.progress-bar-info{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{@complete}", role: "progressbar", style: "width: #{@complete}%;"} #{@complete} %
-        - if @user != current_user
-          %a.btn.btn-primary{href: "#", "data-target" => "#modal-message", "data-toggle" => "modal"}
-            %i.fa.fa-envelope.fa-lg.fa-inverse=  " Private message"
-        %br
-        %br
-  %h1 Articles:
-  %br
-  - if @articles.any?
-    - @articles.each do |article|
-      .col-sm-1.col-md-2
-        .thumbnail.animated.fadeIn
-          = link_to article do
-            = image_tag article.photo.url, class: "img-rounded"
-          .caption
-            %h4= "#{article.theme}"
-  - else
-    %div{align: "center"}
-      %h1.text-muted= "#{@user.first_name} has no created articles yet..."
-      - if @user == current_user
-        = link_to "Create your first Article", new_article_path, class: "btn btn-success"
-/modals
-= render "followers"
-= render "followed"
-= render "avatar_modal"
-= render "messages/form"
+    - if @articles.any?
+      - @articles.each do |article|
+        .col-sm-1.col-md-2
+          .thumbnail.animated.fadeIn
+            = link_to article do
+              = image_tag article.photo.url, class: "img-rounded"
+            .caption
+              %h4= "#{article.theme}"
+    - else
+      %div{align: "center"}
+        %h1.text-muted= "#{@user.first_name} has no created articles yet..."
+        - if @user == current_user
+          = link_to "Create your first Article", new_article_path, class: "btn btn-success"
+  /modals
+  = render "followers"
+  = render "followed"
+  = render "avatar_modal"
+  = render "messages/form"
 
