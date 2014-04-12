@@ -2,7 +2,7 @@
 - if @user.paused
   User has been suspended his/her profile
 - else
-  .container.row
+  .container.row.pander
     .col-md-6.animated.bounceInLeft
       %h1= "#{@user.fullname}"
       - if @user != current_user

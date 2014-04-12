@@ -34,5 +34,7 @@ $( document ).ready(function() {
     $(".btn-follow").html('Following...')
   })
 
+  $('[data-toggle="tooltip"]').tooltip()
+
 });
 

@@ -1,18 +1,23 @@
 - content_for :title, "My Calendar"
-=stylesheet_link_tag "calendar"
+= stylesheet_link_tag "calendar"
 %a.btn.btn-primary.btn-sm{href: new_article_path} Create new Article
 %div#calendar.small-8.large-centered.column
   %h2{align: "center"}
     = link_to "<", :month => (@date.beginning_of_month-1).strftime("%Y/%m")
     #{@date.strftime("%B %Y")}
     = link_to ">", :month => (@date.end_of_month+1).strftime("%Y/%m")
-  =calendar_for @articles, :year => @date.year, :month => @date.month do |calendar|
+  = calendar_for @articles, :year => @date.year, :month => @date.month do |calendar|
     = calendar.head('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday')
-    =calendar.day(:day_method => :created_at) do |date, articles|
-      =date.day
+    = calendar.day(:day_method => :created_at) do |date, articles|
+      = date.day
+      - if date.to_s == Time.now.strftime("%Y-%m-%d")
+        %br
+        .text-center
+          %a.btn.btn-primary.btn-sm{href: new_article_path, "data-toggle" => "tooltip", "data-placement" => "top", title: "Create new article"}
+            %i.fa.fa-file-o
       %ul
-        -for article in articles
-          -if article.theme!=nil 
-            =link_to "#{article.theme}", article
-          -else 
-            =link_to "#{article.content[0..12]}...", article
+        - for article in articles
+          = link_to article, "data-toggle" => "tooltip", "data-placement" => "top", title: article.theme do
+            = image_tag article.photo.small.url, class: "img-thumbnail"
+
+

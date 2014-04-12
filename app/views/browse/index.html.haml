@@ -11,9 +11,11 @@
     #articles.tab-pane.active.animated.bounceInLeft
       .pull-right= will_paginate @articles
       .page-header
-        = form_tag articles_search_path, method: 'get', class: 'navbar-search pull-left' do
-          %i.fa.fa-search.fa-inverse.fa-lg
-          = text_field_tag :search, params[:search], class: "form-control", placeholder: "Search article..."
+        .form-inline
+          = form_tag articles_search_path, method: 'get', class: 'navbar-search pull-left' do
+            = text_field_tag :search, params[:search], class: "form-control", placeholder: "Search article..."
+            = button_tag(type: 'submit', class: "btn btn-primary btn-xs") do
+              %i.fa.fa-search.fa.lg.fa-inverse &nbsp;Search
       %br
       %hr
       %ul.media-list

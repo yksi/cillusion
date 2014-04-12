@@ -11,13 +11,7 @@
       .collapse.navbar-collapse.NAVCOl
         = link_to @main_path, class: "navbar-brand animated bounceInLeft" do
           %i.fa.fa-eye.fa-lg Cillusion
-        - if user_signed_in?
-          .navbar-form.navbar-left
-            .form-group#search_form
-              = form_tag articles_search_path, method: 'get', class: 'navbar-search pull-left' do
-                %i.fa.fa-search.fa-lg
-                = text_field_tag :search, params[:search], class: "form-control", placeholder: "Search article..."
-        .nav.navbar-center.navbar-nav
+        .nav.navbar-left.navbar-nav
           - if user_signed_in?
             %li
               = link_to browse_index_path do
