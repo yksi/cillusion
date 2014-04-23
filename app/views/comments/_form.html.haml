@@ -1,5 +1,7 @@
-= form_for @comment do |f|
-  = f.text_area :content, class: 'form-control', style: "resize:vertical"
-  = f.hidden_field :article_id, value: @article.id
-  = button_tag(type: 'submit', class: "btn btn-success btn-block") do
-    %i.fa.fa-comment.fa.lg.fa-inverse= " Add comment"
+.row
+  = form_for @comment, class: "form-inline"  do |f|
+    .col-md-9= f.text_field :content, class: 'form-control', style: "resize:vertical"
+    = f.hidden_field :article_id, value: @article.id
+    .col-md-3
+      = button_tag(type: 'submit', class: "btn btn-success btn-sm btn-block") do
+        %i.fa.fa-comment.fa.lg.fa-inverse= " Post"
