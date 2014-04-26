@@ -3,8 +3,12 @@
   User has been suspended his/her profile
 - else
   .container.row.pander
-    .col-md-6.animated.bounceInLeft
+    .col-md-8.animated.bounceInLeft
       %h1= "#{@user.fullname}"
+      - if @user.about.present?
+        .label.label-default.about-me-label About #{@user.first_name}
+        .about-me
+          = @user.about
       - if @user != current_user
         - if current_user.following?(@user)
           = render 'unfollow'
@@ -21,7 +25,7 @@
       %br
       Created articles: #{@user.user_articles.count}
       %br
-    .col-md-6.animated.bounceInRight
+    .col-md-4.colanimated.bounceInRigt.text-right
       .pander{align: "center"}
         %a{href: "#", "data-target" => "#modal-avatar", "data-toggle" => "modal"}=image_tag @user.avatar.thumb.url, align: "top", hspace: "20", vspace: "20"
         -if @complete < 100 && @user == current_user
@@ -54,9 +58,10 @@
     - if @articles.any?
       - @articles.each do |article|
         .col-sm-1.col-md-2
-          .thumbnail.animated.fadeIn
+          .thumbnail.animated.fadeIn.article-thumb
             = link_to article do
-              = image_tag article.photo.url, class: "img-rounded"
+              = image_tag article.photo.url, class: "img-rounded article-thumb-image"
+            .mark
             .caption
               %h4= "#{article.theme}"
     - else

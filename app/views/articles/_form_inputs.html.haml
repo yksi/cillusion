@@ -21,5 +21,5 @@
     = label_tag "Category:"
     = f.select :category, @category, class: "styled-select"
     %br= label_tag "Photo:"
-    = f.file_field :photo
-    = image_tag @article.photo.url
+    = f.file_field :photo, id: "file-input"
+    #imagee= image_tag @article.photo.url
