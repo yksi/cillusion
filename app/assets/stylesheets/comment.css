@@ -3,7 +3,7 @@
   width: 100%;
   height: auto;
   float: right;
-  border-radius: 2px;
+  border-radius: 0px;
 
   /*create leaf*/
 /*
@@ -16,11 +16,12 @@
 
   /*end of create leaf*/
 
-  border: 1px #000 solid;
+  border: 4px #AAA solid;
 
   background-color: rgba(255, 255, 255, 0.6);
 
   padding: 14px;
+  margin-bottom: 5px;
 
   /*color: #511f20;
   font-size: inherit;
