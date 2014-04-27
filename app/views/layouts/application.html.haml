@@ -12,7 +12,7 @@
     - if !user_signed_in? || !current_user.paused
       = render "layouts/top"
     %div#divq
-      -if yield(:title) == "Main"
+      - if yield(:title) == "Main"
         .jumbotron
           .container
             %div{align: "center"}
@@ -48,7 +48,7 @@
                   %button.close.close#close_alert{"aria-hidden" => "true", type: "button"} ×
                   %i.fa.fa-warning.fa-inverse= " #{msg}"
       %br
-      .container
+      %div{class: "#{'container' if !params[:action] == 'show' && !params[:controller] == 'users'}"}
         -if !user_signed_in? || !current_user.paused
           = yield
         - else

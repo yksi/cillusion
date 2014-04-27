@@ -8,7 +8,6 @@ Illusion::Application.routes.draw do
   get "articles/search"
   root "users#index"
   get "users/index"
-  get "users/show"
   get "comments/show"
 
 

@@ -15,11 +15,15 @@ textarea {
 .article-thumb {
   min-height: 209px;
   max-height: 209px;
+  -webkit-box-shadow: 5px 3px 6px 0px rgba(50, 50, 50, 0.58);
+  -moz-box-shadow:    5px 3px 6px 0px rgba(50, 50, 50, 0.58);
+  box-shadow:         5px 3px 6px 0px rgba(50, 50, 50, 0.58);
 }
 
 .article-thumb-image {
   min-height: 150px;
   min-width: auto;
+  max-height: 150px;
 }
 
 .about-me {
@@ -27,6 +31,15 @@ textarea {
   padding: 15px;
 }
 
-.about-me-label {
-  margin-bottom: -20px;
+.user_info {
+  background-color: #F2F3F4;
+}
+
+.change-avatar {
+  margin-top: -20px;
+  /*visibility: hidden;*/
+}
+
+.avatar:hover .change-avatar{
+  visibility: visible;
 }

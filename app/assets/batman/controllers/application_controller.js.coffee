@@ -1,1 +1,0 @@
-class Illusion.ApplicationController extends Batman.Controller

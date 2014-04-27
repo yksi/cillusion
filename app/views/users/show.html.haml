@@ -1,33 +1,40 @@
 - content_for :title, @user.fullname
 - if @user.paused
-  User has been suspended his/her profile
+  %h1 #{@user.fullname} has been suspended his/her profile
 - else
-  .container.row.pander
+  .row.pander
     .col-md-8.animated.bounceInLeft
-      %h1= "#{@user.fullname}"
-      - if @user.about.present?
-        .label.label-default.about-me-label About #{@user.first_name}
-        .about-me
-          = @user.about
-      - if @user != current_user
-        - if current_user.following?(@user)
-          = render 'unfollow'
-        - else
-          = render 'follow'
+      %h1
+        = "#{@user.fullname}"
+        - if @user.updated_at > Time.now - 15.minute
+          (online)
+      .well
+        - if @user.about.present?
+          .label.label-default.about-me-label About #{@user.first_name}
+          .about-me
+            = @user.about
+        - if @user != current_user
+          - if current_user.following?(@user)
+            = render 'unfollow'
+          - else
+            = render 'follow'
+        - if @user.age
+          %br
+          Age: #{@user.age}
+        - if @user.hometown
+          %br
+          Hometown: #{@user.hometown}
+          %br
+        Registered: #{@user.created_at.strftime("%d %B %Y")}
+        %br
+        Created articles: #{@user.user_articles.count}
       %br
-      - if @user.age
-        Age: #{@user.age}
-      %br
-      - if @user.hometown
-        Hometown: #{@user.hometown}
-      %br
-      Registered: #{@user.created_at.strftime("%d %B %Y")}
-      %br
-      Created articles: #{@user.user_articles.count}
-      %br
-    .col-md-4.colanimated.bounceInRigt.text-right
-      .pander{align: "center"}
-        %a{href: "#", "data-target" => "#modal-avatar", "data-toggle" => "modal"}=image_tag @user.avatar.thumb.url, align: "top", hspace: "20", vspace: "20"
+    .col-md-4.colanimated.bounceInRigt.text-right.user_info
+      %div{align: "center"}
+        %a{href: "#", "data-target" => "#modal-avatar", "data-toggle" => "modal"}
+          =image_tag @user.avatar.thumb.url, align: "top", hspace: "20", vspace: "20"
+        - if @user = current_user
+          %button.change-avatar.btn.btn-default.btn-block Change avatar
         -if @complete < 100 && @user == current_user
           .alert.alert-info
             %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", type: "button"} ×
@@ -53,7 +60,7 @@
               %i.fa.fa-envelope.fa-lg.fa-inverse=  " Private message"
           %br
           %br
-    %h1 Articles:
+    %h1 Articles
     %br
     - if @articles.any?
       - @articles.each do |article|
