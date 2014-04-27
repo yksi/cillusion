@@ -27,40 +27,44 @@
                   = link_to "http://illusion.wikia.com/wiki/Main_Page", class: "btn btn-success animated slideInRight" do
                     Cillusion Wiki
                     %i.fa.fa-inverse.fa-angle-double-right.fa-lg
-      .container
-        -if flash.each.count > 0
-          %br
-          - flash.each do |name, msg|
-            - if msg.class == Array
-              %ul
-                - msg.each do |message|
-                  %li
-                    .alert.alert-info.animated.flash
-                      %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", type: "button"} ×
-                      = label_tag message, id: "flash_#{name}"
-            - else
-              - if flash[:notice]
-                .alert.alert-info.animated.flash#flash_info
-                  %button.close#close_notice{"aria-hidden" => "true", type: "button"} ×
-                  %i.fa.fa-info.fa-inverse= "   #{msg}"
-              - if flash[:alert]
-                .alert.alert-warning.animated.flash#flash_warning
-                  %button.close.close#close_alert{"aria-hidden" => "true", type: "button"} ×
-                  %i.fa.fa-warning.fa-inverse= " #{msg}"
-      %br
-      %div{class: "#{'container' if !params[:action] == 'show' && !params[:controller] == 'users'}"}
-        -if !user_signed_in? || !current_user.paused
-          = yield
-        - else
-          .row
-            .col-md-3
-              = link_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn-primary btn-block"
-              %br
-              %br
-              = form_for current_user do |f|
-                = f.hidden_field :paused, value: :false
-                = f.submit "Restore profile", class: "btn btn-success btn-block"
-            %h1.text-muted.col-md-9.pander Your profile was suspeded
+      - else
+        .container
+          -if flash.each.count > 0
+            %br
+            - flash.each do |name, msg|
+              - if msg.class == Array
+                %ul
+                  - msg.each do |message|
+                    %li
+                      .alert.alert-info.animated.flash
+                        %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", type: "button"} ×
+                        = label_tag message, id: "flash_#{name}"
+              - else
+                - if flash[:notice]
+                  .alert.alert-info.animated.flash#flash_info
+                    %button.close#close_notice{"aria-hidden" => "true", type: "button"} ×
+                    %i.fa.fa-info.fa-inverse= "   #{msg}"
+                - if flash[:alert]
+                  .alert.alert-warning.animated.flash#flash_warning
+                    %button.close.close#close_alert{"aria-hidden" => "true", type: "button"} ×
+                    %i.fa.fa-warning.fa-inverse= " #{msg}"
+        %br
+        - bodyClass = 'container';
+        - if params[:controller] == 'users' && params[:action] == 'show'
+          - bodyClass = 'container-full';
+        %div{class: bodyClass}
+          - if !current_user.paused
+            = yield
+          - else
+            .row
+              .col-md-3
+                = link_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn-primary btn-block"
+                %br
+                %br
+                = form_for current_user do |f|
+                  = f.hidden_field :paused, value: :false
+                  = f.submit "Restore profile", class: "btn btn-success btn-block"
+              %h1.text-muted.col-md-9.pander Your profile was suspeded
       - if !user_signed_in?
         = render 'layouts/video'
 

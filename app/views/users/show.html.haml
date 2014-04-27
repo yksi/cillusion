@@ -31,10 +31,11 @@
       %br
     .col-md-4.colanimated.bounceInRigt.text-right.user_info
       %div{align: "center"}
-        %a{href: "#", "data-target" => "#modal-avatar", "data-toggle" => "modal"}
-          =image_tag @user.avatar.thumb.url, align: "top", hspace: "20", vspace: "20"
-        - if @user = current_user
-          %button.change-avatar.btn.btn-default.btn-block Change avatar
+        %figure.photo
+          %a{href: "#", "data-target" => "#modal-avatar", "data-toggle" => "modal"}
+            =image_tag @user.avatar.thumb.url, align: "top", hspace: "20", vspace: "20"
+          - if @user == current_user
+            %a.btn-pick-photo{href: edit_user_registration_path(current_user)} Change profile photo
         -if @complete < 100 && @user == current_user
           .alert.alert-info
             %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", type: "button"} ×
