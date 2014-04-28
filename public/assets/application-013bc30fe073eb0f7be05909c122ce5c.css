@@ -1,3 +1,58 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+
+
+
+ */
+
+
+body
+{
+  overflow-x: hidden;
+  padding-top: 45px;
+  padding-bottom: 45px;
+}
+
+.container-fluid .row-fluid [class*="span"] { margin-left:0px; }
+#wrap {  padding-top: 120px; }
+
+#cover {
+  width: 30px;
+  height: 30px;
+  background-color: #333;
+
+  margin: 100px auto;
+  -webkit-animation: rotateplane 1.2s infinite ease-in-out;
+  animation: rotateplane 1.2s infinite ease-in-out;
+}
+
+@-webkit-keyframes rotateplane {
+  0% { -webkit-transform: perspective(120px) }
+  50% { -webkit-transform: perspective(120px) rotateY(180deg) }
+  100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }
+}
+
+@keyframes rotateplane {
+  0% {
+    transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg)
+  } 50% {
+    transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg)
+  } 100% {
+    transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+    -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+  }
+}
+
 @import url("//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700");
 
 .pander{
@@ -6143,4 +6198,74 @@ label,
   -khtml-opacity: 0.8;        /* Safari 1.x */
   opacity: 0.8;               /* Good browsers */
   background-color: #fff;
+}
+body {
+  margin: 0;
+  background-position: center;
+}
+
+#imagee {
+  max-width: 200px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.article-thumb {
+  min-height: 209px;
+  max-height: 209px;
+  -webkit-box-shadow: 5px 3px 6px 0px rgba(50, 50, 50, 0.58);
+  -moz-box-shadow:    5px 3px 6px 0px rgba(50, 50, 50, 0.58);
+  box-shadow:         5px 3px 6px 0px rgba(50, 50, 50, 0.58);
+}
+
+.article-thumb-image {
+  min-height: 150px;
+  min-width: auto;
+  max-height: 150px;
+}
+
+.about-me {
+  border: 4px #AAA solid;
+  padding: 15px;
+}
+
+.user_info {
+  background-color: #F2F3F4;
+}
+
+.change-avatar {
+  margin-top: -20px;
+  /*visibility: hidden;*/
+}
+
+.avatar:hover .change-avatar{
+  visibility: visible;
+}
+
+figure.photo {
+  position: relative;
+}
+
+figure.photo .btn-pick-photo {
+  display: none;
+  position: absolute;
+  bottom: 10px;
+  right: 0px;
+  left: 0px;
+  padding: 4px 9px;
+  background: #C5CBE1;
+  color: white;
+  font-weight: bold;
+  opacity: 0.9;
+}
+
+figure.photo .btn-pick-photo:hover {
+  background: #b4bcd8;
+  text-decoration: underline;
+}
+
+figure.photo:hover .btn-pick-photo {
+  display: block;
 }
