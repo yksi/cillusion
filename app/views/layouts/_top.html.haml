@@ -2,13 +2,13 @@
   .animated.fadeIn
     .container-fluid
       .navbar-header
-        .navbar-brand
-          = link_to @main_path, class: "navbar-brand animated bounceInLeft" do
-            %i.fa.fa-eye.fa-lg Cillusion
         - if user_signed_in?
           - @main_path = browse_timeline_path
         - else
           - @main_path = root_path
+        %a.navbar-brand
+          = link_to @main_path, class: "navbar-brand animated bounceInLeft" do
+            %i.fa.fa-eye.fa-lg Cillusion
       %button.navbar-toggle{'data-toggle' => 'collapse', 'data-target' => '.NAVCOl'}
         %i.fa.fa-bars.fa-lg
       .collapse.navbar-collapse.NAVCOl
