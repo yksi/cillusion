@@ -2,13 +2,13 @@ $( document ).ready(function() {
 
   $('#file-input').change(function(e) {
     loadImage(
-        e.target.files[0],
-        function (img) {
-          img.setAttribute("width", "100%");
-          img.setAttribute("height", "auto%");
-          $('#imagee').fadeIn().html(img);
-        },
-        {maxWidth: 300}
+      e.target.files[0],
+      function (img) {
+        img.setAttribute("width", "100%");
+        img.setAttribute("height", "auto%");
+        $('#imagee').fadeIn().html(img);
+      },
+      { maxWidth: 300 }
     );
   });
 
@@ -22,28 +22,14 @@ $( document ).ready(function() {
     $('#divq').addClass(' animated bounceInRight')
   });
 
-  $( "#close_notice" ).click(function() {
-    d = document.getElementById("flash_info")
-    d.className = "alert alert-info";
-    $('#flash_info').addClass(' animated bounceOutLeft')
-    d.innerHTML = ""
-  });
-
-  $( "#close_alert" ).click(function() {
-    d = document.getElementById("flash_warning")
-    d.className = "alert alert-warning";
-    $('#flash_warning').addClass(' animated bounceOutLeft')
-    d.innerHTML = ""
-  });
-
-  $("[data-toggle=popover]").popover({html:true})
+  $("[data-toggle=popover]").popover( { html:true } )
 
   $('#example').click(function() {
     $('#example').popover();
   });
 
   $(".btn-follow").click(function() {
-    $(".btn-follow").html('Following...')
+    $(".btn-follow").html( 'Following...' )
   })
 
   $('[data-toggle="tooltip"]').tooltip()
