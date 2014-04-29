@@ -7,15 +7,15 @@
         .panel-body
           -@article.errors.full_messages.each do |ue|
             %i.fa.fa-warning= "#{ue}"
-    = f.text_field :theme, placeholder: "Theme...", class: "form-control", style: "width: 650px;"
-    %br
-    = f.cktext_area :content, :id => 'sometext'
+    .panel.panel-warning
+      .panel-heading= f.text_field :theme, placeholder: "Theme...", class: "form-control article-theme", style: "width: 100%;"
+      .panel-body= f.cktext_area :content, :id => 'editor'
     %br
   .col-xs-6.col-md-4.animated.bounceInRight
     - if !current_page?(new_article_path)
       = link_to @article, method: :delete, class: "btn btn-danger btn-sm" do
         %i.fa.fa-times= " Remove"
-    = button_tag(type: "submit", class: "btn btn-success btn-sm") do
+    = button_tag(type: "submit", class: "btn btn-success btn-sm article-submit", disabled: !@can ) do
       %i.fa.fa-check= " Save"
     %hr
     = label_tag "Category:"

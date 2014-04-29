@@ -42,18 +42,18 @@
               - else
                 - if flash[:notice]
                   .alert.alert-info.animated.flash#flash_info
-                    %button.close#close_notice{"aria-hidden" => "true", type: "button"} ×
+                    %button.close#close_notice{"aria-hidden" => "true", type: "button", "data-dismiss" => "alert"} ×
                     %i.fa.fa-info.fa-inverse= "   #{msg}"
                 - if flash[:alert]
                   .alert.alert-warning.animated.flash#flash_warning
-                    %button.close.close#close_alert{"aria-hidden" => "true", type: "button"} ×
+                    %button.close.close#close_alert{"aria-hidden" => "true", type: "button", "data-dismiss" => "alert"} ×
                     %i.fa.fa-warning.fa-inverse= " #{msg}"
         %br
         - bodyClass = 'container';
         - if params[:controller] == 'users' && params[:action] == 'show'
           - bodyClass = 'container-full';
         %div{class: bodyClass}
-          - if !current_user.paused
+          - if !user_signed_in? || !current_user.paused
             = yield
           - else
             .row

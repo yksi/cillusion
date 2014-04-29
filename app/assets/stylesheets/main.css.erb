@@ -36,7 +36,6 @@ textarea {
 
 .change-avatar {
   margin-top: -20px;
-  /*visibility: hidden;*/
 }
 
 .avatar:hover .change-avatar{
@@ -67,4 +66,40 @@ figure.photo .btn-pick-photo:hover {
 
 figure.photo:hover .btn-pick-photo {
   display: block;
+}
+
+.rounded-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px #949145 solid;
+  text-align: center;
+  transition: background-color 0.5s;
+  padding-top: 9px;
+  color: #949154;
+}
+
+.rounded-btn:hover{
+  background-color: #949145;
+  color: #664F40;
+}
+
+.pomp {
+  height:40px;
+  padding-top: 0;
+}
+
+@font-face
+{
+  font-family: logo;
+  src: url('/assets/font-logo.ttf');
+}
+
+.navbar-brand {
+  font-family: logo;
+  color: #949145;
+}
+
+#editor {
+  width:120%;
 }

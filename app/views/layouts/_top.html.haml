@@ -1,42 +1,51 @@
-.navbar.navbar-default.navbar-fixed-top
+.navbar.navbar-inverse.navbar-fixed-top
   .animated.fadeIn
+    .navbar-header
+      - if user_signed_in?
+        - @main_path = browse_timeline_path
+      - else
+        - @main_path = root_path
+      %a.navbar-brand
+        = link_to @main_path, class: "navbar-brand animated bounceInLeft" do
+          %i.fa.fa-eye
     .container-fluid
-      .navbar-header
-        - if user_signed_in?
-          - @main_path = browse_timeline_path
-        - else
-          - @main_path = root_path
-        %a.navbar-brand
-          = link_to @main_path, class: "navbar-brand animated bounceInLeft" do
-            %i.fa.fa-eye.fa-lg Cillusion
       %button.navbar-toggle{'data-toggle' => 'collapse', 'data-target' => '.NAVCOl'}
-        %i.fa.fa-bars.fa-lg
+        %i.fa.fa-bars
       .collapse.navbar-collapse.NAVCOl
         .nav.navbar-left.navbar-nav
           - if user_signed_in?
-            %li
+            %li{"data-toggle" => "tooltip", "data-placement" => "bottom", title: "Browse website"}
               = link_to browse_index_path do
-                %i.fa.fa-book.fa-lg.animated.bounceInDown= " Browse"
-            %li
+                .rounded-btn
+                  %i.fa.fa-book.fa-2x
+            %li{"data-toggle" => "tooltip", "data-placement" => "bottom", title: "News timeline"}
               = link_to browse_timeline_path do
-                %i.fa.fa-lg.fa-clock-o.animated.bounceInDown= " News"
-            %li
+                .rounded-btn
+                  %i.fa.fa-clock-o.animated.bounceInDown.fa-2x
+            %li.headerDivider
+            %li{"data-toggle" => "tooltip", "data-placement" => "bottom", title: "Messages"}
               =link_to messages_path do
-                %i.fa.fa-envelope.fa-lg.animated.bounceInDown=  " Messages"
-                - @count = 0
-                - current_user.recieved_messages.each do |m|
-                  - if m.read == false
-                    - @count += 1
-                - if @count > 0
-                  #span.badge= @count
+                .rounded-btn
+                  %i.fa.fa-envelope.animated.bounceInDown.fa-2x
+                  - @count = 0
+                  - current_user.recieved_messages.each do |m|
+                    - if m.read == false
+                      - @count += 1
+                  - if @count > 0
+                    #span.badge= @count
+            .pull-right
+              = form_tag articles_search_path, method: 'get', class: 'navbar-search pull-left', style: "margin-top:7px;background-color:#9A9A9A;" do
+                = text_field_tag :search, params[:search], class: "form-control", placeholder: "Search article..."
         .nav.navbar-right.navbar-nav.animated.bounceInRight
           -if user_signed_in?
-            %li
+            %li{"data-toggle" => "tooltip", "data-placement" => "bottom", title: "Create new article"}
               = link_to new_article_path do
-                %i.fa.fa-plus.fa-lg.text= " New Article"
+                .rounded-btn
+                  %i.fa.fa-plus.text.fa-2x
             %li.dropdown
               %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-                %i.fa.fa-lg.fa-user= " #{current_user.fullname}"
+                = image_tag current_user.avatar.small.url, class: 'img-circle', width: '48px'
+                = current_user.first_name
                 %b.caret
               %ul.dropdown-menu
                 %li

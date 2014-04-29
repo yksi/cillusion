@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
   before_action :require_article, only: [:show, :edit, :destroy, :update]
   before_action :require_category, only: [:index, :edit, :new]
+  before_action :can_submit, only: [:new, :edit]
 
   def index
   	@articles = current_user.user_articles.all
@@ -58,6 +59,14 @@ class ArticlesController < ApplicationController
 
   def require_category
     @category = ["Programming", "Business", "Traveling", "Languages", "Cars", "Technologies", "Gaming", "Films", "Music", "Poetry", "News", "Wiki", "How To", "My Lifestyle", "Science", "Math", "Other"]
+  end
+
+  def can_submit
+    if @article.present? && @article.theme.present? && @article.theme.length >= 2
+      @can = true
+    else
+      @can = false
+    end
   end
 
 end
