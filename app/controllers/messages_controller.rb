@@ -1,8 +1,9 @@
 class MessagesController < ApplicationController
+  before_action :find_message, except: [:create, :index]
 
   def index
-    @resieved_messages = current_user.recieved_messages
-    @sent_messages = current_user.sent_messages
+    @resieved_messages = current_user.recieved_messages.order(created_at: :desc)
+    @sent_messages = current_user.sent_messages.order(created_at: :desc)
     @new_message = Message.new
   end
 
@@ -15,8 +16,16 @@ class MessagesController < ApplicationController
     end
   end
 
+  def mark_as_read
+    @message.read = true
+    respond_to do |format|
+      if @message.save
+        format.js { render json: { success: true }  }
+      end
+    end
+  end
+
   def update
-    @message = Message.find(params[:id])
     if @message.update_attributes!(message_update_params)
       flash[:notice] = "You have been mark as read message #{@message.theme}."
     else
@@ -26,7 +35,6 @@ class MessagesController < ApplicationController
   end
 
   def destroy
-    @message = Message.find(params[:id])
     @message.destroy
     redirect_to messages_path
   end

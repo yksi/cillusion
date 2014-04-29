@@ -9,30 +9,28 @@
     #inbox.tab-pane.active
       .page-header
         - if @resieved_messages.any?
-          %table.table
+          %table.panel.panel-info
             %tr
               %th From
               %th Theme
               %th Received at
-              %th Actions
             - @resieved_messages.each do |message|
-              %tr
-                %td= User.find(message.sender_id).fullname
-                - if message.read
-                  %td
-                    %a{href: "#", "data-target" => "##{message.id}", "data-toggle" => "modal"}= message.theme
-                - else
-                  %td.danger
-                    %a{href: "#", "data-target" => "##{message.id}", "data-toggle" => "modal"}= message.theme
-                %td= message.created_at.strftime("%H:%M %d %B %Y.")
+              - if !message.read
+                - danger = "new_alert"
+                - mark_as_read = "mark_as_read"
+              %tr{class: "#{message.id}"}
                 %td
-                  .btn-group
-                    = link_to message, method: :delete, class: "btn btn-sm btn-danger" do
-                      %i.fa.fa-inverse.fa-lg.fa-times= " Delete"
-                    - if !message.read
-                      = form_for message do |f|
-                        = f.hidden_field :read, value: true
-                        = f.submit "Mark as read", class: "btn btn-default btn-sm"
+                  %h4
+                    = link_to User.find(message.sender_id).fullname, User.find(message.sender_id)
+                %td
+                  %a{href: "#", "data-target" => "##{message.id}", "data-toggle" => "modal", class: mark_as_read, data: { id: message.id } }
+                    %span.pull-right{class: "#{danger} #{message.id}"}
+                    %h4
+                      = message.theme
+                %td
+                  %h4
+                    .label.label-success.label-lg= message.created_at.strftime("%H:%M")
+                  = message.created_at.strftime("%d %B %Y.")
               .modal.fade{"aria-hidden" => "true", role: "dialog", tabindex: "-1", id: "#{message.id}"}
                 .modal-dialog
                   .modal-content
@@ -64,25 +62,27 @@
     #outbox.tab-pane
       .page-header
         - if @sent_messages.any?
-          %table.table
+          %table
             %tr
               %th To
               %th Theme
-              %th Received at
-              %th Actions
+              %th Sent at
             - @sent_messages.each do |message|
-              %tr
-                %td= User.find(message.recipient_id).fullname
-                - if message.read
-                  %td
-                    %a{href: "#", "data-target" => "##{message.id}a", "data-toggle" => "modal"}= message.theme
-                - else
-                  %td
-                    %a{href: "#", "data-target" => "##{message.id}a", "data-toggle" => "modal"}= "#{message.theme} (unread)"
-                %td= message.created_at.strftime("%H:%M %d %B %Y.")
+              - if !message.read
+                - danger = "new_alert"
+              %tr{class: "#{message.id}"}
                 %td
-                  = link_to message, method: :delete, class: "btn btn-sm btn-danger" do
-                    %i.fa.fa-inverse.fa-lg.fa-times= " Delete"
+                  %h4
+                    = link_to User.find(message.recipient_id).fullname, User.find(message.recipient_id)
+                %td
+                  %a{href: "#", "data-target" => "##{message.id}a", "data-toggle" => "modal"}
+                    %span.pull-right{class: "#{danger} #{message.id}"}
+                    %h4
+                      = message.theme
+                %td
+                  %h4
+                    .label.label-success.label-lg= message.created_at.strftime("%H:%M")
+                  = message.created_at.strftime("%d %B %Y.")
               .modal.fade{"aria-hidden" => "true", role: "dialog", tabindex: "-1", id: "#{message.id}a"}
                 .modal-dialog
                   .modal-content

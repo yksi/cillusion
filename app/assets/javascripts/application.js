@@ -22,6 +22,7 @@
 //= require index
 //= require jquery.turbolinks
 //= require load_image
+//= require messages
 
 
 

@@ -5,9 +5,7 @@
         - @main_path = browse_timeline_path
       - else
         - @main_path = root_path
-      %a.navbar-brand
-        = link_to @main_path, class: "navbar-brand animated bounceInLeft" do
-          %i.fa.fa-eye
+      %a.navbar-brand{ href: root_path } cillusion
     .container-fluid
       %button.navbar-toggle{'data-toggle' => 'collapse', 'data-target' => '.NAVCOl'}
         %i.fa.fa-bars
@@ -32,7 +30,7 @@
                     - if m.read == false
                       - @count += 1
                   - if @count > 0
-                    #span.badge= @count
+                    #span.new_message= @count
             .pull-right
               = form_tag articles_search_path, method: 'get', class: 'navbar-search pull-left', style: "margin-top:7px;background-color:#9A9A9A;" do
                 = text_field_tag :search, params[:search], class: "form-control", placeholder: "Search article..."
@@ -62,6 +60,6 @@
                     %i.fa.fa-times= " Sign out"
           -else
             %li
-              %a#target{href: "#", "data-target" => "#modal-login", "data-toggle" => "modal"} Sign up
+              %a#target.sign_up{href: "#", "data-target" => "#modal-login", "data-toggle" => "modal"} Sign up
 - if !user_signed_in?
   = render "layouts/login_register_frame"

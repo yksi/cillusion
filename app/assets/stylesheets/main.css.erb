@@ -92,7 +92,7 @@ figure.photo:hover .btn-pick-photo {
 @font-face
 {
   font-family: logo;
-  src: url('/assets/font-logo.ttf');
+  src: url('<%= asset_path "font-logo.woff" %>');
 }
 
 .navbar-brand {
@@ -102,4 +102,46 @@ figure.photo:hover .btn-pick-photo {
 
 #editor {
   width:120%;
+}
+
+.new_message {
+  display: inline;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #FFF;
+  line-height: 1;
+  vertical-align: baseline;
+  white-space: nowrap;
+  text-align: center;
+  background-color: #e7e7e7;
+  border-radius: 10px;
+  position: absolute;
+  background-color: red;
+  top: 1px;
+}
+
+.sign_up {
+  margin-top: 15px;
+  font-size: 25px;
+}
+
+.unread {
+  background-color: #f2f2f2;
+}
+
+.new_alert {
+  display: inline;
+  width: 5px;
+  height: 5px;
+  padding: 10px 10px;
+  font-size: 12px;
+  line-height: 1;
+  position: relative;
+  top: -10px;
+  white-space: nowrap;
+  text-align: center;
+  border-radius: 50%;
+  background-color: #3265D3;
 }

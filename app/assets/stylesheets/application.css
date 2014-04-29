@@ -11,6 +11,7 @@
  *= require_self
  *= require bootstrap/bootstrap
  *= require main
+ *= require table
  */
 
 body
