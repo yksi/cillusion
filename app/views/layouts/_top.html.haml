@@ -30,7 +30,7 @@
                     - if m.read == false
                       - @count += 1
                   - if @count > 0
-                    #span.new_message= @count
+                    #span.new_messages= @count
             .pull-right
               = form_tag articles_search_path, method: 'get', class: 'navbar-search pull-left', style: "margin-top:7px;background-color:#9A9A9A;" do
                 = text_field_tag :search, params[:search], class: "form-control", placeholder: "Search article..."
