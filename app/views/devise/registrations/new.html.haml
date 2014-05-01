@@ -11,6 +11,12 @@
           %ul
             %li= "#{ue}"
   .col-md-6.col-md-offset-3.well
+    .text-right
+      = link_to user_omniauth_authorize_path('facebook'), class: 'btn btn-primary btn-sm' do
+        %b
+          Login with facebook&nbsp;
+          %i.fa.fa-facebook.fa-lg
+    %br
     .row
       .col-md-6=f.text_field :first_name, class: 'form-control', placeholder: "*Enter your firsname...", pattern: "[a-zA-Z]+"
       .col-md-6=f.text_field :last_name, class: 'form-control', placeholder: "Enter your lastname..."

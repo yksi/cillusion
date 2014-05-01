@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  TEMP_EMAIL = 'change@me.com'
+  TEMP_EMAIL_REGEX = /change@me.com/
 
   mount_uploader :avatar, AvatarUploader
   devise :database_authenticatable, :registerable,
@@ -15,6 +17,7 @@ class User < ActiveRecord::Base
   has_many :followers, through: :reverse_relationships
   has_many :recieved_messages, class_name: 'Message', foreign_key: 'recipient_id'
   has_many :sent_messages, class_name: 'Message', foreign_key: 'sender_id'
+  has_many :groups, class_name: 'Group', foreign_key: 'user_id'
 
   validates :first_name, presence: true, length: {in: 2..30}
   validates :last_name, presence: true, length: {in: 2..30}
@@ -60,16 +63,29 @@ class User < ActiveRecord::Base
     end
   end
 
-  def self.find_for_facebook_oauth(auth)
-    where(auth.slice(:provider, :uid)).first_or_create do |user|
-      user.provider = auth.provider
-      user.uid = auth.uid
-      user.email = auth.info.email
-      user.password = Devise.friendly_token[0,20]
-      user.first_name = auth.info.first_name   # assuming the user model has a name
-      user.last_name = auth.info.last_name
-      user.avatar = auth.info.image # assuming the user model has an image
+  def self.find_for_oauth(auth, signed_in_resource = nil)
+
+    identity = Identity.find_for_oauth(auth)
+    user = identity.user
+    if user.nil?
+      user = User.where(:email => auth.info.email).first if auth.info.email
+      if user.nil?
+        user = User.new(
+          first_name: auth.extra.raw_info.first_name,
+          last_name: auth.extra.raw_info.last_name,
+          #username: auth.info.nickname || auth.uid,
+          email: auth.info.email.blank? ? TEMP_EMAIL : auth.info.email,
+          password: Devise.friendly_token[0,20]
+        )
+        user.save!
+      end
+
+      if identity.user != user
+        identity.user = user
+        identity.save!
+      end
     end
+    user
   end
 
 end
