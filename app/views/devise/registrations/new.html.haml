@@ -14,7 +14,7 @@
     .text-right
       = link_to user_omniauth_authorize_path('facebook'), class: 'btn btn-primary btn-sm' do
         %b
-          Login with facebook&nbsp;
+          Sign up with facebook&nbsp;
           %i.fa.fa-facebook.fa-lg
     %br
     .row
@@ -27,5 +27,8 @@
     %br
     = f.password_field :password_confirmation, class: 'form-control', placeholder: "*Confirm your password..."
     %br
+    %b.text-muted.pull-right
+      Already have a profile?
+      = link_to "Sign in", new_user_session_path
     %div{align: "center"}
       =f.submit "Sign up", class: "btn btn-success"
