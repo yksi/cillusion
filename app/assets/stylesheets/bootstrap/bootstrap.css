@@ -3769,15 +3769,16 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-brand {
   float: left;
   padding-left: 6px;
-  padding-top: 20px;
-  font-size: 35px;
+  padding-top: 12px;
+  font-size: 32px;
   line-height: 21px;
-  height: 45px;
-
+  height: 30px;
+  transition: color 1s;
 }
 .navbar-brand:hover,
 .navbar-brand:focus {
   text-decoration: none;
+  color: #949145;
 }
 @media (min-width: 768px) {
   .navbar > .container .navbar-brand,

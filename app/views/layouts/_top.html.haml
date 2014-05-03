@@ -5,7 +5,7 @@
         - @main_path = browse_timeline_path
       - else
         - @main_path = root_path
-      %a.navbar-brand{ href: root_path } cillusion
+      %a.cillusion-brand{ href: root_path } cillusion
     .container-fluid
       %button.navbar-toggle{'data-toggle' => 'collapse', 'data-target' => '.NAVCOl'}
         %i.fa.fa-bars
@@ -32,7 +32,7 @@
                   - if @count > 0
                     #span.new_messages= @count
             .pull-right
-              = form_tag articles_search_path, method: 'get', class: 'navbar-search pull-left', style: "margin-top:7px;background-color:#9A9A9A;" do
+              = form_tag articles_search_path, method: 'get', class: 'navbar-search pull-left', style: "margin-top:7px;b" do
                 = text_field_tag :search, params[:search], class: "form-control", placeholder: "Search article..."
         .nav.navbar-right.navbar-nav.animated.bounceInRight
           -if user_signed_in?
