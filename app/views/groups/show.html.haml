@@ -1,0 +1,19 @@
+.pander-sm
+  %h1
+    = @group.name
+    = link_to "add article", "#", class: "btn btn-default btn-xs", data: { toggle: "modal", target: "#add_article_to_group" }
+    = render "add_article_modal"
+  %h3
+    %em.text-muted= @group.description
+  %h1.text-center
+    Articles(#{@group.article_count || 0})
+    .row
+      - @group.articles.each do |article|
+        .col-md-3.thumbnail.animated.fadeIn.article-thumb
+          = link_to article do
+            = image_tag article.photo.url, class: "img-rounded article-thumb-image"
+          .mark
+            .pull-right= link_to "remove", delete_article_from_group_path(article: article), class: "btn btn-danger btn-sm"
+          .caption
+            %h4= "#{article.theme}"
+

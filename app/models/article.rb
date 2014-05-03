@@ -3,6 +3,7 @@ class Article < ActiveRecord::Base
   self.per_page = 3
 
   belongs_to :user
+  belongs_to :group
   has_many :comments, class_name: 'Comment', foreign_key: 'article_id'
 
   validates :theme, presence: true

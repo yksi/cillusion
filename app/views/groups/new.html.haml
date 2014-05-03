@@ -1,0 +1,12 @@
+.pander-sm
+  %h2 Create new group
+  %h4
+    %em.text-danger and organize your articles match better
+  .row
+    .well.col-md-8.col-md-offset-2
+      = form_for @group do |f|
+        = f.text_field :name, class: "form-control", placeholder: "Give your new group name"
+        %br
+        = f.text_area :description, class: "form-control", placeholder: "Put some description here"
+        %br
+        .text-right= f.submit "Continue", class: "btn btn-success btn-sm"

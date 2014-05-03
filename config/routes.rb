@@ -13,6 +13,8 @@ Illusion::Application.routes.draw do
   resources :articles
   resources :follows, only: [:create, :destroy]
   resources :comments
+  resources :groups, only: [:create, :new, :show]
+
 
   resources :users do
     member do
@@ -28,6 +30,15 @@ Illusion::Application.routes.draw do
     scope controller: :messages do
       member do
         match :mark_as_read, via: [:get, :post]
+      end
+    end
+  end
+
+  resources :groups do
+    scope controller: :groups do
+      member do
+        match :add_article_to, via: [:get, :post]
+        match :delete_article_from, via: [:get, :post]
       end
     end
   end
