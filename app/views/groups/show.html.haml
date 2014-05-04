@@ -1,19 +1,27 @@
 .pander-sm
   %h1
     = @group.name
-    = link_to "add article", "#", class: "btn btn-default btn-xs", data: { toggle: "modal", target: "#add_article_to_group" }
-    = render "add_article_modal"
+    - if user_signed_in? && @group.user == current_user
+      = link_to "add article", "#", class: "btn btn-default btn-xs", data: { toggle: "modal", target: "#add_article_to_group" }
+      = link_to "delete group", @group, method: :delete,  class: "btn btn-danger btn-xs", "data-confirm" => "Really want to delete this group?"
+    = render "add_article_modal" if user_signed_in?
   %h3
     %em.text-muted= @group.description
+  %h4
+    %em.text-muted
+      by
+      = link_to @group.user.fullname, @group.user
+      %i.fa.fa-circle
+      #{@group.created_at.strftime("%d %b %Y")}
   %h1.text-center
-    Articles(#{@group.article_count || 0})
+    Articles(#{@group.articles.count || 0})
     .row
       - @group.articles.each do |article|
-        .col-md-3.thumbnail.animated.fadeIn.article-thumb
-          = link_to article do
-            = image_tag article.photo.url, class: "img-rounded article-thumb-image"
-          .mark
-            .pull-right= link_to "remove", delete_article_from_group_path(article: article), class: "btn btn-danger btn-sm"
-          .caption
-            %h4= "#{article.theme}"
+        .col-md-2
+          .text-right= link_to "remove", delete_article_from_group_path(article: article), class: "btn btn-danger btn-xs" if user_signed_in? && @group.user == current_user
+          .thumbnail.article-thumb
+            = link_to article do
+              = image_tag article.photo.url, class: "img-rounded article-thumb-image"
+            .caption
+              %h4= "#{article.theme}"
 

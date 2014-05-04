@@ -36,7 +36,7 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    if @article.update(article_params)
+    if @article.update(article_params_to_update)
       redirect_to @article
     else
       render 'edit'
@@ -51,6 +51,10 @@ class ArticlesController < ApplicationController
 
   def article_params
   	params.require(:article).permit(:content, :date, :user_id, :theme, :category, :photo)
+  end
+
+  def article_params_to_update
+    params.require(:article).permit(:content, :date, :user_id, :theme, :category, :photo, :group_id)
   end
 
   def require_article

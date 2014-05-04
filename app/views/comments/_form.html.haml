@@ -1,7 +1,12 @@
-.row
-  = form_for @comment, class: "form-inline"  do |f|
-    .col-md-9= f.text_field :content, class: 'form-control', style: "resize:vertical"
-    = f.hidden_field :article_id, value: @article.id
-    .col-md-3
-      = button_tag(type: 'submit', class: "btn btn-success btn-sm btn-block") do
-        %i.fa.fa-comment.fa.lg.fa-inverse= " Post"
+= form_for @comment, class: "form-inline"  do |f|
+  .pander-sm
+    .row
+      .col-md-2
+        = image_tag current_user.avatar.small.url, class: "img-circle"
+      .col-md-10
+        = f.text_field :content, class: 'form-control', style: "resize:vertical", placeholder: "leave comment for this article..."
+        = f.hidden_field :article_id, value: @article.id
+    %br
+    .text-right
+      = button_tag(type: 'submit', class: "btn btn-success btn-sm") do
+        %i.fa.fa-comment.fa.lg.fa-inverse= " Comment"

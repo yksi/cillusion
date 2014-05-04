@@ -28,7 +28,7 @@ class UsersController < ApplicationController
     if @user.hometown
       @complete += 20
     end
-    if @user.age
+    if @user.born_date
       @complete += 20
     end
     if @user.avatar?

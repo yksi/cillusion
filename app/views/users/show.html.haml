@@ -13,14 +13,14 @@
           .label.label-default.about-me-label About #{@user.first_name}
           .about-me
             = @user.about
-        - if @user != current_user
+        - if user_signed_in? && @user != current_user
           - if current_user.following?(@user)
             = render 'unfollow'
           - else
             = render 'follow'
-        - if @user.age
+        - if @user.born_date
           %br
-          Age: #{@user.age}
+          Age: #{(@user.age)}
         - if @user.hometown
           %br
           Hometown: #{@user.hometown}
@@ -61,22 +61,38 @@
               %i.fa.fa-envelope.fa-lg.fa-inverse=  " Private message"
           %br
           %br
-    %h1 Articles
+    %h1 Articles(#{@articles.count})
     %br
     - if @articles.any?
-      - @articles.each do |article|
-        .col-sm-1.col-md-2
-          .thumbnail.animated.fadeIn.article-thumb
-            = link_to article do
-              = image_tag article.photo.url, class: "img-rounded article-thumb-image"
-            .mark
-            .caption
-              %h4= "#{article.theme}"
+      .row.col-md-10.col-md-offset-1
+        - @articles.each do |article|
+          .col-sm-1.col-md-2
+            .thumbnail.animated.fadeIn.article-thumb
+              = link_to article do
+                = image_tag article.photo.url, class: "img-rounded article-thumb-image"
+              .mark
+              .caption
+                %h4= "#{article.theme}"
     - else
       %div{align: "center"}
         %h1.text-muted= "#{@user.first_name} has no created articles yet..."
         - if @user == current_user
           = link_to "Create your first Article", new_article_path, class: "btn btn-success"
+    %br
+    - if @user.groups.any?
+      %h1 Groups(#{@user.groups.count})
+      .row.col-md-10.col-md-offset-1
+        - @user.groups.each do |group|
+          .col-sm-1.col-md-2
+            = link_to group do
+              .well.row.group-thumb
+                %h4= "#{group.name}(#{group.articles.count} articles)"
+                - if group.articles.any?
+                  - group.articles[0..4].each do |article|
+                    = image_tag article.photo.small.url, class: "img-circle", width: "60px"
+                - else
+                  %em.text-muted
+                    No articles
   /modals
   = render "followers"
   = render "followed"

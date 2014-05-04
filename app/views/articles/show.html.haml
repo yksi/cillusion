@@ -1,5 +1,7 @@
 - content_for :title, @article.theme[0..15]
 = stylesheet_link_tag "comment"
+- if @article.user == current_user
+  = render "add_to_group_modal"
 .page-header
   .row
     .col-xs-12.col-sm-6.col-md-8.animated.slideInLeft.verticalLine
@@ -9,18 +11,32 @@
             %i.fa.fa-arrows-alt
         %h1
           = "#{@article.theme} (#{@article.category})"
-          - if @article.user == current_user
-            = link_to edit_article_path, class: "btn btn-default" do
-              %i.fa.fa-edit &nbsp;Edit
+        %h4
+          %em.text-muted
+            by
+            = link_to @article.user.fullname, @article.user
+            %i.fa.fa-circle
+            #{@article.created_at.strftime("%d %b %Y")}
+            - if !@article.group.nil?
+              %i.fa.fa-circle
+              = link_to @article.group.name, @article.group
         #{@article.content.html_safe}
       %br
     .col-xs-6.col-md-4.animated.slideInRight
+      - if @article.user == current_user
+        = link_to edit_article_path, class: "btn btn-warning btn-sm" do
+          %i.fa.fa-edit &nbsp;Edit
+        #a.btn.btn-primary.btn-sm{ data: { toggle: "modal", target: "#add_to_group" } }
+          %i.fa.fa-plus &nbsp;Add to group
+        %br
+        %br
       .thumbnail
         = image_tag @article.photo.url
       - if user_signed_in?
         = render 'comments/form'
       %br
       %div#unordered_list
+        Comments(#{@article.comments.count})
         - @article.comments.order(created_at: :asc).each do |comment|
           .panel-collapse.collapse.off{id: "collapse#{comment.id}"}
             .panel-body
@@ -36,14 +52,12 @@
                 %br
                 %em.text-muted= "#{time_ago_in_words(comment.created_at)} ago."
               .col-md-2
-                - if comment.user == current_user
+                - if comment.user == current_user || @article.user == current_user
                   .pull-right
                     .panel-heading
                       %h4.panel-title
                         %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#collapse#{comment.id}"}
                           %i.fa.fa-times
-            %h5.text-= comment.content
-%h5.text-right= "#{@article.created_at.strftime("%d %b. %Y")} by "
-%h5.text-right= link_to @article.user.fullname, user_path(@article.user)
+            %h5.text-left= comment.content
 = render 'users/articles'
 = render "full_screen"

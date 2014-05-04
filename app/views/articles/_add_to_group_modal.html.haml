@@ -1,0 +1,27 @@
+#add_to_group.modal
+  .modal-dialog
+    .modal-content
+      = form_for @article do |f|
+        .modal-header
+          Add article
+          = link_to @article.theme, @article
+          to group
+        .modal-body
+          - if @article.group_id != nil
+            %h5.alert.alert-info
+              %strong.text-warning Note!
+              This article already in group
+              = link_to Group.find(@article.group_id).name, Group.find(@article.group_id)
+              = ". If you will add it to another group, it will be removed from current group!"
+            %br
+          - if current_user.groups.any?
+            = f.label "Choose group"
+            %br
+            = f.select :group_id,  current_user.groups.map { |g| [g.name, g.id] }, class: "form-control"
+          - else
+            You have not any groups
+          %br
+          = link_to "New group", new_group_path
+        .modal-footer
+          %a.btn.btn-sm.btn-danger{"data-dismiss" => "modal"} Cancel
+          = f.submit "OK", class: "btn btn-sm btn-success"

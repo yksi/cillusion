@@ -1,0 +1,23 @@
+%h1
+  My groups(#{current_user.groups.count})
+  = link_to "Create new", new_group_path, class: "btn btn-sm btn-success"
+.pander
+  - if current_user.groups.any?
+    - current_user.groups.each do |group|
+      .well
+        %h1= link_to group.name, group
+        .row
+          - if group.articles.any?
+            - group.articles.each do |article|
+              .col-md-3
+                .thumbnail.animated.fadeIn.article-thumb
+                  = link_to article do
+                    = image_tag article.photo.url, class: "img-rounded article-thumb-image"
+                  .mark
+                  .caption
+                    %h4= "#{article.theme}"
+          - else
+            %h2.text-center.text-muted Empty group
+  - else
+    %h1 You have not any groups
+    = link_to "Create", new_group_path

@@ -88,4 +88,9 @@ class User < ActiveRecord::Base
     user
   end
 
+  def age
+    now = Time.now.utc.to_date
+    now.year - self.born_date.year - (born_date.to_date.change(:year => now.year) > now ? 1 : 0)
+  end
+
 end

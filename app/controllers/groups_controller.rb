@@ -6,7 +6,7 @@ class GroupsController < ApplicationController
 
   def show
     @group = Group.find(params[:id])
-    @articles = current_user.user_articles
+    @articles = current_user.user_articles if user_signed_in?
     @list = 0
   end
 
@@ -21,9 +21,7 @@ class GroupsController < ApplicationController
 
   def add_article_to
     if params[:article]
-      @group = Group.find(params[:id])
       if @article = Article.find(params[:article]).update_columns(group_id: params[:id])
-        @group.update_column(:article_count, @group.article_count+1)
         flash[:notice] = "Successfully added..."
       end
     end
@@ -32,9 +30,7 @@ class GroupsController < ApplicationController
 
   def delete_article_from
     if params[:article]
-      @group = Group.find(params[:id])
       if @article = Article.find(params[:article]).update_columns(group_id: nil)
-        @group.update_column(:article_count, @group.article_count-1)
         flash[:notice] = "Successfully removed..."
       end
     end
@@ -45,6 +41,12 @@ class GroupsController < ApplicationController
   end
 
   def destroy
+    @group = Group.find(params[:id])
+    Article.where(group_id: @group.id).each do |article|
+      article.update_column(:group_id, nil)
+    end
+    @group.destroy
+    redirect_to groups_path
   end
 
   private
