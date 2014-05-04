@@ -12,6 +12,7 @@
  *= require bootstrap/bootstrap
  *= require main
  *= require table
+ *= require animate
  */
 
 body
