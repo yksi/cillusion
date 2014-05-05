@@ -8,26 +8,27 @@
         = "#{@user.fullname}"
         - if @user.updated_at > Time.now - 15.minute
           (online)
-      .well
-        - if @user.about.present?
-          .label.label-default.about-me-label About #{@user.first_name}
-          .about-me
-            = @user.about
         - if user_signed_in? && @user != current_user
           - if current_user.following?(@user)
             = render 'unfollow'
           - else
             = render 'follow'
-        - if @user.born_date
+      .row
+        .well.col-md-6
+          - if @user.about.present?
+            .label.label-default.about-me-label About #{@user.first_name}
+            .about-me
+              = @user.about
+          - if @user.born_date
+            %br
+            Age: #{(@user.age)}
+          - if @user.hometown
+            %br
+            Hometown: #{@user.hometown}
+            %br
+          Registered: #{@user.created_at.strftime("%d %B %Y")}
           %br
-          Age: #{(@user.age)}
-        - if @user.hometown
-          %br
-          Hometown: #{@user.hometown}
-          %br
-        Registered: #{@user.created_at.strftime("%d %B %Y")}
-        %br
-        Created articles: #{@user.user_articles.count}
+          Created articles: #{@user.user_articles.count}
       %br
     .col-md-4.colanimated.bounceInRigt.text-right.user_info
       %div{align: "center"}

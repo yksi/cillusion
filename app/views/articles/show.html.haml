@@ -20,7 +20,7 @@
             - if !@article.group.nil?
               %i.fa.fa-circle
               = link_to @article.group.name, @article.group
-        #{@article.content.html_safe}
+        .article-content #{@article.content.html_safe}
       %br
     .col-xs-6.col-md-4.animated.slideInRight
       - if @article.user == current_user

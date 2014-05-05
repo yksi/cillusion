@@ -13,7 +13,7 @@ class GroupsController < ApplicationController
   def create
     @group = current_user.groups.create(group_params)
     if @group.save
-      redirect_to @group, notice: "Group '#{@group.name} was succesfully created'"
+      redirect_to @group, notice: "Group '#{@group.name}' was succesfully created"
     else
       redirect_to :back, alert: "Group cannot to be saved. Please try again."
     end

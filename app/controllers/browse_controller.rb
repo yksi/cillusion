@@ -7,33 +7,33 @@ class BrowseController < ApplicationController
   end
 
   def timeline
-      @new_articles = []
-      current_user.followed_users.each do |f|
-        f.user_articles.each do |a|
-          @new_articles << a
-        end
+    @new_articles = []
+    current_user.followed_users.each do |f|
+      f.user_articles.each do |a|
+        @new_articles << a
       end
-      @resourses = []
+    end
+    @resourses = []
 
-      Relationship.all[0..100].each do |relationship|
-        @resourses << relationship
-      end
+    Relationship.all[0..100].each do |relationship|
+      @resourses << relationship
+    end
 
-      User.all[0..10].each do |user|
-        @resourses << user
-      end
+    User.all[0..10].each do |user|
+      @resourses << user
+    end
 
-      @new_articles[0..50].each do |new_article|
-        @resourses << new_article
-      end
+    @new_articles[0..50].each do |new_article|
+      @resourses << new_article
+    end
 
-      @resourses = @resourses.sort_by { |a|  a.created_at }.reverse
+    @resourses = @resourses.sort_by { |a|  a.created_at }.reverse
   end
 
   private
 
   def find_articles
-    @articles = Article.order(created_at: :desc).paginate(page: params[:page], per_page: 20)
+    @articles = Article.order(created_at: :desc).paginate(page: params[:page], per_page: 10)
   end
 
   def find_users

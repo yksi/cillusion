@@ -2,7 +2,7 @@
 -if user_signed_in?
   %ul.nav.nav-tabs
     %li.active
-      %a{"data-toggle" => "tab", :href => "#articles"} Articles
+      %a{"data-toggle" => "tab", :href => "#articles"} Articles(#{Article.count})
     %li
       %a{"data-toggle" => "tab", :href => "#users"} Users
     %li
@@ -10,17 +10,17 @@
   .tab-content
     #articles.tab-pane.active.animated.bounceInLeft
       .pull-right= will_paginate @articles
-      .page-header
+      %div
         .form-inline
           = form_tag articles_search_path, method: 'get', class: 'navbar-search pull-left' do
             = text_field_tag :search, params[:search], class: "form-control", placeholder: "Search article..."
-            = button_tag(type: 'submit', class: "btn btn-primary btn-xs") do
+            = button_tag(type: 'submit', class: "btn btn-primary") do
               %i.fa.fa-search.fa.lg.fa-inverse &nbsp;Search
       %br
       %hr
       %ul.media-list
         - @articles.each do |a|
-          %li.well
+          %li.browse-item
             = link_to a do
               = image_tag a.photo.url(:thumb), align: "left", class: "img-circle"
               %h4= "#{a.theme}"

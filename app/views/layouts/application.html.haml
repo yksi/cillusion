@@ -31,6 +31,7 @@
         .container
           -if flash.each.count > 0
             %br
+            %br
             - flash.each do |name, msg|
               - if msg.class == Array
                 %ul
@@ -43,11 +44,11 @@
                 - if flash[:notice]
                   .alert.alert-info.animated.flash#flash_info
                     %button.close#close_notice{"aria-hidden" => "true", type: "button", "data-dismiss" => "alert"} ×
-                    %i.fa.fa-info.fa-inverse= "   #{msg}"
+                    %i.fa.fa-info= "   #{msg}"
                 - if flash[:alert]
                   .alert.alert-warning.animated.flash#flash_warning
                     %button.close.close#close_alert{"aria-hidden" => "true", type: "button", "data-dismiss" => "alert"} ×
-                    %i.fa.fa-warning.fa-inverse= " #{msg}"
+                    %i.fa.fa-warning= " #{msg}"
         %br
         - bodyClass = 'container';
         - if params[:controller] == 'users' && params[:action] == 'show'

@@ -1,50 +1,51 @@
-.navbar.navbar-inverse.navbar-fixed-top
+.navbar.navbar-default.navbar-fixed-top
   .animated.fadeIn
     .navbar-header
       - if user_signed_in?
         - @main_path = browse_timeline_path
       - else
         - @main_path = root_path
-      %a.cillusion-brand{ href: root_path } cillusion
+      %a.navbar-brand{ href: root_path }
+        = image_tag "logo-toolbar.png", height: '48px'
     .container-fluid
       %button.navbar-toggle{'data-toggle' => 'collapse', 'data-target' => '.NAVCOl'}
         %i.fa.fa-bars
       .collapse.navbar-collapse.NAVCOl
         .nav.navbar-left.navbar-nav
           - if user_signed_in?
-            %li{"data-toggle" => "tooltip", "data-placement" => "bottom", title: "Browse website"}
+            %li.nav-btn{"data-toggle" => "tooltip", "data-placement" => "bottom", title: "Browse website"}
               = link_to browse_index_path do
-                .rounded-btn
+                .rounded-btn.browse-btn.animated.bounceInDown
                   %i.fa.fa-book.fa-2x
-            %li{"data-toggle" => "tooltip", "data-placement" => "bottom", title: "News timeline"}
+            %li.nav-btn{"data-toggle" => "tooltip", "data-placement" => "bottom", title: "News timeline"}
               = link_to browse_timeline_path do
-                .rounded-btn
-                  %i.fa.fa-clock-o.animated.bounceInDown.fa-2x
+                .rounded-btn.timeline-btn.animated.bounceInDown
+                  %i.fa.fa-clock-o.fa-2x
             %li.headerDivider
-            %li{"data-toggle" => "tooltip", "data-placement" => "bottom", title: "Messages"}
+            %li.nav-btn{"data-toggle" => "tooltip", "data-placement" => "bottom", title: "Messages"}
               =link_to messages_path do
-                .rounded-btn
-                  %i.fa.fa-envelope.animated.bounceInDown.fa-2x
+                .rounded-btn.messages-btn.animated.bounceInDown
+                  %i.fa.fa-envelope.fa-2x
                   - @count = 0
                   - current_user.recieved_messages.each do |m|
                     - if m.read == false
                       - @count += 1
                   - if @count > 0
                     #span.new_messages= @count
-            %li{"data-toggle" => "tooltip", "data-placement" => "bottom", title: "Groups"}
+            %li.nav-btn{"data-toggle" => "tooltip", "data-placement" => "bottom", title: "Groups"}
               = link_to groups_path do
-                .rounded-btn
+                .rounded-btn.groups-btn.animated.bounceInDown
                   %i.fa.fa-th-large.fa-2x
             .pull-right
-              = form_tag articles_search_path, method: 'get', class: 'navbar-search pull-left', style: "margin-top:7px;b" do
+              = form_tag articles_search_path, method: 'get', class: 'navbar-search pull-left ', style: "margin-top:20px;" do
                 = text_field_tag :search, params[:search], class: "form-control", placeholder: "Search article..."
         .nav.navbar-right.navbar-nav.animated.bounceInRight
           -if user_signed_in?
-            %li{"data-toggle" => "tooltip", "data-placement" => "bottom", title: "Create new article"}
+            %li.nav-btn{"data-toggle" => "tooltip", "data-placement" => "bottom", title: "Create new article"}
               = link_to new_article_path do
                 .rounded-btn
                   %i.fa.fa-plus.text.fa-2x
-            %li.dropdown
+            %li.dropdown.nav-btn
               %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
                 = image_tag current_user.avatar.small.url, class: 'img-circle', width: '48px'
                 = current_user.first_name

@@ -18,6 +18,7 @@
     %br
 - else
   %h5.text-muted= "No articles found..."
+  = link_to "Create article #{params[:search]}", new_article_path(theme: params[:search])
 
 
 

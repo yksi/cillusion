@@ -34,10 +34,5 @@ $( document ).ready(function() {
 
   $('[data-toggle="tooltip"]').tooltip()
 
-  $('.article-theme').keydown(function() {
-    if($(this).val().length >= 2)$('.article-submit').prop('disabled', false);
-    else $('.article-submit').prop('disabled', true);
-  });
-
 });
 
