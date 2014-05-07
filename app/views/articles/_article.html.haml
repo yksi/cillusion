@@ -1,0 +1,19 @@
+= content_tag_for(:div, article, class: "row") do
+  .post
+    .post-img-content
+      %img.img-responsive{src: article.photo.url, 'max-height' => '196px' }/
+      %span.post-title
+        %b= article.theme
+        %br/
+        - if !article.group.nil?
+          %b= article.group.name
+    .content
+      .author
+        By
+        %b= article.user.fullname
+        |
+        %time= article.return_created_at_as_nice_string
+      %div.post-content= "#{strip_tags(article.content).html_safe[0..50]} ...."
+      %div
+        = yield(:remove)
+        %a.btn.btn-warning.btn-sm{href: article_path(article)} Read more

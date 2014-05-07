@@ -13,20 +13,61 @@
       = render "layouts/top"
     %div#divq
       - if yield(:title) == "Main"
-        .jumbotron
-          .container
-            %div{align: "center"}
-              = image_tag "logo.png", class: "animated flipInX"
-              %h1.animated.bounce{style: "color:white;"}= "Create your Articles"
-            %p.animated.fadeIn#div1{style: "color:white;"}= "Howdy, Guest. Welcome to Cillusion web-service. Create the articles, manage groups, and get new Followers, read articles from other users and enjoy the service."
-            .row
-              .col-md-6.col-md-offset-6
-                .btn-group
-                  = link_to "Create Profile", new_user_registration_path, class: "btn btn-default animated slideInLeft"
-                  %a.btn.btn-warning{href: "#", "data-target" => "#modal-video", "data-toggle" => "modal"} View presentation video
-                  = link_to "http://illusion.wikia.com/wiki/Main_Page", class: "btn btn-success animated slideInRight" do
-                    Cillusion Wiki
-                    %i.fa.fa-inverse.fa-angle-double-right.fa-lg
+        .row
+          #carousel-example-generic.carousel.slide{"data-ride" => "carousel"}
+            %ol.carousel-indicators
+              %li.active{"data-slide-to" => "0", "data-target" => "#carousel-example-generic"}
+              %li{"data-slide-to" => "1", "data-target" => "#carousel-example-generic"}
+              %li{"data-slide-to" => "2", "data-target" => "#carousel-example-generic"}
+            .carousel-inner
+              .item.active
+                %img{alt: "First slide", src: "#{asset_path '4.jpg'}"}/
+                .header-text.hidden-xs
+                  .col-md-12.text-center
+                    %h2
+                      %span
+                        Welcome to
+                        %strong CILLUSION
+                    %br
+                    %h3
+                      %span If you are new in our website, register, or if else, login.
+                    %br
+                    %div
+                      %a.btn.btn-theme.btn-sm.btn-min-block{href: new_user_session_path} Login
+                      %a.btn.btn-theme.btn-sm.btn-min-block{href: new_user_registration_path} Register
+              .item
+                %img{alt: "Second slide", src: "#{asset_path '2.jpg'}"}/
+                .header-text.hidden-xs
+                  .col-md-12.text-center
+                    %h2
+                      %span
+                        Don't know, what is
+                        %strong CILLUSION
+                        ?
+                    %br/
+                    %h3
+                      %span Use info links below.
+                    %br/
+                    %div
+                      %a.btn.btn-theme.btn-sm.btn-min-block{href: "#", data: { toggle: "modal", target: "#modal-video" } } Info video
+                      %a.btn.btn-theme.btn-sm.btn-min-block{href: "http://illusion.wikia.com/wiki/Main_Page"} Wiki
+              .item
+                %img{alt: "Third slide", src: "#{asset_path '3.jpg'}"}/
+                .header-text.hidden-xs
+                  .col-md-12.text-center
+                    %h2
+                      %span Have any ideas
+                    %br/
+                    %h3
+                      %span To make better Cillusion together.
+                    %br/
+                    %div
+                      %a.btn.btn-theme.btn-sm.btn-min-block{href: "mailto:embox@ukr.net"} Send feedback to developer
+            %a.left.carousel-control{"data-slide" => "prev", href: "#carousel-example-generic"}
+              %span.fa.fa-angle-left.glyphicon.icon-prev
+            %a.right.carousel-control{"data-slide" => "next", href: "#carousel-example-generic"}
+              %span.fa.fa-angle-right.glyphicon.icon-next
+        = yield
       - else
         .container
           -if flash.each.count > 0
@@ -50,10 +91,7 @@
                     %button.close.close#close_alert{"aria-hidden" => "true", type: "button", "data-dismiss" => "alert"} ×
                     %i.fa.fa-warning= " #{msg}"
         %br
-        - bodyClass = 'container';
-        - if params[:controller] == 'users' && params[:action] == 'show'
-          - bodyClass = 'container-full';
-        %div{class: bodyClass}
+        .container
           - if !user_signed_in? || !current_user.paused
             = yield
           - else

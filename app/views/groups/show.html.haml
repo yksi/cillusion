@@ -16,13 +16,10 @@
   %hr
   %h1.text-center
     Articles(#{@group.articles.count || 0})
-    .row
-      - @group.articles.each do |article|
-        .col-md-2
-          .text-right= link_to "remove", delete_article_from_group_path(article: article), class: "btn btn-danger btn-xs" if user_signed_in? && @group.user == current_user
-          .thumbnail.article-thumb
-            = link_to article do
-              = image_tag article.photo.url, class: "img-rounded article-thumb-image"
-            .caption
-              %h4= "#{article.theme}"
+  .row
+    - @group.articles.each do |article|
+      .col-md-4
+        = render "articles/article", article: article
+        = content_tag(:remove) do
+          .text-right= link_to "remove", delete_article_from_group_path(article: article), class: "btn btn-danger btn-default"
 

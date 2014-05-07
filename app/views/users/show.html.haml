@@ -2,7 +2,7 @@
 - if @user.paused
   %h1 #{@user.fullname} has been suspended his/her profile
 - else
-  .row.pander
+  .row.pander-sm
     .col-md-8.animated.bounceInLeft
       %h1
         = "#{@user.fullname}"
@@ -65,15 +65,9 @@
     %h1 Articles(#{@articles.count})
     %br
     - if @articles.any?
-      .row.col-md-10.col-md-offset-1
+      .row
         - @articles.each do |article|
-          .col-sm-1.col-md-2
-            .thumbnail.animated.fadeIn.article-thumb
-              = link_to article do
-                = image_tag article.photo.url, class: "img-rounded article-thumb-image"
-              .mark
-              .caption
-                %h4= "#{article.theme}"
+          .col-md-4.col-sm-4= render "articles/article", article: article
     - else
       %div{align: "center"}
         %h1.text-muted= "#{@user.first_name} has no created articles yet..."

@@ -13,6 +13,8 @@
  *= require main
  *= require table
  *= require animate
+ *= require carousel
+ *= require post-article
  */
 
 body

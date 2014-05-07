@@ -1,19 +1,40 @@
 - content_for :title, "Main"
-- @like = '<iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fcillusion.cu.cc&amp;width&amp;layout=button&amp;action=like&amp;show_faces=true&amp;share=true&amp;height=80&amp;appId=455173291275789" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:80px;" allowTransparency="true"></iframe><br><a href="https://twitter.com/share" class="twitter-share-button" data-via="Vitaliy30108843" data-size="large">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?"http":"https";if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document, "script", "twitter-wjs");</script>'
-.row.text-center
-  .col-md-4
-    .btn-social.btn-danger.text-center#example{"data-container" => "body", "data-content" => @like, "data-placement" => "left", "data-toggle" => "popover", type: "button"}
-      %i.fa.fa-heart.fa-lg
-  .col-md-4
-    .btn-social.btn-primary.text-center
-      %i.fa.fa-facebook.fa-lg
-  .col-md-4
-    .btn-social.btn-success.text-center
-      %i.fa.fa-twitter.fa-lg
-:javascript
-  window.___gcfg = {lang: "en-GB"};
-  (function() {
-    var po = document.createElement("script"); po.type = "text/javascript"; po.async = true;
-    po.src = "https://apis.google.com/js/platform.js";
-    var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(po, s);
-  })();
+.my-info.container
+  .row
+    .col-md-10
+      %h1 Vitaliy Krushelnitskiy
+      %hr.text-muted
+      %h4.text-primary I am a young web-developer. My ambitions is to create something very useful and easy in use for peoples. So, I founded Cilluion.
+      %hr
+      .row
+        .col-md-2
+          %h3
+            Contacts
+        .col-md-4
+          %ul.list-group
+            %li.list-group-item
+              %i.fa.fa-google-plus.text-danger.fa-lg
+              .pull-right= link_to "google +", "https://plus.google.com/u/0/113271724909153326824"
+            %li.list-group-item
+              %i.fa.fa-facebook.text-info.fa-lg
+              .pull-right= link_to "facebook", "https://www.facebook.com/profile.php?id=100005973152290"
+            %li.list-group-item
+              %i.fa.fa-twitter.text-primary.fa-lg
+              .pull-right=link_to "twitter", "https://twitter.com/v_yksi"
+            %li.list-group-item
+              %i.fa.fa-vk.text-default.fa-lg
+              .pull-right= link_to "vk.com", "http://vk.com/yksi_o"
+            %li.list-group-item
+              %i.fa.fa-envelope.text-warning.fa-lg
+              .pull-right=link_to "embox@urk.net", "mailto:embox@urk.net"
+        .col-md-4
+          .thumbnail
+            %h1.text-center
+              %i.fa.fa-github.text-primary
+              also github
+            %h2.text-center= link_to "GitHub", "https://github.com/yksi", class: "btn btn-success"
+    .col-md-2
+      %h1.user
+        %i.fa.fa-user
+      %h2.user
+        About me
