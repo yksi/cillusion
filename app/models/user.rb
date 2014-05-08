@@ -93,4 +93,13 @@ class User < ActiveRecord::Base
     now.year - self.born_date.year - (born_date.to_date.change(:year => now.year) > now ? 1 : 0)
   end
 
+  def to_param
+    username = self.fullname.gsub(' ','_').downcase
+    if User.where(first_name: self.first_name).first == self
+      "#{username}"
+    else
+      "#{username}_#{self.id}"
+    end
+  end
+
 end

@@ -27,7 +27,11 @@ class Article < ActiveRecord::Base
   end
 
   def to_param
-    "#{self.id} #{self.theme}".parameterize
+    if Article.where(theme: self.theme).first.id == self.id
+      "#{self.theme}"
+    else
+      "#{self.theme}_#{self.id}"
+    end
   end
 
   def return_created_at_as_nice_string

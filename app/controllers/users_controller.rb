@@ -19,7 +19,6 @@ class UsersController < ApplicationController
 
   def show
     @message = Message.new
-		@user = User.find(params[:id])
 		@articles = @user.user_articles.all
 		@user_created_at = @user.created_at.strftime("%d %B %Y")
     @followers = @user.followers
@@ -55,7 +54,9 @@ class UsersController < ApplicationController
   private
 
   def find_user
-    @user = User.find(params[:id])
+    get_params = params[:id].split('_')
+    p get_params
+    @user = (get_params.length > 2) ? User.find(get_params[2]) : User.find(:first, conditions: ["lower(first_name) LIKE ? ", get_params[0].downcase], conditions: ["lower(last_name) LIKE ? ", get_params[1].downcase] )
   end
 
   def user_params

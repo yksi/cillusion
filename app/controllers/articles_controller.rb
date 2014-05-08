@@ -28,6 +28,9 @@ class ArticlesController < ApplicationController
   end
 
   def edit
+    if !user_signed_in? || @article.user!= current_user
+      redirect_to @article
+    end
   end
 
   def destroy
@@ -58,7 +61,7 @@ class ArticlesController < ApplicationController
   end
 
   def require_article
-    @article = Article.find(params[:id])
+    @article = Article.find_by_theme(params[:id]) || Article.find(params[:id].split('_')[1])
   end
 
   def require_category
