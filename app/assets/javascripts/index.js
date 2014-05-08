@@ -34,5 +34,18 @@ $( document ).ready(function() {
 
   $('[data-toggle="tooltip"]').tooltip()
 
+  $('.paste_html_button').click(function() {
+    $add_to_end = $('#paste_html :checkbox:checked').length > 0
+    if($add_to_end) {
+      CKEDITOR.instances.editor.setData(CKEDITOR.instances.editor.getData() + $('.paste_html').val())
+    }
+    else {
+      CKEDITOR.instances.editor.setData($('.paste_html').val())
+    }
+    $('#paste_html').modal('toggle')
+    $('.paste_html').val(null)
+    console.log($add_to_end)
+  })
+
 });
 

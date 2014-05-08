@@ -1,0 +1,12 @@
+#paste_html.modal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %h3 Paste your html code here
+      .modal-body
+        = text_area_tag :content, nil, class: 'form-control paste_html', placeholder: 'Paste html here', style:'height:264px'
+        = check_box_tag :add_to_end, 'Add to end of html', id: 'to_the_end', checked: true
+        = label_tag :add_to_end
+      .modal-footer
+        .text-right
+          = link_to 'Paste', '#', class: 'paste_html_button btn btn-success'
