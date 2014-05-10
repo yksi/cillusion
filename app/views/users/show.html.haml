@@ -2,93 +2,57 @@
 - if @user.paused
   %h1 #{@user.fullname} has been suspended his/her profile
 - else
-  .row.pander-sm
-    .col-md-8.animated.bounceInLeft
-      %h1
-        = "#{@user.fullname}"
-        - if @user.updated_at > Time.now - 15.minute
-          (online)
-        - if user_signed_in? && @user != current_user
-          - if current_user.following?(@user)
-            = render 'unfollow'
-          - else
-            = render 'follow'
-      .row
-        .well.col-md-6
-          - if @user.about.present?
-            .label.label-default.about-me-label About #{@user.first_name}
-            .about-me
-              = @user.about
-          - if @user.born_date
+  .pander-sm
+    .row
+      .col-md-2
+        %a{ data: { toggle: 'modal', target: ("#modal-avatar" if @user.avatar?) } }
+          .imgHolder
+            = image_tag @user.avatar.thumb.url, width: '180'
+      .col-md-9
+        .row
+          .col-md-7
+            %h2{style: 'margin:0px;'}
+              = @user.fullname
+            .label.label-success= @user.online? ? 'online' : "last activity #{time_ago_in_words(@user.updated_at)} ago."
             %br
-            Age: #{(@user.age)}
-          - if @user.hometown
             %br
-            Hometown: #{@user.hometown}
+            - if !@user.sex.nil?
+              %i.fa.fa-lg{class: "fa-#{@user.gender}"}
+              = @user.gender
+              %br
+            - if @user.hometown.present?
+              %i.fa.fa-map-marker.fa-lg.text-danger
+              = @user.hometown
+              %br
+            - if @user.born_date.present?
+              %i.fa.fa-calendar-o.fa-lg.text-danger
+              = "#{@user.born_date.strftime("%d %B %Y")}(#{@user.age} years)"
+              %br
+            - if Identity.where(id: current_user.id).any?
+              .label.label-primary.label-lg
+                %i.fa.fa-facebook.fa-lg
+              &nbsp;Connected with facebook
+          .col-md-5
             %br
-          Registered: #{@user.created_at.strftime("%d %B %Y")}
-          %br
-          Created articles: #{@user.user_articles.count}
-      %br
-    .col-md-4.colanimated.bounceInRigt.text-right.user_info
-      %div{align: "center"}
-        %figure.photo
-          %a{href: "#", "data-target" => "#modal-avatar", "data-toggle" => "modal"}
-            =image_tag @user.avatar.thumb.url, align: "top", hspace: "20", vspace: "20"
-          - if @user == current_user
-            %a.btn-pick-photo{href: edit_user_registration_path(current_user)} Change profile photo
-        -if @complete < 100 && @user == current_user
-          .alert.alert-info
-            %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", type: "button"} ×
-            %i.fa.fa-warning= " Your profile is not completed yet. Go to"
-            = link_to "edit profile page", edit_user_registration_path
-            and add information about you.
-        .thumbnail{align: "center"}
-          %a.text-success{href: "#", "data-target" => "#modal-followed", "data-toggle" => "modal"}
-            %strong= @followed.count
-            followed
-          %a.text-success{href: "#", "data-target" => "#modal-followers", "data-toggle" => "modal"}
-            %strong= @followers.count
-            followers
-          %br
-          Profile is completed for
-          %br
-          .row
-            .col-md-6.col-md-offset-3
-              .progress.progress-stripped.active
-                .progress-bar.progress-bar-info{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{@complete}", role: "progressbar", style: "width: #{@complete}%;"} #{@complete} %
-          - if @user != current_user
-            %a.btn.btn-primary{href: "#", "data-target" => "#modal-message", "data-toggle" => "modal"}
-              %i.fa.fa-envelope.fa-lg.fa-inverse=  " Private message"
-          %br
-          %br
-    %h1 Articles(#{@articles.count})
-    %br
-    - if @articles.any?
-      .row
-        - @articles.each do |article|
-          .col-md-4.col-sm-4= render "articles/article", article: article
-    - else
-      %div{align: "center"}
-        %h1.text-muted= "#{@user.first_name} has no created articles yet..."
-        - if @user == current_user
-          = link_to "Create your first Article", new_article_path, class: "btn btn-success"
-    %br
-    - if @user.groups.any?
-      %h1 Groups(#{@user.groups.count})
-      .row.col-md-10.col-md-offset-1
-        - @user.groups.each do |group|
-          .col-sm-1.col-md-2
-            = link_to group do
-              .well.row.group-thumb
-                %h4= "#{group.name}(#{group.articles.count} articles)"
-                - if group.articles.any?
-                  - group.articles[0..4].each do |article|
-                    = image_tag article.photo.small.url, class: "img-circle", width: "60px"
-                - else
-                  %em.text-muted
-                    No articles
-  /modals
+            - if user_signed_in? && @user != current_user
+              - if current_user.following?(@user)
+                = render 'unfollow'
+              - else
+                = render 'follow'
+              %br
+              %a.btn.btn-default.btn-block.btn-primary{ data: { toggle: 'modal', target: '#modal-message' } }
+                %i.fa.fa-envelope &nbsp;Private message
+  %br
+    .pander-sm
+      - if @user.user_articles.any?
+        %h1
+          .label.label-success
+            Articles
+        .row
+          - @user.user_articles.each do |article|
+            .col-md-4= render 'articles/article', article: article
+      - else
+        %h1.text-center.text-muted= "#{@user.first_name} has no created any articles yet"
   = render "followers"
   = render "followed"
   = render "avatar_modal"

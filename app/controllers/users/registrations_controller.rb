@@ -70,6 +70,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
       comment.destroy
     end
 
+    @user.groups.each do |group|
+      group.destroy
+    end
+
   end
 
   protected

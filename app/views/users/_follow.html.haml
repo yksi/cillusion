@@ -1,4 +1,4 @@
 = form_for(current_user.relationships.build(followed_id: @user.id)) do |f|
   %div= f.hidden_field :followed_id
-  = button_tag(type: 'submit', class: "btn btn-follow", rel: "nofollow") do
+  = button_tag(type: 'submit', class: "btn btn-follow btn-block", rel: "nofollow") do
     %i.fa.fa-comment.fa.lg.fa-thumbs-up= " Follow"

@@ -23,7 +23,7 @@ class UsersController < ApplicationController
 		@user_created_at = @user.created_at.strftime("%d %B %Y")
     @followers = @user.followers
     @followed = @user.followed_users
-    @complete = 40
+    @complete = 20
     if @user.hometown
       @complete += 20
     end
@@ -31,6 +31,9 @@ class UsersController < ApplicationController
       @complete += 20
     end
     if @user.avatar?
+      @complete += 20
+    end
+    if @user.about
       @complete += 20
     end
 	end

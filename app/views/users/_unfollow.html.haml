@@ -1,3 +1,3 @@
 = form_for(current_user.relationships.find_by(followed_id: @user.id), html: { method: :delete }) do |f|
-  = button_tag(type: 'submit', class: "btn btn-unfollow") do
+  = button_tag(type: 'submit', class: "btn btn-unfollow btn-block") do
     %i.fa.fa-comment.fa.lg.fa-thumbs-down= " Unfollow"

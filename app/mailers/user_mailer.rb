@@ -1,11 +1,9 @@
 class UserMailer < ActionMailer::Base
-  default from: "cillusiion@gmail.com"
+  default from: 'mailer778@gmail.com'
 
-  def welcome_email(user)
-    @user = user
-    @url  = 'http://cillusion.herokuapp.com'
-    mail(to: @user.email, subject: 'Welcome to My Awesome Site')
+  def welcome_email(user_id)
+    @user = User.find(user_id)
+    mail to: @user.email, subject: 'New and Improved Helpified Features'
   end
 
-  
 end

@@ -27,14 +27,6 @@ class User < ActiveRecord::Base
     return "#{self.first_name} #{self.last_name}"
   end
 
-  def get_short_info_as_string
-    p "#{self.fullname}(#{self.email})"
-  end
-
-  def get_count
-    return self.user_articles.count
-  end
-
   def is_all_fields_filled?
     if first_name == nil || last_name == nil || age == nil || sex == nil || email == nil || hometown == nil
       false
@@ -100,6 +92,14 @@ class User < ActiveRecord::Base
     else
       "#{username}_#{self.id}"
     end
+  end
+
+  def online?
+    updated_at > 10.minutes.ago
+  end
+
+  def gender
+    self.sex ? 'male' : 'female'
   end
 
 end
