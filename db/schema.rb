@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140504092240) do
+ActiveRecord::Schema.define(version: 20140511081138) do
 
   create_table "articles", force: true do |t|
     t.integer  "user_id"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20140504092240) do
     t.string   "category"
     t.string   "photo"
     t.integer  "group_id"
+    t.integer  "views_count", default: 0
   end
 
   create_table "ckeditor_assets", force: true do |t|

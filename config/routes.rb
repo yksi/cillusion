@@ -9,7 +9,7 @@ Illusion::Application.routes.draw do
   get "comments/show"
 
   devise_for :users, controllers: { registrations: 'users/registrations', omniauth_callbacks: "users/omniauth_callbacks"}
-  resources :users,path: '/', :only => [:index, :show]
+  resources :users, :only => [:index, :show]
   resources :articles
   resources :follows, only: [:create, :destroy]
   resources :comments

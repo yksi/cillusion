@@ -4,10 +4,9 @@
 - else
   .pander-prof
     .col-md-offset-2
-      %h2{style: 'margin:0px;display:inline'}
+      %h2{style: 'margin:0px;display:inline;'}
         = @user.fullname
-      .label.label-warning.online-status= @user.online? ? 'online' : "last activity #{time_ago_in_words(@user.updated_at)} ago."
-
+      %h5.label.label-warning.online-status= @user.online? ? 'online' : "last activity #{time_ago_in_words(@user.updated_at)} ago."
     .row.user-inform-pane
       .col-md-10.col-md-offset-2
         .row{style: 'color:white'}
@@ -60,18 +59,18 @@
               .label.label-primary.label-lg
                 %i.fa.fa-facebook.fa-lg
               &nbsp;Connected with facebook
+          .col-md-5
+            %br
+            - if user_signed_in? && @user != current_user
+              - if current_user.following?(@user)
+                = render 'unfollow'
+              - else
+                = render 'follow'
+              %br
+              %a.btn.btn-default.btn-block.btn-primary{ data: { toggle: 'modal', target: '#modal-message' } }
+                %i.fa.fa-envelope &nbsp;Private message
         - if @user.about
           .row.about= "\"#{@user.about}\""
-        .col-md-5
-          %br
-          - if user_signed_in? && @user != current_user
-            - if current_user.following?(@user)
-              = render 'unfollow'
-            - else
-              = render 'follow'
-            %br
-            %a.btn.btn-default.btn-block.btn-primary{ data: { toggle: 'modal', target: '#modal-message' } }
-              %i.fa.fa-envelope &nbsp;Private message
 
   %br
     .pander-sm

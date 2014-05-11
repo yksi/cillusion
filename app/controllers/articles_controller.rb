@@ -22,6 +22,14 @@ class ArticlesController < ApplicationController
   end
 
   def show
+    if URI(request.referer).path != article_path(@article)
+      if @article.views_count.nil?
+        @article.update_column(:views_count, 1)
+      else
+        @article.update_column(:views_count, @article.views_count + 1)
+      end
+    end
+    @status = 1
     @comments = @article.comments.all
     @comment = Comment.new
     @me = current_user == @article.user
@@ -61,7 +69,7 @@ class ArticlesController < ApplicationController
   end
 
   def require_article
-    @article = Article.find_by_theme(params[:id]) || Article.find(params[:id].split('_')[1])
+    @article = Article.find(params[:id])
   end
 
   def require_category
