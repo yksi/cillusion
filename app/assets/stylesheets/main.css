@@ -1,6 +1,9 @@
 body {
   margin: 0;
   background-position: center;
+  color: rgb(85,94,106);
+  font-size: 14px;
+  font-style: normal;
 }
 
 #imagee {
@@ -229,6 +232,11 @@ figure.photo:hover .btn-pick-photo {
   padding: 20px;
 }
 
+.pander-white {
+  background-color: #fff;
+  padding: 20px;
+}
+
 .pander-prof {
   padding: 20px;
   background-image: -webkit-gradient(
@@ -318,4 +326,84 @@ img.avatar {
 
 .active-def-btn {
   border: 3px solid #1B942D;
+}
+
+.user-board {
+  min-height: 334px;
+  text-align: center;
+  margin-bottom: 30px;
+  background-color: #f6f9fa;
+  border-left: none;
+  color: rgba(85,94,106,0.8);
+  font-size: 16px;
+  font-style: normal;
+  line-height: 1.6;
+  margin: 0 0 30px 0;
+  padding: 0px;
+  position: relative;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 3px 0 #dce8ed;
+  -moz-box-shadow: 0 3px 0 #dce8ed;
+  box-shadow: 0 3px 0 #dce8ed;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-transition: background-color 0.1s ease-in-out,1s;
+  -moz-transition: background-color 0.1s ease-in-out,1s;
+  -o-transition: background-color 0.1s ease-in-out,1s;
+  transition: background-color 0.1s ease-in-out,1s;
+  position: relative;
+}
+
+.user-board  button{
+  text-decoration: none;
+  position: absolute;
+  bottom: 0px;
+
+}
+
+a:active {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+.user-board:hover{
+  background-color: #BCE7F5;
+  text-decoration: none;
+}
+
+.user-about-miniature {
+  color: #2ba6cb;
+}
+
+img.miniature {
+  max-height: 100px;
+  max-width: 100px;
+  min-height: 100px;
+  min-width: 100px;
+  border: 3px solid white;
+  margin-top: 60px;
+}
+
+.btn-follow {
+  color: black;
+  background-color: #12da55;
+}
+
+.btn-unfollow {
+  color: black;
+  background-color: #FFda55;
 }

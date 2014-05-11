@@ -117,7 +117,7 @@ class User < ActiveRecord::Base
     if search
       self.where('lower(first_name) LIKE ? OR lower(last_name) LIKE ?', "%#{search}%", "%#{search}%")
     else
-      self.all
+      self.order(updated_at: :desc)
     end
   end
 

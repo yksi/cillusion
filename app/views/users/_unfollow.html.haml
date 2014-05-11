@@ -1,3 +1,4 @@
-%button.btn.btn-unfollow.btn-block{ data: { id: "#{@user.id}" } }
-  %i.fa.fa-thumbs-down.follows-icon.pull-left
-  Unfollow
+= content_tag_for(:p, user) do
+  %button.btn.btn-unfollow.btn-block{ data: { id: "#{user.id}" } }
+    %i.fa.fa-thumbs-down.follows-icon.pull-left
+    Unfollow

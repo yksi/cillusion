@@ -1,0 +1,17 @@
+= content_tag_for(:div, user, class: "row pander-white") do
+  = link_to user do
+    .user-board
+      .text-center
+        .animated.rotateIn= image_tag user.avatar.thumb.url, class: 'miniature img-circle'
+      %strong.user-about-miniature= "created #{pluralize(user.user_articles.count, 'articles')}"
+      %h4= user.fullname
+      - if user.hometown.present?
+        %h4
+          %i.fa.fa-map-marker.text-danger.animated.flip
+          = user.hometown
+      .text-right
+        - if user_signed_in?
+          - if current_user.following?(user)
+            = render 'users/follow', user: user
+          - else
+            = render 'users/unfollow', user: user

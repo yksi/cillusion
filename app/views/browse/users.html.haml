@@ -11,13 +11,9 @@
         %i.fa.fa-search.fa.lg.fa-inverse &nbsp;Search
 %br
 %br
-- if @users.any?
-  %ul.nav.nav-pills.nav-stacked.pander
-    - @users.each do |u|
-      %li
-        = link_to u do
-          = image_tag u.avatar.small.url, class: "img-rounded"
-          #{u.fullname}
-          %p{align: "right"}= "#{u.user_articles.count} articles, #{u.comments.count} comments"
-- else
-  %h3.text-center There are no users mathes "#{params[:search]}"
+.row
+  - if @users.any?
+    - @users.each do |user|
+      .col-md-4= render "users/user", user: user
+  - else
+    %h3.text-center There are no users mathes "#{params[:search]}"
