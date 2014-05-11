@@ -62,16 +62,16 @@
               &nbsp;Connected with facebook
         - if @user.about
           .row.about= "\"#{@user.about}\""
-          .col-md-5
+        .col-md-5
+          %br
+          - if user_signed_in? && @user != current_user
+            - if current_user.following?(@user)
+              = render 'unfollow'
+            - else
+              = render 'follow'
             %br
-            - if user_signed_in? && @user != current_user
-              - if current_user.following?(@user)
-                = render 'unfollow'
-              - else
-                = render 'follow'
-              %br
-              %a.btn.btn-default.btn-block.btn-primary{ data: { toggle: 'modal', target: '#modal-message' } }
-                %i.fa.fa-envelope &nbsp;Private message
+            %a.btn.btn-default.btn-block.btn-primary{ data: { toggle: 'modal', target: '#modal-message' } }
+              %i.fa.fa-envelope &nbsp;Private message
 
   %br
     .pander-sm
