@@ -5,6 +5,9 @@ class Article < ActiveRecord::Base
   belongs_to :user
   belongs_to :group
   has_many :comments, class_name: 'Comment', foreign_key: 'article_id'
+  has_many :views, foreign_key: "article_id", dependent: :destroy
+  has_many :viewers, through: :views
+
 
   validates :theme, presence: true
   validates :category, presence: true
@@ -20,9 +23,9 @@ class Article < ActiveRecord::Base
 
   def self.search(search)
     if search
-      self.find(:all, conditions: ['lower(theme) LIKE ?', "%#{search}%"])
+      self.where('lower(theme) LIKE ?', "%#{search}%")
     else
-      self.find(:all)
+      self.all
     end
   end
 

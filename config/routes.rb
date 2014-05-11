@@ -1,8 +1,10 @@
 Illusion::Application.routes.draw do
 
   mount Ckeditor::Engine => '/ckeditor'
-  get "browse/index"
+
   get "browse/timeline"
+  get "browse/users"
+  get "browse/articles"
   get "articles/search"
   root "users#index"
   get "users/index"
@@ -19,6 +21,13 @@ Illusion::Application.routes.draw do
   resources :users do
     member do
       get :following, :followers
+    end
+  end
+
+  resources :users do
+    member do
+      match :follow, via: [:get, :post]
+      match :unfollow, via: [:get, :post]
     end
   end
 

@@ -18,7 +18,10 @@ class User < ActiveRecord::Base
   has_many :recieved_messages, class_name: 'Message', foreign_key: 'recipient_id'
   has_many :sent_messages, class_name: 'Message', foreign_key: 'sender_id'
   has_many :groups, class_name: 'Group', foreign_key: 'user_id'
-
+  has_many :viwed_articles, through: :views, source: :article
+  has_many :views, foreign_key: "viewer_id",
+                                   class_name:  "View",
+                                   dependent:   :destroy
   validates :first_name, presence: true, length: {in: 2..30}
   validates :last_name, presence: true, length: {in: 2..30}
 
@@ -45,6 +48,14 @@ class User < ActiveRecord::Base
 
   def unfollow!(other_user)
     relationships.find_by(followed_id: other_user.id).destroy
+  end
+
+  def view?(article)
+    views.find_by(article_id: article.id)
+  end
+
+  def view!(article)
+    views.create!(article_id: article.id)
   end
 
   def user
@@ -100,6 +111,14 @@ class User < ActiveRecord::Base
 
   def gender
     self.sex ? 'male' : 'female'
+  end
+
+  def self.search(search)
+    if search
+      self.where('lower(first_name) LIKE ? OR lower(last_name) LIKE ?', "%#{search}%", "%#{search}%")
+    else
+      self.all
+    end
   end
 
 end

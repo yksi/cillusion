@@ -1,0 +1,7 @@
+.row.pander
+  .col-md-offset-3
+    .row
+      .col-md-3
+        = link_to "Articles", browse_articles_path, class: "btn btn-default btn-block #{'active-def-btn' if params[:action] == 'articles'}"
+      .col-md-3
+        = link_to 'Users', browse_users_path, class: "btn btn-default btn-block #{'active-def-btn' if params[:action] == 'users'}"

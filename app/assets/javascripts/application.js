@@ -11,6 +11,7 @@
 //= require jquery.turbolinks
 //= require load_image
 //= require messages
+//= require follows
 
 
 

@@ -1,0 +1,19 @@
+= render 'nav_links'
+.pull-right= will_paginate @articles
+%br
+%br
+%br
+.pull-right
+  .form-inline
+    = form_tag browse_articles_path, method: 'get', class: 'navbar-search pull-left' do
+      = text_field_tag :search, params[:search], class: "form-control", placeholder: "Search articles"
+      = button_tag(type: 'submit', class: "btn btn-primary") do
+        %i.fa.fa-search.fa.lg.fa-inverse &nbsp;Search
+%br
+%br
+- if @articles.any?
+  .row.pander
+    - @articles.each do |article|
+      .col-md-4= render 'articles/article', article: article
+- else
+  %h3.text-center There are no articles mathes "#{params[:search]}"

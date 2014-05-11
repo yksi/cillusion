@@ -14,7 +14,7 @@
         .nav.navbar-left.navbar-nav
           - if user_signed_in?
             %li.nav-btn{"data-toggle" => "tooltip", "data-placement" => "bottom", title: "Browse website"}
-              = link_to browse_index_path do
+              = link_to browse_articles_path do
                 .rounded-btn.animated.browse-btn.bounceInDown
                   %i.fa.fa-book.fa-2x
             %li.nav-btn{"data-toggle" => "tooltip", "data-placement" => "bottom", title: "News timeline"}
@@ -37,8 +37,8 @@
                 .rounded-btn.groups-btn.animated.bounceInDown
                   %i.fa.fa-th-large.fa-2x
             .pull-right
-              = form_tag articles_search_path, method: 'get', class: 'navbar-search pull-left ', style: "margin-top:20px;" do
-                = text_field_tag :search, params[:search], class: "form-control", placeholder: "Search article..."
+              = form_tag browse_articles_path, method: 'get', class: 'navbar-search pull-left ', style: "margin-top:20px;" do
+                = text_field_tag :search, params[:search], class: "form-control", placeholder: "Search"
         .nav.navbar-right.navbar-nav.animated.bounceInRight
           -if user_signed_in?
             %li.nav-btn{"data-toggle" => "tooltip", "data-placement" => "bottom", title: "Create new article"}

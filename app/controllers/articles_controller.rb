@@ -22,7 +22,7 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    if URI(request.referer).path != article_path(@article)
+     if user_signed_in? && !current_user.view?(@article) ? current_user.view!(@article) : ''
       if @article.views_count.nil?
         @article.update_column(:views_count, 1)
       else

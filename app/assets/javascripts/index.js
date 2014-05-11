@@ -28,10 +28,6 @@ $( document ).ready(function() {
     $('#example').popover();
   });
 
-  $(".btn-follow").click(function() {
-    $(".btn-follow").html( 'Following...' )
-  })
-
   $('[data-toggle="tooltip"]').tooltip()
 
   $('.paste_html_button').click(function() {

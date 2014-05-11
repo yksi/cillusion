@@ -15,7 +15,7 @@
               %h5
                 %strong followers
               %a.counter{ href: '#', data: { toggle: 'modal', target: ('#modal-followers' if @followers.count > 0)}}
-                %h3{style:'margin-top:0px'}= @user.followers.count
+                %h3.followers_counter{style:'margin-top:0px'}= @user.followers.count
           .col-md-4
             .text-center
               %h5
@@ -59,7 +59,7 @@
               .label.label-primary.label-lg
                 %i.fa.fa-facebook.fa-lg
               &nbsp;Connected with facebook
-          .col-md-5
+          .col-md-4.col-md-offset-1
             %br
             - if user_signed_in? && @user != current_user
               - if current_user.following?(@user)

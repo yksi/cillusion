@@ -30,6 +30,14 @@ class BrowseController < ApplicationController
     @resourses = @resourses.sort_by { |a|  a.created_at }.reverse
   end
 
+  def articles
+    @articles = Article.search(params[:search]).paginate(page: params[:page], per_page: 10)
+  end
+
+  def users
+    @users = User.search(params[:search]).paginate(page: params[:page], per_page: 10)
+  end
+
   private
 
   def find_articles

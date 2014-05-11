@@ -1,0 +1,23 @@
+= render 'nav_links'
+.pull-right= will_paginate @users
+%br
+%br
+%br
+.pull-right
+  .form-inline
+    = form_tag browse_users_path, method: 'get', class: 'navbar-search pull-left' do
+      = text_field_tag :search, params[:search], class: "form-control", placeholder: "Search users"
+      = button_tag(type: 'submit', class: "btn btn-primary") do
+        %i.fa.fa-search.fa.lg.fa-inverse &nbsp;Search
+%br
+%br
+- if @users.any?
+  %ul.nav.nav-pills.nav-stacked.pander
+    - @users.each do |u|
+      %li
+        = link_to u do
+          = image_tag u.avatar.small.url, class: "img-rounded"
+          #{u.fullname}
+          %p{align: "right"}= "#{u.user_articles.count} articles, #{u.comments.count} comments"
+- else
+  %h3.text-center There are no users mathes "#{params[:search]}"

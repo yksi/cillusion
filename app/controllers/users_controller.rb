@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :find_user, only: [:show, :edit, :follows, :followers]
+  before_action :find_user, only: [:show, :edit, :follows, :followers, :follow, :unfollow]
 
   def update
     @user = User.find(current_user.id)
@@ -52,6 +52,20 @@ class UsersController < ApplicationController
 
   def followers
     @users = @user.followers
+  end
+
+  def follow
+    current_user.follow!(@user)
+    respond_to do |format|
+      format.js { render json: { success: true }  }
+    end
+  end
+
+  def unfollow
+    current_user.unfollow!(@user)
+    respond_to do |format|
+      format.js { render json: { success: true }  }
+    end
   end
 
   private

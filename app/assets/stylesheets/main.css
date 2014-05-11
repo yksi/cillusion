@@ -310,3 +310,12 @@ img.avatar {
 .online-status {
   display: inline;
 }
+
+.follows-icon {
+  margin-left:20px;
+  margin-top:2px;
+}
+
+.active-def-btn {
+  border: 3px solid #1B942D;
+}
