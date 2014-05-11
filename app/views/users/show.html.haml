@@ -2,18 +2,46 @@
 - if @user.paused
   %h1 #{@user.fullname} has been suspended his/her profile
 - else
-  .pander-sm
+  .pander-prof
+    .col-md-offset-2
+      %h2{style: 'margin:0px;display:inline'}
+        = @user.fullname
+      .label.label-warning.online-status= @user.online? ? 'online' : "last activity #{time_ago_in_words(@user.updated_at)} ago."
+
+    .row.user-inform-pane
+      .col-md-10.col-md-offset-2
+        .row{style: 'color:white'}
+          .col-md-4
+            .text-center
+              %h5
+                %strong followers
+              %a.counter{ href: '#', data: { toggle: 'modal', target: ('#modal-followers' if @followers.count > 0)}}
+                %h3{style:'margin-top:0px'}= @user.followers.count
+          .col-md-4
+            .text-center
+              %h5
+                %strong followed
+              %a.counter{ href: '#', data: { toggle: 'modal', target: ('#modal-followed' if @followed.count > 0)}}
+                %h3{style:'margin-top:0px'}= @user.followed_users.count
+          .col-md-4
+            .text-center
+              %h5
+                %strong articles
+              %h3{style:'margin-top:0px'}= @user.user_articles.count
     .row
       .col-md-2
-        %a{ data: { toggle: 'modal', target: ("#modal-avatar" if @user.avatar?) } }
+        %a{ href: ("#" if @user.avatar?), data: { toggle: 'modal', target: ("#modal-avatar" if @user.avatar?) } }
           .imgHolder
-            = image_tag @user.avatar.thumb.url, width: '180'
+            = image_tag @user.avatar.thumb.url, width: '180',heigh: '180', class: 'avatar img-circle'
+            %br
+            %br
+          - if @user == current_user
+            .text-center{style: 'margin-left:24px'}
+              = link_to edit_user_registration_path, class: 'btn btn-default' do
+                %i.fa.fa-pencil &nbsp;Edit profile
       .col-md-9
         .row
           .col-md-7
-            %h2{style: 'margin:0px;'}
-              = @user.fullname
-            .label.label-success= @user.online? ? 'online' : "last activity #{time_ago_in_words(@user.updated_at)} ago."
             %br
             %br
             - if !@user.sex.nil?
@@ -32,6 +60,8 @@
               .label.label-primary.label-lg
                 %i.fa.fa-facebook.fa-lg
               &nbsp;Connected with facebook
+        - if @user.about
+          .row.about= "\"#{@user.about}\""
           .col-md-5
             %br
             - if user_signed_in? && @user != current_user
@@ -42,6 +72,7 @@
               %br
               %a.btn.btn-default.btn-block.btn-primary{ data: { toggle: 'modal', target: '#modal-message' } }
                 %i.fa.fa-envelope &nbsp;Private message
+
   %br
     .pander-sm
       - if @user.user_articles.any?

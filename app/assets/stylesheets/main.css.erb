@@ -25,9 +25,14 @@ textarea {
   max-height: 150px;
 }
 
-.about-me {
-  border: 4px #AAA solid;
+.about {
+  border: 4px #333 solid;
   padding: 15px;
+  font-family: times;
+  font-size: 14px;
+  margin-top: 20px;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: white;
 }
 
 .user_info {
@@ -224,6 +229,22 @@ figure.photo:hover .btn-pick-photo {
   padding: 20px;
 }
 
+.pander-prof {
+  padding: 20px;
+  background-image: -webkit-gradient(
+  linear,
+  left top,
+  right top,
+  color-stop(0, #77E673),
+  color-stop(0.58, #1B942D)
+  );
+  background-image: -o-linear-gradient(right, #77E673 0%, #1B942D 58%);
+  background-image: -moz-linear-gradient(right, #77E673 0%, #1B942D 58%);
+  background-image: -webkit-linear-gradient(right, #77E673 0%, #1B942D 58%);
+  background-image: -ms-linear-gradient(right, #77E673 0%, #1B942D 58%);
+  background-image: linear-gradient(to right, #77E673 0%, #1B942D 58%);
+}
+
 .group-thumb {
   min-height: 200px;
 }
@@ -268,4 +289,24 @@ figure.photo:hover .btn-pick-photo {
     position: absolute;
     right: -24px;
     bottom: 0px;
+}
+
+img.avatar {
+  border: 4px solid white;
+  margin-top: -75%;
+  min-height: 180px;
+  min-width: 180px;
+}
+
+.user-inform-pane {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.counter, .counter:hover  {
+  color: white;
+  text-decoration: none;
+}
+
+.online-status {
+  display: inline;
 }
