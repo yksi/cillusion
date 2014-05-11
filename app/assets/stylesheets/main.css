@@ -401,9 +401,18 @@ img.miniature {
 .btn-follow {
   color: black;
   background-color: #12da55;
+  border-radius: 0px;
+  height: 58px;
 }
 
 .btn-unfollow {
   color: black;
   background-color: #FFda55;
+  border-radius: 0px;
+  height: 58px;
+}
+
+.pander-buttons {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 20px;
 }

@@ -59,8 +59,7 @@
               .label.label-primary.label-lg
                 %i.fa.fa-facebook.fa-lg
               &nbsp;Connected with facebook
-          .col-md-4.col-md-offset-1
-            %br
+          .col-md-4.col-md-offset-1.pander-buttons
             - if user_signed_in? && @user != current_user
               - if current_user.following?(@user)
                 = render 'unfollow', user: @user
