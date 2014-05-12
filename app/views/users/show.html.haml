@@ -55,7 +55,7 @@
               %i.fa.fa-calendar-o.fa-lg.text-danger
               = "#{@user.born_date.strftime("%d %B %Y")}(#{@user.age} years)"
               %br
-            - if Identity.where(id: current_user.id).any?
+            - if Identity.where(user_id: @user.id).any?
               .label.label-primary.label-lg
                 %i.fa.fa-facebook.fa-lg
               &nbsp;Connected with facebook
