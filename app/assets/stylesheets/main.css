@@ -192,6 +192,20 @@ figure.photo:hover .btn-pick-photo {
   top: 1px;
 }
 
+.new_logs {
+  display: inline;
+  min-width: 10px;
+  font-weight: bold;
+  color: #FFF;
+  line-height: 1;
+  vertical-align: baseline;
+  white-space: nowrap;
+  text-align: center;
+  border-radius: 10px;
+  position: absolute;
+  top: 1px;
+}
+
 .sign_up {
   margin-top: 20px;
   font-size: 25px;

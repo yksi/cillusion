@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140511125812) do
+ActiveRecord::Schema.define(version: 20140511214647) do
 
   create_table "articles", force: true do |t|
     t.integer  "user_id"
@@ -93,6 +93,16 @@ ActiveRecord::Schema.define(version: 20140511125812) do
 
   add_index "likes", ["likeable_id", "likeable_type"], name: "fk_likeables", using: :btree
   add_index "likes", ["liker_id", "liker_type"], name: "fk_likes", using: :btree
+
+  create_table "logs", force: true do |t|
+    t.integer  "user_id"
+    t.string   "logable_type"
+    t.integer  "logable_id"
+    t.boolean  "viewed",       default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "owner_id"
+  end
 
   create_table "mentions", force: true do |t|
     t.string   "mentioner_type"

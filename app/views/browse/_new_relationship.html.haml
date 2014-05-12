@@ -1,0 +1,12 @@
+= content_tag_for(:li, logable, user, class: 'animated rotateInUpRight' ) do
+  .timeline-badge.danger
+    %i.fa.fa-lg.fa-users
+  .timeline-panel
+    .timeline-body
+      %h3{style: 'margin-top:0px;'} You have got new follower
+      .pander
+        = link_to user do
+          = image_tag user.avatar.small.url, class: 'img-circle'
+          = user.fullname
+        followed you
+        %em.text-muted= "#{time_ago_in_words(logable.created_at)} ago."

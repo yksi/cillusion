@@ -1,4 +1,6 @@
 class Comment < ActiveRecord::Base
+  include Logable
+
   belongs_to :article
   belongs_to :user
 

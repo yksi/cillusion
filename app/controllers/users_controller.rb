@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     @users = User.all
     @articles = Article.order(created_at: :desc)
     if user_signed_in?
-      redirect_to browse_timeline_path
+      redirect_to current_user
     end
   end
 

@@ -22,12 +22,9 @@ class ArticlesController < ApplicationController
   end
 
   def show
-     if user_signed_in? && !current_user.view?(@article) ? current_user.view!(@article) : ''
-      if @article.views_count.nil?
-        @article.update_column(:views_count, 1)
-      else
-        @article.update_column(:views_count, @article.views_count + 1)
-      end
+    if user_signed_in? && !current_user.view?(@article) && @article.user != current_user
+      view = current_user.view!(@article)
+      view.track_log(current_user.id)
     end
     @status = 1
     @comments = @article.comments.all

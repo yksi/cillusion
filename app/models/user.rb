@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  include Logable
+
   TEMP_EMAIL = 'change@me.com'
   TEMP_EMAIL_REGEX = /change@me.com/
 
@@ -22,6 +24,7 @@ class User < ActiveRecord::Base
   has_many :views, foreign_key: "viewer_id",
                                    class_name:  "View",
                                    dependent:   :destroy
+  has_many :refered_logs, class_name: 'Log', foreign_key: 'owner_id'
   validates :first_name, presence: true, length: {in: 2..30}
   validates :last_name, presence: true, length: {in: 2..30}
 
@@ -118,6 +121,24 @@ class User < ActiveRecord::Base
       self.where('lower(first_name) LIKE ? OR lower(last_name) LIKE ?', "%#{search}%", "%#{search}%")
     else
       self.order(updated_at: :desc)
+    end
+  end
+
+  def has_new_logs?
+    Log.all.each do |log|
+      p log
+      if log.get_recipient == self && !log.viewed
+        return true
+      end
+    end
+    false
+  end
+
+  def read_news!
+    Log.all.each do |log|
+      if (log.get_recipient == self) && (!log.viewed)
+        log.update_column(:viewed, true)
+      end
     end
   end
 

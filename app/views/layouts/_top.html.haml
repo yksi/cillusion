@@ -1,10 +1,6 @@
 .navbar.navbar-default.navbar-fixed-top
   .animated.fadeIn
     .navbar-header
-      - if user_signed_in?
-        - @main_path = browse_timeline_path
-      - else
-        - @main_path = root_path
       %a.navbar-brand{ href: root_path }
         = image_tag "logo-toolbar.png", height: '48px'
     .container-fluid
@@ -21,6 +17,9 @@
               = link_to browse_timeline_path do
                 .rounded-btn.timeline-btn.animated.bounceInDown
                   %i.fa.fa-clock-o.fa-2x
+                  - if current_user.has_new_logs?
+                    #span.new_logs
+                      %i.fa.fa-circle.text-danger
             %li.headerDivider
             %li.nav-btn{"data-toggle" => "tooltip", "data-placement" => "bottom", title: "Messages"}
               =link_to messages_path do
