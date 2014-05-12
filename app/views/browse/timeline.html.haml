@@ -10,7 +10,7 @@
     - else
       - if log.get_recipient == current_user
         = render "new_#{log.logable_type.downcase}", logable: log.logable, user: log.user
-    - count = count +1
+        - count = count +1
 - if count == 0
   .text-center
     %i.fa.fa-frown-o.fa-5x
