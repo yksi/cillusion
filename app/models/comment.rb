@@ -20,7 +20,7 @@ class Comment < ActiveRecord::Base
   end
 
   def my_article
-    if self.article 
+    if self.article
       return self.article.theme
     else
       return "Deleted article"

@@ -11,6 +11,7 @@ class ArticlesController < ApplicationController
   def create
   	@article = current_user.user_articles.create(article_params)
   	if @article.save
+      @article.track_log(current_user)
       redirect_to @article
     else
       render :new, alert: "Please fill in all required fields."
@@ -39,6 +40,7 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
+    @article.reverse_logs
   	@article.destroy
   	redirect_to current_user
   end

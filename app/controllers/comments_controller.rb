@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
 
   def create
     @comment = current_user.comments.create(comment_params)
-    @comment.track_log(current_user.id)
+    @comment.track_log(current_user.id) if current_user != @comment.user
     redirect_to @comment.article
     if @comment.content.length >= 255
       flash[:alert] = "Comment size is too large"
@@ -23,6 +23,7 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = Comment.find(params[:id])
+    @comment.reverse_logs
     @comment.destroy
     redirect_to @comment.article
   end

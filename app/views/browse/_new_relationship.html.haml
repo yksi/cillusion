@@ -5,8 +5,8 @@
     .timeline-body
       %h3{style: 'margin-top:0px;'} You have got new follower
       .pander
-        = link_to user do
-          = image_tag user.avatar.small.url, class: 'img-circle'
-          = user.fullname
+        = link_to logable.follower do
+          = image_tag logable.follower.avatar.small.url, class: 'img-circle'
+          = logable.follower.fullname
         followed you
         %em.text-muted= "#{time_ago_in_words(logable.created_at)} ago."

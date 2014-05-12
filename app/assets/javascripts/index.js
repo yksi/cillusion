@@ -43,5 +43,22 @@ $( document ).ready(function() {
     console.log($add_to_end)
   })
 
+  $('.hide-side').click(function(e) {
+    console.log($(this).data())
+    if($(this).data('show') == true) {
+      $(this).data('show', false)
+      $('.col-xs-6').css('display', 'none')
+      $('.col-md-8').removeClass('col-md-8').addClass('col-md-12')
+      $(this).html('<i class="fa fa-arrow-left"></i>')
+    }
+    else {
+       $(this).data('show', true)
+      $('.col-xs-6').css('display', 'block')
+      $('.col-md-12').removeClass('col-md-12').addClass('col-md-8')
+      $(this).html('<i class="fa fa-arrow-right"></i>')
+    }
+
+  })
+
 });
 

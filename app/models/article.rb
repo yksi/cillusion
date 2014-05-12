@@ -2,7 +2,6 @@ class Article < ActiveRecord::Base
   include Logable
 
   mount_uploader :photo, ArticlePhotoUploader
-  self.per_page = 3
 
   belongs_to :user
   belongs_to :group

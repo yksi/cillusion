@@ -55,14 +55,16 @@ class UsersController < ApplicationController
   end
 
   def follow
-    current_user.follow!(@user)
+    rel = current_user.follow!(@user)
+    rel.track_log(current_user)
     respond_to do |format|
       format.js { render json: { success: true }  }
     end
   end
 
   def unfollow
-    current_user.unfollow!(@user)
+    rel = current_user.unfollow!(@user)
+    rel.reverse_logs
     respond_to do |format|
       format.js { render json: { success: true }  }
     end

@@ -375,7 +375,7 @@ img.avatar {
   position: relative;
 }
 
-.user-board  button, b{
+.user-board  button{
   text-decoration: none;
   position: absolute;
   bottom: 0px;

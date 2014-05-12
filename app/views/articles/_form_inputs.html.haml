@@ -1,4 +1,5 @@
 = render 'paste_html'
+%br
 = form_for @article do |f|
   .col-xs-12.col-sm-6.col-md-8.animated.bounceInLeft
     -if @article.errors.any?
@@ -8,9 +9,15 @@
         .panel-body
           -@article.errors.full_messages.each do |ue|
             %i.fa.fa-warning= "#{ue}"
-    .panel.panel-warning
-      .panel-heading= f.text_field :theme, placeholder: "Theme...", class: "form-control article-theme", style: "width: 100%;", value: (params[:theme].present? ? params[:theme] : @article.theme )
-      .panel-body= f.cktext_area :content, :id => 'editor'
+    .pull-left= link_to "Organize with groups", new_group_path, class: "btn btn-primary btn-sm"
+    .text-right
+      %a.hide-side.btn.btn-default{ data: { show: 'true' } }
+        %i.fa.fa-arrow-right
+    %br
+    .pander
+      = f.text_field :theme, placeholder: "Theme...", class: "form-control article-theme", style: "width: 100%;", value: (params[:theme].present? ? params[:theme] : @article.theme )
+      %br
+      = f.cktext_area :content, id: 'editor'
     %br
   .col-xs-6.col-md-4.animated.bounceInRight
     - if !current_page?(new_article_path)

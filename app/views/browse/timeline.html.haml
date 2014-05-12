@@ -1,6 +1,23 @@
 - content_for :title,  "Timeline"
 = stylesheet_link_tag "timeline"
+- count = 0
 %ul.timeline
   - Log.order(created_at: :desc).each do |log|
-    - if log.get_recipient == current_user
-      = render "new_#{log.logable_type.downcase}", logable: log.logable, user: log.user
+    - if log.logable_type == 'Article'
+      - if current_user.following?(log.logable.user).created_at < log.logable.created_at
+        = render "new_article", logable: log.logable, user: log.user
+        - count = count + 1
+    - else
+      - if log.get_recipient == current_user
+        = render "new_#{log.logable_type.downcase}", logable: log.logable, user: log.user
+    - count = count +1
+- if count == 0
+  .text-center
+    %i.fa.fa-frown-o.fa-5x
+  %h1.text-center.text-center No any news, which you able to see
+  %h3.text-center
+    Start
+    = link_to 'creating articles', new_article_path
+    and
+    = link_to 'following users', browse_users_path
+    to watch the news
