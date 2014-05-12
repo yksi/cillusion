@@ -34,10 +34,19 @@
             = image_tag @user.avatar.thumb.url, width: '180',heigh: '180', class: 'avatar img-circle'
             %br
             %br
-          - if @user == current_user
-            .text-center{style: 'margin-left:24px'}
-              = link_to edit_user_registration_path, class: 'btn btn-default' do
-                %i.fa.fa-pencil &nbsp;Edit profile
+        - if user_signed_in? && @user != current_user
+          - if current_user.following?(@user)
+            = render 'unfollow', user: @user
+          - else
+            = render 'follow', user: @user
+          %a.btn.btn-block.btn-primary{ data: { toggle: 'modal', target: '#modal-message' } }
+            %i.fa.fa-envelope 
+            &nbsp;Private message
+        - if @user == current_user
+          .text-center{style: 'margin-left:24px'}
+            = link_to edit_user_registration_path, class: 'btn btn-default' do
+              %i.fa.fa-pencil 
+              &nbsp;Edit profile
       .col-md-9
         .row
           .col-md-7
@@ -59,15 +68,6 @@
               .label.label-primary.label-lg
                 %i.fa.fa-facebook.fa-lg
               &nbsp;Connected with facebook
-          .col-md-4.col-md-offset-1.pander-buttons
-            - if user_signed_in? && @user != current_user
-              - if current_user.following?(@user)
-                = render 'unfollow', user: @user
-              - else
-                = render 'follow', user: @user
-              %br
-              %a.btn.btn-default.btn-block.btn-primary{ data: { toggle: 'modal', target: '#modal-message' } }
-                %i.fa.fa-envelope &nbsp;Private message
         - if @user.about
           .row.about= "\"#{@user.about}\""
 

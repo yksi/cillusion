@@ -126,6 +126,7 @@ figure.photo:hover .btn-pick-photo {
 .groups-btn {
   color: #B37C05;
   border-color: #B37C05;
+  padding-top: 10px;
 }
 
 .groups-btn:hover
@@ -133,6 +134,18 @@ figure.photo:hover .btn-pick-photo {
   background-color: #B37C05;
   border-color: #B37C05;
   color: #DDDDDD;
+}
+
+.new_article-btn {
+  background-color: #1B942D;
+  border-color: #1B942D;
+  color: #DDD;
+}
+
+.new_article-btn:hover {
+  background-color: #DDD;
+  color: #1B942D;
+  border-color: #1B942D;
 }
 
 
@@ -292,6 +305,7 @@ figure.photo:hover .btn-pick-photo {
 
 .nav-btn{
   border-bottom: 6px solid transparent;
+  display: inline;
 }
 
 .modal-full {
@@ -305,12 +319,12 @@ figure.photo:hover .btn-pick-photo {
 }
 
 .imgHolder {
-    position: relative;
+  position: relative;
 }
 .imgHolder i{
-    position: absolute;
-    right: -24px;
-    bottom: 0px;
+  position: absolute;
+  right: -24px;
+  bottom: 0px;
 }
 
 img.avatar {
@@ -338,8 +352,9 @@ img.avatar {
   margin-top:2px;
 }
 
-.active-def-btn {
-  border: 3px solid #1B942D;
+.active-def-btn, .active-def-btn:hover, .active-def-btn:disabled {
+  background-color: #5DD45F;
+  color: white;
 }
 
 .user-board {
@@ -412,7 +427,7 @@ img.miniature {
   margin-top: 60px;
 }
 
-.btn-follow {
+/*.btn-follow {
   color: black;
   background-color: #12da55;
   border-radius: 0px;
@@ -424,9 +439,15 @@ img.miniature {
   background-color: #FFda55;
   border-radius: 0px;
   height: 58px;
-}
+}*/
 
 .pander-buttons {
   background-color: rgba(255, 255, 255, 0.2);
   padding: 20px;
+}
+
+.btn-browse-exp {
+  height: 60px;
+  padding-top: 10px;
+  border-radius: 0px;
 }

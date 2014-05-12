@@ -2,7 +2,7 @@
 = stylesheet_link_tag "timeline"
 - count = 0
 %ul.timeline
-  - Log.order(created_at: :desc).each do |log|
+  - @logs.each do |log|
     - if log.logable_type == 'Article'
       - if !current_user.following?(log.logable.user).nil? && current_user.following?(log.logable.user).created_at < log.logable.created_at
         = render "new_article", logable: log.logable, user: log.user

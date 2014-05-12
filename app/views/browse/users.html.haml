@@ -1,16 +1,21 @@
 = render 'nav_links'
-.pull-right= will_paginate @users
 %br
-%br
-%br
-.pull-right
-  .form-inline
-    = form_tag browse_users_path, method: 'get', class: 'navbar-search pull-left' do
-      = text_field_tag :search, params[:search], class: "form-control", placeholder: "Search users"
-      = button_tag(type: 'submit', class: "btn btn-primary") do
-        %i.fa.fa-search.fa.lg.fa-inverse &nbsp;Search
-%br
-%br
+%h2.text-center
+  Happy
+  %strong.text-success cillusion
+  users
+  %i.fa.fa-users.text-danger
+.row
+  .col-md-6
+    .digg_pagination= will_paginate @users
+  .col-md-6
+    %br
+    .form-inline.pull-right
+      = form_tag browse_users_path, method: 'get', class: 'navbar-search' do
+        = text_field_tag :search, params[:search], class: "form-control", placeholder: "Search users"
+        = button_tag(type: 'submit', class: "btn btn-primary") do
+          %i.fa.fa-search.fa.lg.fa-inverse
+          &nbsp;Search
 .row
   - if @users.any?
     - @users.each do |user|

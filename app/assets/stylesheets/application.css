@@ -6,6 +6,7 @@
  *= require animate
  *= require carousel
  *= require post-article
+ *= require pagination
  */
 
 body

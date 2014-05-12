@@ -1,16 +1,14 @@
 = render 'nav_links'
-.pull-right= will_paginate @articles
-%br
-%br
-%br
-.pull-right
-  .form-inline
-    = form_tag browse_articles_path, method: 'get', class: 'navbar-search pull-left' do
-      = text_field_tag :search, params[:search], class: "form-control", placeholder: "Search articles"
-      = button_tag(type: 'submit', class: "btn btn-primary") do
-        %i.fa.fa-search.fa.lg.fa-inverse &nbsp;Search
-%br
-%br
+.row
+  .col-md-6
+    .digg_pagination= will_paginate @articles
+  .col-md-6
+    %br
+    .form-inline.pull-right
+      = form_tag browse_articles_path, method: 'get', class: 'navbar-search pull-left' do
+        = text_field_tag :search, params[:search], class: "form-control", placeholder: "Search articles"
+        = button_tag(type: 'submit', class: "btn btn-primary") do
+          %i.fa.fa-search.fa.lg.fa-inverse &nbsp;Search
 - if @articles.any?
   .row.pander
     - @articles.each do |article|

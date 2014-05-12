@@ -20,6 +20,4 @@
     - @group.articles.each do |article|
       .col-md-4
         = render "articles/article", article: article
-        = content_tag(:remove) do
-          .text-right= link_to "remove", delete_article_from_group_path(article: article), class: "btn btn-danger btn-default"
 

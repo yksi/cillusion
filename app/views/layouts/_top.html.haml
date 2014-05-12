@@ -4,7 +4,7 @@
       %a.navbar-brand{ href: root_path }
         = image_tag "logo-toolbar.png", height: '48px'
     .container-fluid
-      %button.navbar-toggle{'data-toggle' => 'collapse', 'data-target' => '.NAVCOl'}
+      %button.navbar-toggle{'data-toggle' => 'collapse', 'data-target' => '.NAVCOl', style: 'margin-top:-30px;'}
         %i.fa.fa-bars
       .collapse.navbar-collapse.NAVCOl
         .nav.navbar-left.navbar-nav
@@ -42,7 +42,7 @@
           -if user_signed_in?
             %li.nav-btn{"data-toggle" => "tooltip", "data-placement" => "bottom", title: "Create new article"}
               = link_to new_article_path do
-                .rounded-btn
+                .rounded-btn.new_article-btn
                   %i.fa.fa-plus.text.fa-2x
             %li.dropdown.nav-btn
               %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}

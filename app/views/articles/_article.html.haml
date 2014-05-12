@@ -16,6 +16,7 @@
       %div.post-content.well.text-center
         %strong.text-muted= article.content.empty? ? 'Looks like empty' : "#{strip_tags(article.content).html_safe[0..80]}"
       %div
-        = yield(:remove)
         .text-right{style: 'position:absolute;bottom:5px;right:10px'}
           %a.btn.btn-warning.btn-sm{href: article_path(article)} Read more
+        - if params[:controller] == 'groups' && params[:action] == 'show' && user_signed_in? && article.user == current_user
+          .pull-left= link_to "remove", delete_article_from_group_path(article: article), class: "btn btn-danger btn-default"

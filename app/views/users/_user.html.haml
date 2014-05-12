@@ -4,15 +4,25 @@
       .text-center
         .animated.rotateIn= image_tag user.avatar.thumb.url, class: 'miniature img-circle'
       %strong.user-about-miniature= "created #{pluralize(user.user_articles.count, 'articles')}"
-      %h4= user.fullname
+      %h4
+        = "#{user.fullname} "
+        -if !user.sex.nil?
+          %i.fa.text-primary{class: "fa-#{user.gender}" }
       - if user.hometown.present?
         %h4
           %i.fa.fa-map-marker.text-danger.animated.flip
           = user.hometown
       .text-right
-        - if user_signed_in?
+        - if user_signed_in? && user != current_user
           - if current_user.following?(user)
             .text-center
-              %strong.text-success Following
+              %strong.text-success
+                Following&nbsp;
+                %i.fa.fa-rss.text-warning
           - else
             = render 'users/follow', user: user
+        - elsif user == current_user
+          .text-center
+            %strong.text-default
+              It's you&nbsp;
+              %i.fa.fa-heart.text-danger
