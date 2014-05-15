@@ -12,6 +12,7 @@
 //= require load_image
 //= require messages
 //= require follows
+//= require gritter
 
 
 

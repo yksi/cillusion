@@ -9,9 +9,15 @@ Illusion::Application.routes.draw do
   root "users#index"
   get "users/index"
   get "comments/show"
+  scope controller: :terms, path: 'lead' ,only: [] do
+    get :eula
+  end
 
   devise_for :users, controllers: { registrations: 'users/registrations', omniauth_callbacks: "users/omniauth_callbacks"}
-  resources :users, :only => [:index, :show]
+
+  # resources :users
+  # resources :users, path: '/', only: [:show, :index]
+
   resources :articles
   resources :follows, only: [:create, :destroy]
   resources :comments

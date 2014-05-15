@@ -12,7 +12,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       sign_up(:user, @user)
       redirect_to @user
     else
-      render :new
+      render :new, alert: 'Cannot create profile. Please try again'
     end
   end
 

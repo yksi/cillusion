@@ -69,27 +69,19 @@
               %span.fa.fa-angle-right.glyphicon.icon-next
         = yield
       - else
-        .container
-          -if flash.each.count > 0
-            %br
-            %br
-            - flash.each do |name, msg|
-              - if msg.class == Array
-                %ul
-                  - msg.each do |message|
-                    %li
-                      .alert.alert-info.animated.flash
-                        %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", type: "button"} ×
-                        = label_tag message, id: "flash_#{name}"
+        -if flash.each.count > 0
+          - flash.each do |name, msg|
+            - if msg.class == Array
+              - msg.each do |message|
+                = js add_gritter("#{msg}", title: name)
+            - else
+              - if flash[:notice]
+                - title = 'Notification'
+                - image = '/assets/notice.png'
               - else
-                - if flash[:notice]
-                  .alert.alert-info.animated.flash#flash_info
-                    %button.close#close_notice{"aria-hidden" => "true", type: "button", "data-dismiss" => "alert"} ×
-                    %i.fa.fa-info= "   #{msg}"
-                - if flash[:alert]
-                  .alert.alert-warning.animated.flash#flash_warning
-                    %button.close.close#close_alert{"aria-hidden" => "true", type: "button", "data-dismiss" => "alert"} ×
-                    %i.fa.fa-warning= " #{msg}"
+                - title = 'Error'
+                - image = '/assets/warning.png'
+              = js add_gritter("#{msg}", image: image, title: title)
         %br
         .container
           - if !user_signed_in? || !current_user.paused

@@ -45,7 +45,7 @@
         - if @user == current_user
           .text-center{style: 'margin-left:24px'}
             = link_to edit_user_registration_path, class: 'btn btn-default' do
-              %i.fa.fa-pencil 
+              %i.fa.fa-pencil
               &nbsp;Edit profile
       .col-md-9
         .row
@@ -70,6 +70,7 @@
               &nbsp;Connected with facebook
         - if @user.about
           .row.about= "\"#{@user.about}\""
+
 
   %br
     .pander-sm

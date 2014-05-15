@@ -1,0 +1,21 @@
+.calendar-small {
+  height: 200px;
+  max-height: 200px;
+}
+
+.calendar-small td{
+  height: 32px;
+  width: 32px;
+}
+
+.calendar-small th{
+  height: 32px;
+  width: 32px;
+  padding: 0px;
+}
+
+.calendar-small tr{
+  height: 32px;
+  width: 32px;
+  padding: 0px;
+}

@@ -14,7 +14,7 @@ class ArticlesController < ApplicationController
       @article.track_log(current_user)
       redirect_to @article
     else
-      render :new, alert: "Please fill in all required fields."
+      redirect_to :back, alert: "Theme and article content cannot be blank."
     end
   end
 

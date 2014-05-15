@@ -7,6 +7,8 @@
  *= require carousel
  *= require post-article
  *= require pagination
+ *= require gritter_custom
+ *= require small_calendar
  */
 
 body
@@ -14,7 +16,6 @@ body
   overflow-x: hidden;
   padding-top: 60px;
   margin-top: 100px;
-  padding-bottom: 45px;
   background-color: #FFFAF2;
 }
 

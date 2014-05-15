@@ -8,11 +8,11 @@ class MessagesController < ApplicationController
   end
 
   def create
-    if @message = current_user.sent_messages.create(message_params)
-      redirect_to User.find(@message.recipient_id)
-      flash[:notice] = "Message was successfully sent to #{User.find(@message.recipient_id).fullname}"
+    @message = current_user.sent_messages.create(message_params)
+    if @message.save
+      redirect_to User.find(@message.recipient_id), notice: "Message was successfully sent to #{User.find(@message.recipient_id).fullname}"
     else
-      flash[:notice] = "Message was not sent. Please check, is all fields not empty."
+      redirect_to :back, alert: "Message was not sent. Please check, is all fields not empty."
     end
   end
 

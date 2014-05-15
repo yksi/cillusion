@@ -24,6 +24,7 @@ class UsersController < ApplicationController
     @followers = @user.followers
     @followed = @user.followed_users
     @complete = 20
+    @date = params[:month] ? Date.parse(params[:month]) : Date.today
     if @user.hometown
       @complete += 20
     end

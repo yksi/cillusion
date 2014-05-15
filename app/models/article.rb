@@ -9,11 +9,9 @@ class Article < ActiveRecord::Base
   has_many :views, foreign_key: "article_id", dependent: :destroy
   has_many :viewers, through: :views
 
-
-  validates :theme, presence: true
   validates :category, presence: true
-
-  before_save :default_values
+  validates :theme, presence: true
+  validates :content, presence: truez
 
   extend FriendlyId
   friendly_id :theme
@@ -36,10 +34,6 @@ class Article < ActiveRecord::Base
 
   def return_created_at_as_nice_string
     self.created_at.strftime("%d %B %Y.")
-  end
-
-  def default_values
-    self.category ||= 'Other'
   end
 
 end

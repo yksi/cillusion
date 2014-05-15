@@ -1,9 +1,14 @@
-body {
+html, body {
   margin: 0;
   background-position: center;
   color: rgb(85,94,106);
   font-size: 14px;
   font-style: normal;
+  overflow: auto;
+}
+
+.modal {
+  overflow: hidden;
 }
 
 #imagee {
@@ -450,4 +455,12 @@ img.miniature {
   height: 60px;
   padding-top: 10px;
   border-radius: 0px;
+}
+
+.footer {
+  background: #999;
+  border-top: 7px solid #777;
+  height: 60px;
+  background-color: #f5f5f5;
+  float: bottom;
 }

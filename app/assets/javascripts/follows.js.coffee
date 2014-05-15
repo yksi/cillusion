@@ -9,6 +9,7 @@ $(document).on 'click', '.btn-follow', (e) ->
     dataType: 'json'})
     .done (data) ->
       console.log('success')
+      jQuery.gritter.add({ image: '/assets/success.png', title: 'Success', text: 'Followed' + $('h2').text() });
       $('.btn-follow').addClass('animated flipInY').removeClass('btn-follow').addClass('btn-unfollow').html('<i class="fa fa-thumbs-down pull-left follows-icon"></i> Unfollow')
       $('.followers_counter').html($num+1)
 
