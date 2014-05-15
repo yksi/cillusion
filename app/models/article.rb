@@ -11,7 +11,7 @@ class Article < ActiveRecord::Base
 
   validates :category, presence: true
   validates :theme, presence: true
-  validates :content, presence: truez
+  validates :content, presence: true
 
   extend FriendlyId
   friendly_id :theme
