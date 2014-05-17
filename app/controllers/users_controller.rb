@@ -19,7 +19,7 @@ class UsersController < ApplicationController
 
   def show
     @message = Message.new
-		@articles = @user.user_articles.all
+		@articles = @user.user_articles.order(created_at: :desc).paginate(page: params[:page], per_page: 9)
 		@user_created_at = @user.created_at.strftime("%d %B %Y")
     @followers = @user.followers
     @followed = @user.followed_users

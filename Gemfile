@@ -42,7 +42,6 @@ gem 'omniauth-facebook'
 gem 'certified'
 gem 'carrierwave-dropbox'
 gem 'friendly_id', '~> 5.0.3'
-gem "font-awesome-rails"
 gem 'ckeditor', '~> 4.0.10'
 gem 'will_paginate', '~> 3.0'
 
@@ -52,3 +51,4 @@ gem 'therubyracer'
 gem 'sitemap_generator'
 gem 'gritter'
 gem 'sass'
+gem "font-awesome-rails", "4.1.0"

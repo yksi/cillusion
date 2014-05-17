@@ -11,11 +11,11 @@ class BrowseController < ApplicationController
   end
 
   def articles
-    @articles = Article.search(params[:search]).paginate(page: params[:page], per_page: 9)
+    @articles = Article.search(params[:search]).order(created_at: :desc).paginate(page: params[:page], per_page: 9)
   end
 
   def users
-    @users = User.search(params[:search]).paginate(page: params[:page], per_page: 9)
+    @users = User.search(params[:search]).order(updated_at: :desc).paginate(page: params[:page], per_page: 9)
   end
 
 end

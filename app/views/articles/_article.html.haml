@@ -1,7 +1,6 @@
 = content_tag_for(:div, article, class: "row") do
   .post{style: 'position: relative'}
-    .post-img-content
-      %img.img-responsive{src: article.photo.url, 'max-height' => '196px' }/
+    .post-img-content{style: "background: url(#{article.photo.url});background-size: cover;"}
       %span.post-title
         %b= article.theme
         %br
@@ -13,10 +12,12 @@
         %b= article.user.fullname
         |
         %time= article.return_created_at_as_nice_string
-      %div.post-content.well.text-center
-        %strong.text-muted= article.content.empty? ? 'Looks like empty' : "#{strip_tags(article.content).html_safe[0..80]}"
+      %div.post-content.pander-sm.text-center
+        %strong.text-muted= article.content.empty? ? 'Looks like empty' : strip_tags(article.content)[0..80].html_safe
       %div
-        .text-right{style: 'position:absolute;bottom:5px;right:10px'}
-          %a.btn.btn-warning.btn-sm{href: article_path(article)} Read more
+        .text-right{style: 'position:absolute;bottom:10px;right:10px'}
+          %a.btn.btn-warning.btn-sm{href: article_path(article)}
+            Continue reading&nbsp;
+            %i.fa.fa-align-left
         - if params[:controller] == 'groups' && params[:action] == 'show' && user_signed_in? && article.user == current_user
           .pull-left= link_to "remove", delete_article_from_group_path(article: article), class: "btn btn-danger btn-default"

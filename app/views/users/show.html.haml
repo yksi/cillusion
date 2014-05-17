@@ -40,7 +40,7 @@
           - else
             = render 'follow', user: @user
           %a.btn.btn-block.btn-primary{ data: { toggle: 'modal', target: '#modal-message' } }
-            %i.fa.fa-envelope 
+            %i.fa.fa-envelope
             &nbsp;Private message
         - if @user == current_user
           .text-center{style: 'margin-left:24px'}
@@ -75,11 +75,19 @@
   %br
     .pander-sm
       - if @user.user_articles.any?
-        %h1
-          .label.label-success
-            Articles
         .row
-          - @user.user_articles.each do |article|
+          .col-md-8
+            %h1
+              .label.label-success
+                Articles
+          .col-md-4
+            .pull-right
+              .digg_pagination
+                .page-info= page_entries_info @articles if @articles.total_pages > 1
+                = will_paginate @articles
+
+        .row
+          - @articles.each do |article|
             .col-md-4= render 'articles/article', article: article
       - else
         %h1.text-center.text-muted= "#{@user.first_name} has no created any articles yet"
