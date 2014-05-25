@@ -8,11 +8,11 @@
 //= require ckeditor/override
 //= require ckeditor/init
 //= require index
-//= require jquery.turbolinks
 //= require load_image
 //= require messages
 //= require follows
 //= require gritter
+//= require turbolinks
 
 
 
