@@ -17,6 +17,12 @@ $(document).on("page:change", function() {
     $('#divq').addClass(' animated bounceOutLeft')
   });
 
+  $('.scrart').click(function() {
+    $('html, body').animate({
+        scrollTop: $(".user_articles").offset().top
+    }, 500);
+  });
+
   $('#modal-login').on('hidden.bs.modal', function () {
     document.getElementById("divq").className = "";
     $('#divq').addClass(' animated bounceInRight')

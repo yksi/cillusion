@@ -5,10 +5,12 @@ Illusion::Application.routes.draw do
   get "browse/timeline"
   get "browse/users"
   get "browse/articles"
+  get 'browse/groups'
   get "articles/search"
   root "users#index"
   get "users/index"
   get "comments/show"
+
   scope controller: :terms, path: 'lead' ,only: [] do
     get :eula
   end

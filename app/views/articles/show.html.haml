@@ -38,29 +38,9 @@
       - if user_signed_in?
         = render 'comments/form'
       %br
-      %div#unordered_list
-        Comments(#{@article.comments.count})
+      %div#unordered_list.all_comments
+        #comments_count Comments(#{@article.comments.count})
         - @article.comments.order(created_at: :asc).each do |comment|
-          .panel-collapse.collapse.off{id: "collapse#{comment.id}"}
-            .panel-body
-              .btn-group{align: "center"}
-                %h5 Really delete this comment?
-                = link_to "Yes", comment, method: :delete, class: "btn btn-danger btn-sm", id: comment.id
-                %a.btn.btn-sm.btn-default{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#collapse#{comment.id}"} No
-          %div.comment
-            .row
-              .col-md-2= image_tag comment.user.avatar.small.url, class: "img-circle"
-              .col-md-8
-                = comment.user.fullname
-                %br
-                %em.text-muted= "#{time_ago_in_words(comment.created_at)} ago."
-              .col-md-2
-                - if comment.user == current_user || @article.user == current_user
-                  .pull-right
-                    .panel-heading
-                      %h4.panel-title
-                        %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#collapse#{comment.id}"}
-                          %i.fa.fa-times
-            %h5.text-left= comment.content
+          = render 'comments/comment', comment: comment
 = render 'users/articles'
 = render "full_screen"

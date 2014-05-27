@@ -4,7 +4,6 @@ class BrowseController < ApplicationController
     @comments = Comment.order(created_at: :desc)
   end
 
-
   def timeline
     @logs = Log.order(created_at: :desc)
     current_user.read_news!
@@ -18,4 +17,7 @@ class BrowseController < ApplicationController
     @users = User.search(params[:search]).order(updated_at: :desc).paginate(page: params[:page], per_page: 9)
   end
 
+  def groups
+    @groups = Group.search(params[:search]).order(created_at: :desc).paginate(page: params[:page], per_page: 9)
+  end
 end

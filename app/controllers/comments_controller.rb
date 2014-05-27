@@ -5,11 +5,11 @@ class CommentsController < ApplicationController
   def create
     @comment = current_user.comments.create(comment_params)
     @comment.track_log(current_user.id) if current_user != @comment.article.user
-    redirect_to @comment.article
-    if @comment.content.length >= 255
-      flash[:alert] = "Comment size is too large"
-    elsif @comment.content.length < 1
-      flash[:alert] = "Comment is empty"
+    if @comment.save
+      respond_to do |format|
+        format.html { redirect_to :back, notice: "Your comment is posted!" }
+        format.js
+      end
     end
   end
 
@@ -25,7 +25,10 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     @comment.reverse_logs
     @comment.destroy
-    redirect_to @comment.article
+    respond_to do |format|
+      format.html { redirect_to :back, notice: "Comment is deleted!" }
+      format.js
+    end
   end
 
   private

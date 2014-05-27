@@ -1,6 +1,6 @@
 = content_tag_for(:div, article, class: "row") do
   .post{style: 'position: relative'}
-    .post-img-content{style: "background: url(#{article.photo.url});background-size: cover;"}
+    .post-img-content{style: "background: url(#{article.photo.url}) no-repeat; background-position: center; background-size: cover;"}
       %span.post-title
         %b= article.theme
         %br

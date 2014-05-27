@@ -1,13 +1,14 @@
 .pander-sm
-  %h1
+  %h1.text-center
     = @group.name
+    %br
     - if user_signed_in? && @group.user == current_user
       = link_to "add article", "#", class: "btn btn-default btn-xs", data: { toggle: "modal", target: "#add_article_to_group" }
       = link_to "delete group", @group, method: :delete,  class: "btn btn-danger btn-xs", "data-confirm" => "Really want to delete this group?"
     = render "add_article_modal" if user_signed_in?
-  %h3
+  %h4.text-center
     %em.text-muted= @group.description
-  %h4
+  %h5.text-center
     %em.text-muted
       by
       = link_to @group.user.fullname, @group.user
@@ -15,7 +16,10 @@
       #{@group.created_at.strftime("%d %b %Y")}
   %hr
   %h1.text-center
-    Articles(#{@group.articles.count || 0})
+    Articles
+    .label.label-success= @group.articles.count
+    Today
+    .label.label-success= @today.count
   .row
     - @group.articles.each do |article|
       .col-md-4

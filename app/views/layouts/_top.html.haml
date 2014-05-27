@@ -35,9 +35,9 @@
               = link_to groups_path do
                 .rounded-btn.groups-btn.animated.bounceInDown
                   %i.fa.fa-briefcase.fa-2x
-            .pull-right
-              = form_tag browse_articles_path, method: 'get', class: 'navbar-search pull-left ', style: "margin-top:20px;" do
-                = text_field_tag :search, params[:search], class: "form-control", placeholder: "Search"
+            %li
+              = form_tag browse_articles_path, method: 'get', style: "margin-top:20px;" do
+                = text_field_tag :search, params[:search], class: "nav-search form-control", placeholder: "Search"
         .nav.navbar-right.navbar-nav.animated.bounceInRight
           -if user_signed_in?
             %li.nav-btn{"data-toggle" => "tooltip", "data-placement" => "bottom", title: "Create new article"}

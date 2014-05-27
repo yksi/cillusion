@@ -8,6 +8,7 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
     @articles = current_user.user_articles if user_signed_in?
     @list = 0
+    @today = @group.articles.where(created_at: (Time.now.beginning_of_day..Time.now.end_of_day))
   end
 
   def create

@@ -1,0 +1,19 @@
+= render 'nav_links'
+.row
+  .col-md-6
+    .digg_pagination= will_paginate @groups
+  .col-md-6
+    %br
+    .form-inline.pull-right
+      = form_tag browse_groups_path, method: 'get', class: 'navbar-search' do
+        = text_field_tag :search, params[:search], class: "form-control", placeholder: "Search groups"
+        = button_tag(type: 'submit', class: "btn btn-primary") do
+          %i.fa.fa-search.fa.lg.fa-inverse
+          &nbsp;Search
+%br
+.row
+  - if @groups.any?
+    - @groups.each do |group|
+      .col-md-4= render "groups/group", group: group
+  - else
+    %h3.text-center There are no groups mathes "#{params[:search]}"

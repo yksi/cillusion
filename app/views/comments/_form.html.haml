@@ -1,4 +1,4 @@
-= form_for @comment, class: "form-inline"  do |f|
+= form_for @comment, class: "form-inline", remote: true, url: @comment.article  do |f|
   .pander-sm
     .row
       .col-md-2

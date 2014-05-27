@@ -1,0 +1,3 @@
+$("#comment_<%= @comment.id %>").fadeOut();
+$("#comments_count").html("Comments(<%= @comment.article.comments.count %>)");
+jQuery.gritter.add({ image: '/assets/warning.png', title: 'Removed', text: 'comment has been successfully removed' });

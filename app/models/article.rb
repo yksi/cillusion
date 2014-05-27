@@ -1,6 +1,5 @@
 class Article < ActiveRecord::Base
   include Logable
-
   mount_uploader :photo, ArticlePhotoUploader
 
   belongs_to :user
@@ -35,5 +34,4 @@ class Article < ActiveRecord::Base
   def return_created_at_as_nice_string
     self.created_at.strftime("%d %B %Y.")
   end
-
 end

@@ -1,0 +1,39 @@
+= content_tag_for(:div, group, class: 'panel panel-success group' ) do
+  .panel-heading
+    .row
+      .col-md-6
+        = image_tag group.cover_photo, class: 'img-circle'
+        = group.name
+      .col-md-6.vcenter
+        .text-right= link_to 'More', group, class: 'btn btn-primary'
+  .panel-body
+    .row
+      .col-md-6
+        %strong.text-success Articles
+        = group.articles.count
+      .col-md-6
+        .text-right
+          %strong.text-success Views
+          = group.total_views
+    %div{style: "height: 2px; background-color: black; text-align: center;margin-bottom: 22px"}
+      %span{style: "background-color: white; position: relative; top: -0.7em; padding: 20px;"}
+        %strong About
+    - if group.description.present?
+      %strong.text-center
+        %em.text-muted= "\"#{group.description}\""
+    - else
+      %em.text-muted.text-center
+        User did not added description to this group
+    - if group.articles.any?
+      %br
+      %strong
+        .text-center.text-success last article
+      .list-group-item.list-group-item-success
+        = image_tag group.articles.last.photo.small.url, class: 'img-circle'
+        = link_to group.articles.last.theme, group.articles.last
+  .panel-footer
+    .pull-left
+      .text-muted= "#{time_ago_in_words(group.created_at)} ago."
+    .text-right
+      by
+      = link_to group.user.fullname, group.user

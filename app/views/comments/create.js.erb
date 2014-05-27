@@ -1,0 +1,7 @@
+$(".all_comments").append("<%= escape_javascript(render('comments/comment', comment: @comment)) %>");
+$("#comments_count").html("Comments(<%= @comment.article.comments.count %>)");
+$("#new_comment")[0].reset();
+jQuery.gritter.add({ image: '/assets/success.png', title: 'Success', text: 'added new comment' });
+$('html, body').animate({
+  scrollTop: $("#comment_<%= @comment.id %>").offset().top
+}, 500);
