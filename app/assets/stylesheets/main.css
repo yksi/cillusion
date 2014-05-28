@@ -291,11 +291,6 @@ figure.photo:hover .btn-pick-photo {
   border-radius: 2px;
 }
 
-.nav-btn:hover{
-  border-bottom-color: green;
-  transition: border-bottom-color .5s ease-in;
-}
-
 .nav-btn{
   border-bottom: 6px solid transparent;
   display: inline;

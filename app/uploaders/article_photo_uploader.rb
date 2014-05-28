@@ -10,7 +10,7 @@ class ArticlePhotoUploader < CarrierWave::Uploader::Base
   end
 
   def default_url
-    ActionController::Base.helpers.asset_path("fallback/" + [version_name, "Default.png"].compact.join('_'))
+    ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default_article.png"].compact.join('_'))
   end
 
   process :resize_to_fit => [300, 300]

@@ -91,5 +91,10 @@ $(document).on("page:change", function() {
     if($('.navbar-collapse.in').css('display') == 'block')$('.navbar-collapse').collapse('toggle')
   })
 
+  $('#articles_select').select2({
+    placeholder: "Select an Article",
+    allowClear: true
+  });
+
 });
 

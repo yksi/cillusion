@@ -12,7 +12,7 @@ gem "watu_table_builder", :require => "table_builder"
 gem 'rails_12factor'
 gem 'carrierwave'
 gem 'fog'
-gem "mini_magick", "~> 3.6.0"
+gem "mini_magick", "3.5.0"
 gem "mailcatcher"
 gem 'unf'
 gem 'turbolinks'
@@ -45,9 +45,6 @@ gem 'friendly_id', '~> 5.0.3'
 gem 'ckeditor', '~> 4.0.10'
 gem 'will_paginate', '~> 3.0'
 
-gem 'batman-rails'
-gem 'less-rails'
-gem 'therubyracer'
 gem 'sitemap_generator'
 gem 'gritter'
 gem 'sass'

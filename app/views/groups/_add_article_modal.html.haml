@@ -1,16 +1,26 @@
+= stylesheet_link_tag 'select2'
+= javascript_include_tag 'select2'
 #add_article_to_group.modal
   .modal-dialog
     .modal-content
       .modal-header
         Add articles to group
-      .modal-body
-        .row
-          - @articles.each do |article|
-            - if article.group != @group
-              .col-md-2
-                = link_to add_article_to_group_path(article: article), data: { confirm: ("Article already in group #{article.group.name}. Want to change article group?" if !article.group_id.nil?) } do
-                  = image_tag article.photo.small.url
-                  %h5= article.theme
-              - @list = @list + 1
-          - if @list == 0
-            %h3.text-muted You have not any articles, which you can add to this gruop, maybe they are here
+      .modal-body.text-center
+        = link_to 'Create new', new_article_path(group_id: @group.id), class: 'btn btn-default btn-lg text-success'
+        %br
+        or Choose from existing articles
+        %br Note! Articles may belong to another group! Be careful!
+        .text-danger
+        %br
+        .form-inline  
+          %select#articles_select
+            %option
+            - @articles.each do |article|
+              - if article.group != @group
+                %option{ value: add_article_to_group_path(article: article) }= "#{article.theme}(#{article.group.nil? ? 'alone' : article.group.name})"
+                - @list = @list + 1
+          %br
+          %br
+          %a.btn.btn-success#add_to_group_submit{ href: add_article_to_group_path(Article.find(4)) } ADD
+        - if @list == 0
+          %h3.text-muted You have not any articles, which you can add to this gruop, maybe they are here

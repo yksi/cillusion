@@ -1,0 +1,5 @@
+$(document).on("page:change", function() {
+  $('#articles_select').change( function() {
+    $('#add_to_group_submit').attr('href', $('#articles_select').val())
+  })
+});

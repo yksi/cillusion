@@ -60,7 +60,7 @@ class ArticlesController < ApplicationController
   private
 
   def article_params
-  	params.require(:article).permit(:content, :date, :user_id, :theme, :category, :photo)
+  	params.require(:article).permit(:content, :date, :user_id, :theme, :category, :photo, :group_id)
   end
 
   def article_params_to_update

@@ -40,12 +40,21 @@
                 = text_field_tag :search, params[:search], class: "nav-search form-control", placeholder: "Search"
         .nav.navbar-right.navbar-nav.animated.bounceInRight
           -if user_signed_in?
-            %li.nav-btn{"data-toggle" => "tooltip", "data-placement" => "bottom", title: "Create new article"}
-              = link_to new_article_path do
+            %li.nav-btn
+              %a.dropdown-toggle{ href: "#", data: { toggle: 'dropdown' } }
                 .rounded-btn.new_article-btn
                   %i.fa.fa-plus.text.fa-2x
+              %ul.dropdown-menu
+                .pander.text-center
+                  %li
+                    = link_to new_article_path, class: 'btn btn-default btn-lg' do
+                      %i.fa.fa-book.text-success &nbsp;&nbsp;ARTICLE
+                  %br
+                  %li
+                    = link_to new_group_path, class: 'btn btn-default btn-lg' do
+                      %i.fa.fa-briefcase.text-danger &nbsp;&nbsp;GROUP
             %li.dropdown.nav-btn
-              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
                 = image_tag current_user.avatar.small.url, class: 'img-circle', width: '48px'
                 = current_user.first_name
                 %b.caret
