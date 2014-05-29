@@ -12,7 +12,7 @@
         %br Note! Articles may belong to another group! Be careful!
         .text-danger
         %br
-        .form-inline  
+        .form-inline
           %select#articles_select
             %option
             - @articles.each do |article|
@@ -21,6 +21,6 @@
                 - @list = @list + 1
           %br
           %br
-          %a.btn.btn-success#add_to_group_submit{ href: add_article_to_group_path(Article.find(4)) } ADD
+          %a.btn.btn-success#add_to_group_submit{ href: '#') } ADD
         - if @list == 0
           %h3.text-muted You have not any articles, which you can add to this gruop, maybe they are here
