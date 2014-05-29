@@ -28,7 +28,6 @@ GEM
     addressable (2.3.6)
     arel (4.0.2)
     bcrypt (3.1.7)
-    bcrypt (3.1.7-x86-mingw32)
     better_errors (1.1.0)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
@@ -79,7 +78,6 @@ GEM
       json
     erubis (2.7.0)
     eventmachine (1.0.3)
-    eventmachine (1.0.3-x86-mingw32)
     excon (0.33.0)
     execjs (2.1.0)
     factory_girl (4.2.0)
@@ -92,7 +90,6 @@ GEM
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.3)
-    ffi (1.9.3-x86-mingw32)
     fog (1.22.0)
       fog-brightbox
       fog-core (~> 1.21, >= 1.21.1)
@@ -145,7 +142,6 @@ GEM
       mail
       sinatra
       skinny (>= 0.1.2)
-      sqlite3-ruby
       thin
     mime-types (1.25.1)
     mini_magick (3.6.0)
@@ -159,8 +155,6 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (2.9.1)
     nokogiri (1.6.2.1)
-      mini_portile (= 0.6.0)
-    nokogiri (1.6.2.1-x86-mingw32)
       mini_portile (= 0.6.0)
     oauth2 (0.9.4)
       faraday (>= 0.8, < 0.10)
@@ -180,7 +174,6 @@ GEM
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
     pg (0.17.1)
-    pg (0.17.1-x86-mingw32)
     polyglot (0.3.4)
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
@@ -245,10 +238,6 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
-    sqlite3 (1.3.9)
-    sqlite3 (1.3.9-x86-mingw32)
-    sqlite3-ruby (1.3.3)
-      sqlite3 (>= 1.3.3)
     subexec (0.2.3)
     thin (1.5.1)
       daemons (>= 1.0.9)
@@ -269,7 +258,6 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.6)
-    unf_ext (0.0.6-x86-mingw32)
     warden (1.2.3)
       rack (>= 1.0)
     watu_table_builder (0.3.0)
@@ -280,7 +268,6 @@ GEM
 
 PLATFORMS
   ruby
-  x86-mingw32
 
 DEPENDENCIES
   better_errors
