@@ -17,6 +17,9 @@ gem "mailcatcher"
 gem 'unf'
 gem 'turbolinks'
 gem 'jquery-turbolinks'
+gem 'less-rails'
+gem 'therubyracer'
+
 
 group :development do
   gem 'better_errors'
