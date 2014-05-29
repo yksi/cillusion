@@ -1,7 +1,7 @@
 = render 'paste_html'
 %br
 = form_for @article do |f|
-  = f.hidden_field :group_id, value: params[:group_id] 
+  = f.hidden_field :group_id, value: params[:group_id] if params[:group_id].present?
   .col-xs-12.col-sm-6.col-md-8.animated.bounceInLeft
     - if @article.errors.any?
       .panel.panel-danger
