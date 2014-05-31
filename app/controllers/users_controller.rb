@@ -76,7 +76,7 @@ class UsersController < ApplicationController
   def find_user
     get_params = params[:id].split('_')
     p get_params
-    @user = (get_params.length > 2) ? User.find(get_params[2]) : User.find(:first, conditions: ["lower(first_name) LIKE ? ", get_params[0].downcase.mb_chars.downcase.to_s], conditions: ["lower(last_name) LIKE ? ", get_params[1].downcase.mb_chars.downcase.to_s] )
+    @user = (get_params.length > 2) ? User.find(get_params[2]) : User.find(:first, conditions: ["lower(first_name) LIKE ? AND lower(last_name) LIKE ?", get_params[0].downcase.mb_chars.downcase.to_s, get_params[1].downcase.mb_chars.downcase.to_s] )
   end
 
   def user_params
