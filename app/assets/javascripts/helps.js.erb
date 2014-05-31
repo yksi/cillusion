@@ -1,0 +1,10 @@
+$(document).on("page:change", function() {
+  if($('.new_article-btn[data-help="yes"]').length >= 1)
+    {$('.new_article-btn[data-help="yes"]').popover({
+          title: 'Be active!',
+          placement: 'bottom',
+          content: '<div class="pander">Start creating articles and groups just now!<br><br><div class="text-center"><i class="fa fa-book fa-2x text-danger"></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-briefcase fa-2x text-success"></i></div></div>',
+          container: 'body',
+          html: true
+        }).popover('show');}
+});

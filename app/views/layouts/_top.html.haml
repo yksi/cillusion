@@ -42,7 +42,7 @@
           -if user_signed_in?
             %li.nav-btn
               %a.dropdown-toggle{ href: "#", data: { toggle: 'dropdown' } }
-                .rounded-btn.new_article-btn
+                .rounded-btn.new_article-btn{ data: { help: current_user.user_articles.any? ? 'no' : 'yes' } }
                   %i.fa.fa-plus.text.fa-2x
               %ul.dropdown-menu
                 .pander.text-center

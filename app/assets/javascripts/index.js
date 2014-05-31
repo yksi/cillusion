@@ -95,6 +95,5 @@ $(document).on("page:change", function() {
     placeholder: "Select an Article",
     allowClear: true
   });
-
 });
 
