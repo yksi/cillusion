@@ -11,3 +11,4 @@ $(document).on 'click', '.mark_as_read', (e) ->
         $(".new_messages").html($num-1)
       else
         $(".new_messages").remove()
+

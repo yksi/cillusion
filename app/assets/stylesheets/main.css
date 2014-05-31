@@ -476,3 +476,24 @@ img.miniature {
   min-height: 53px;
   max-height: 53px;
 }
+
+.right-pane {
+  height: 100%;
+  position: fixed;
+  right: 0px;
+  width: 0px;
+  background-color: white;
+  border-left: 4px solid gray;
+  transition: width 1s;
+}
+
+.btn-hide-right-pane {
+  background-color: #6574AD;
+  color: white;
+  height: 48px;
+  width: 100px;
+  border: none;
+  border-radius: none;
+  position: fixed;
+  right: 10px;
+}

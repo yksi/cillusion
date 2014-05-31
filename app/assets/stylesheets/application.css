@@ -9,6 +9,7 @@
  *= require gritter_custom
  *= require small_calendar
  *= require font-awesome
+ *= require select2
  */
 
 body

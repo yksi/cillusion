@@ -95,5 +95,20 @@ $(document).on("page:change", function() {
     placeholder: "Select an Article",
     allowClear: true
   });
+
+  $('#message_recipient_id').select2({
+    placeholder: "Select an Article",
+    allowClear: true
+  });
+
+  $('.btn-hide-right-pane').click(function() {
+    if($('.right-pane').width() > 0){
+      $('.right-pane').css('width', '0px')
+      $(this).css('position', 'fixed').css('right', '10px').css('width', '100px')
+    } else {
+      $('.right-pane').css('width', '300px')
+    $(this).css('position', 'static').css('width', '300px')
+    }
+  })
 });
 
