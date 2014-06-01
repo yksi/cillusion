@@ -74,7 +74,7 @@
           -else
             %li
               .sign_up
-                %a.sign_up{href: "#", "data-target" => "#modal-login", "data-toggle" => "modal"} Sign up
+                %a.sign_up{href: new_user_session_path} Sign up
                 = link_to user_omniauth_authorize_path('facebook'), class: 'btn btn-primary btn-sm' do
                   %i.fa.fa-facebook.ga-lg
 - if !user_signed_in?
