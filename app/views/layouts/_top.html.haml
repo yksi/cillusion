@@ -77,5 +77,3 @@
                 %a.sign_up{href: new_user_session_path} Sign up
                 = link_to user_omniauth_authorize_path('facebook'), class: 'btn btn-primary btn-sm' do
                   %i.fa.fa-facebook.ga-lg
-- if !user_signed_in?
-  = render "layouts/login_register_frame"
