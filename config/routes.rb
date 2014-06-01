@@ -59,7 +59,7 @@ Illusion::Application.routes.draw do
     end
   end
 
-  resources :groups, only: [] do
+  resources :groups do
     scope controller: :groups do
       member do
         match :add_article_to, via: [:get, :post]
