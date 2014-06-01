@@ -1,0 +1,13 @@
+.modal#share_via_message
+  .modal-dialog
+    .modal-content
+      .modal-body.text-center
+        %h3 Share this article via private message
+        with:
+        %select#users_select
+          - User.all.each do |user|
+            %option{ value: user.id }= user.fullname
+        %br
+        %br
+        .text-center
+          %button.btn.btn-success.share_via_message Share

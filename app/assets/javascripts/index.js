@@ -101,14 +101,21 @@ $(document).on("page:change", function() {
     allowClear: true
   });
 
-  $('.btn-hide-right-pane').click(function() {
-    if($('.right-pane').width() > 0){
-      $('.right-pane').css('width', '0px')
-      $(this).css('position', 'fixed').css('right', '10px').css('width', '100px')
-    } else {
-      $('.right-pane').css('width', '300px')
-    $(this).css('position', 'static').css('width', '300px')
-    }
-  })
-});
+  $('select').select2({
+    placeholder: "Select an Article",
+    allowClear: true
+  });
 
+  $('.btn-hide-right-pane').click(function() {
+    $('.right-pane').css('right', '0px');
+    $(this).hide();
+  })
+
+  $('body').click(function(e) {
+    var mouseR = $(document).width() - e.pageX
+    if( mouseR > 300 ) { 
+      $('.right-pane').css('right', '-300px'); 
+      setTimeout (function() {$('.btn-hide-right-pane').show()}, 1000 )
+    }
+});
+});

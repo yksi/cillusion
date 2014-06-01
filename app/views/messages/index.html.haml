@@ -6,6 +6,10 @@
       %a#mtbin{"data-toggle" => "tab", :href => "#inbox"} Inbox
     %li
       %a#mtbout{"data-toggle" => "tab", :href => "#outbox"} Outbox
+    %li  
+      .text-right
+        .btn-hide-right-pane
+          %i.fa.fa-envelope.fa-lg New
   .tab-content
     #inbox.tab-pane.active
       .page-header
@@ -41,7 +45,7 @@
                       %h4#myModalLabel.modal-title{align: "center"}= message.theme
                     .modal-body
                       %p
-                        %pre= message.content
+                        %pre= message.content.html_safe
                     .modal-footer
                       .panel-heading
                         %h4.panel-title
@@ -93,7 +97,7 @@
                       %h4#myModalLabel.modal-title{align: "center"}= message.theme
                     .modal-body
                       %p
-                        %pre= message.content
+                        %pre= message.content.html_safe
                     .modal-footer
                       %em.text-muted= "To #{User.find(message.recipient_id).fullname} #{message.created_at.strftime("%H:%M %d %B %Y.")}"
         - else

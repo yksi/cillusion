@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :require_article, only: [:show, :edit, :destroy, :update]
+  before_action :require_article, only: [:show, :edit, :destroy, :update, :share_via_message]
   before_action :require_category, only: [:index, :edit, :new]
   before_action :can_submit, only: [:new, :edit]
 
@@ -55,6 +55,13 @@ class ArticlesController < ApplicationController
 
   def search
     @articles = Article.search(params[:search])
+  end
+
+  def share_via_message
+    current_user.sent_messages.create!(theme: @article.theme, content: "#{current_user.first_name} shared article <br><a href='#{article_path(@article)}'>#{@article.theme}</a> to you", recipient_id: params[:user_id])
+    respond_to do |format|
+      format.js { render json: :success }
+    end
   end
 
   private

@@ -480,20 +480,24 @@ img.miniature {
 .right-pane {
   height: 100%;
   position: fixed;
-  right: 0px;
-  width: 0px;
+  right: -300px;
+  width: 300px;
   background-color: white;
   border-left: 4px solid gray;
-  transition: width 1s;
+  transition: right 1s;
 }
 
 .btn-hide-right-pane {
-  background-color: #6574AD;
-  color: white;
-  height: 48px;
-  width: 100px;
-  border: none;
-  border-radius: none;
   position: fixed;
   right: 10px;
+  color: #6576A2;
+  border: 2px solid #6576A2;
+  padding: 10px;
+  cursor: pointer;
+  background-color: white;
+}
+
+.btn-hide-right-pane:hover {
+  background-color: #6576A2;
+  color: #fff;
 }

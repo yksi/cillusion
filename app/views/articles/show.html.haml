@@ -1,14 +1,20 @@
 - content_for :title, @article.theme[0..15]
 = stylesheet_link_tag "comment"
+= render "share_via_message"
 - if @article.user == current_user
   = render "add_to_group_modal"
 .page-header
   .row
     .col-xs-12.col-sm-6.col-md-8.animated.slideInLeft.verticalLine
       %div
-        .pull-right
+        .text-right
           %button.close{href: "#", "data-target" => "#modal-full-screen", "data-toggle" => "modal"}
-            %i.fa.fa-arrows-alt
+            %i.fa.fa-arrows-alt &nbsp; &nbsp;
+          &nbsp;
+          &nbsp;
+          &nbsp;
+          %button.close{href: "#", "data-target" => "#share_via_message", "data-toggle" => "modal"}
+            %i.fa.fa-share &nbsp;&nbsp;
         %h1
           = "#{@article.theme} (#{@article.category})"
         %h4

@@ -43,7 +43,7 @@ Illusion::Application.routes.draw do
 
   resources :messages
 
-  resources :messages do
+  resources :messages, only: [] do
     scope controller: :messages do
       member do
         match :mark_as_read, via: [:get, :post]
@@ -51,7 +51,15 @@ Illusion::Application.routes.draw do
     end
   end
 
-  resources :groups do
+  resources :articles, only: [] do
+    scope controller: :articles do
+      member do
+        match :share_via_message, via: [:get, :post]
+      end
+    end
+  end
+
+  resources :groups, only: [] do
     scope controller: :groups do
       member do
         match :add_article_to, via: [:get, :post]

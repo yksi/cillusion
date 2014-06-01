@@ -1,14 +1,14 @@
 .right-pane
-  %button.btn-hide-right-pane New Message
   = form_for Message.new do |f|
     .modal-header
-      Send optional messages
+      Send your message to user
     .modal-body
-      %h4 Choose user from list
       = f.text_field :theme, class: 'form-control', placeholder: 'Give message short theme'
       %br
       = f.text_area :content, class: 'form-control', placeholder: 'Write, what you would to say'
       %br
-      .text-center= f.select :recipient_id, options_from_collection_for_select(User.all, "id", "fullname"), class: 'form-control'
+      .text-center
+        %h4 Choose user from list
+        = f.select :recipient_id, options_from_collection_for_select(User.all, "id", "fullname"), class: 'form-control'
     .modal-footer
       = f.submit "Send", class: 'btn btn-success'

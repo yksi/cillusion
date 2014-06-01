@@ -78,7 +78,7 @@ GEM
       json
     erubis (2.7.0)
     eventmachine (1.0.3)
-    excon (0.33.0)
+    excon (0.34.0)
     execjs (2.1.0)
     factory_girl (4.2.0)
       activesupport (>= 3.0.0)
@@ -90,10 +90,11 @@ GEM
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.3)
-    fog (1.22.0)
+    fog (1.22.1)
       fog-brightbox
-      fog-core (~> 1.21, >= 1.21.1)
+      fog-core (~> 1.22)
       fog-json
+      ipaddress (~> 0.5)
       nokogiri (~> 1.5, >= 1.5.11)
     fog-brightbox (0.0.2)
       fog-core
@@ -110,14 +111,15 @@ GEM
     font-awesome-rails (4.1.0.0)
       railties (>= 3.2, < 5.0)
     formatador (0.2.5)
-    friendly_id (5.0.3)
+    friendly_id (5.0.4)
       activerecord (>= 4.0.0)
     gritter (1.1.0)
     haml (4.0.5)
       tilt
     hashie (2.1.1)
     hike (1.2.3)
-    i18n (0.6.10)
+    i18n (0.6.9)
+    ipaddress (0.8.0)
     jbuilder (1.5.3)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
@@ -142,6 +144,7 @@ GEM
       mail
       sinatra
       skinny (>= 0.1.2)
+      sqlite3-ruby
       thin
     mime-types (1.25.1)
     mini_magick (3.6.0)
@@ -174,7 +177,7 @@ GEM
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
     pg (0.17.1)
-    polyglot (0.3.4)
+    polyglot (0.3.5)
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
     rack (1.5.2)
@@ -213,8 +216,8 @@ GEM
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
-    rubyzip (1.1.3)
-    sass (3.3.7)
+    rubyzip (1.1.4)
+    sass (3.3.8)
     selenium-webdriver (2.39.0)
       childprocess (>= 0.2.5)
       multi_json (~> 1.0)
@@ -238,6 +241,9 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
+    sqlite3 (1.3.9)
+    sqlite3-ruby (1.3.3)
+      sqlite3 (>= 1.3.3)
     subexec (0.2.3)
     thin (1.5.1)
       daemons (>= 1.0.9)

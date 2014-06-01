@@ -1,0 +1,1305 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: articles; Type: TABLE; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+CREATE TABLE articles (
+    id integer NOT NULL,
+    user_id integer,
+    content text,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    date timestamp without time zone,
+    theme character varying(255),
+    photo character varying(255),
+    group_id integer,
+    views_count integer DEFAULT 0,
+    category character varying(255) DEFAULT 'Other'::character varying
+);
+
+
+ALTER TABLE public.articles OWNER TO vitaliy;
+
+--
+-- Name: articles_id_seq; Type: SEQUENCE; Schema: public; Owner: vitaliy
+--
+
+CREATE SEQUENCE articles_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.articles_id_seq OWNER TO vitaliy;
+
+--
+-- Name: articles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: vitaliy
+--
+
+ALTER SEQUENCE articles_id_seq OWNED BY articles.id;
+
+
+--
+-- Name: ckeditor_assets; Type: TABLE; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+CREATE TABLE ckeditor_assets (
+    id integer NOT NULL,
+    data_file_name character varying(255) NOT NULL,
+    data_content_type character varying(255),
+    data_file_size integer,
+    assetable_id integer,
+    assetable_type character varying(30),
+    type character varying(30),
+    width integer,
+    height integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.ckeditor_assets OWNER TO vitaliy;
+
+--
+-- Name: ckeditor_assets_id_seq; Type: SEQUENCE; Schema: public; Owner: vitaliy
+--
+
+CREATE SEQUENCE ckeditor_assets_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.ckeditor_assets_id_seq OWNER TO vitaliy;
+
+--
+-- Name: ckeditor_assets_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: vitaliy
+--
+
+ALTER SEQUENCE ckeditor_assets_id_seq OWNED BY ckeditor_assets.id;
+
+
+--
+-- Name: comments; Type: TABLE; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+CREATE TABLE comments (
+    id integer NOT NULL,
+    content character varying(255),
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    user_id integer,
+    article_id integer
+);
+
+
+ALTER TABLE public.comments OWNER TO vitaliy;
+
+--
+-- Name: comments_id_seq; Type: SEQUENCE; Schema: public; Owner: vitaliy
+--
+
+CREATE SEQUENCE comments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.comments_id_seq OWNER TO vitaliy;
+
+--
+-- Name: comments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: vitaliy
+--
+
+ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
+
+
+--
+-- Name: follows; Type: TABLE; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+CREATE TABLE follows (
+    id integer NOT NULL,
+    follower_type character varying(255),
+    follower_id integer,
+    followable_type character varying(255),
+    followable_id integer,
+    created_at timestamp without time zone
+);
+
+
+ALTER TABLE public.follows OWNER TO vitaliy;
+
+--
+-- Name: follows_id_seq; Type: SEQUENCE; Schema: public; Owner: vitaliy
+--
+
+CREATE SEQUENCE follows_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.follows_id_seq OWNER TO vitaliy;
+
+--
+-- Name: follows_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: vitaliy
+--
+
+ALTER SEQUENCE follows_id_seq OWNED BY follows.id;
+
+
+--
+-- Name: groups; Type: TABLE; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+CREATE TABLE groups (
+    id integer NOT NULL,
+    user_id integer,
+    name character varying(255),
+    description text,
+    article_count integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.groups OWNER TO vitaliy;
+
+--
+-- Name: groups_id_seq; Type: SEQUENCE; Schema: public; Owner: vitaliy
+--
+
+CREATE SEQUENCE groups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.groups_id_seq OWNER TO vitaliy;
+
+--
+-- Name: groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: vitaliy
+--
+
+ALTER SEQUENCE groups_id_seq OWNED BY groups.id;
+
+
+--
+-- Name: identities; Type: TABLE; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+CREATE TABLE identities (
+    id integer NOT NULL,
+    user_id integer,
+    provider character varying(255),
+    uid character varying(255),
+    oauth_token character varying(255),
+    oauth_secret character varying(255),
+    oauth_expires_at timestamp without time zone,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.identities OWNER TO vitaliy;
+
+--
+-- Name: identities_id_seq; Type: SEQUENCE; Schema: public; Owner: vitaliy
+--
+
+CREATE SEQUENCE identities_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.identities_id_seq OWNER TO vitaliy;
+
+--
+-- Name: identities_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: vitaliy
+--
+
+ALTER SEQUENCE identities_id_seq OWNED BY identities.id;
+
+
+--
+-- Name: likes; Type: TABLE; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+CREATE TABLE likes (
+    id integer NOT NULL,
+    liker_type character varying(255),
+    liker_id integer,
+    likeable_type character varying(255),
+    likeable_id integer,
+    created_at timestamp without time zone
+);
+
+
+ALTER TABLE public.likes OWNER TO vitaliy;
+
+--
+-- Name: likes_id_seq; Type: SEQUENCE; Schema: public; Owner: vitaliy
+--
+
+CREATE SEQUENCE likes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.likes_id_seq OWNER TO vitaliy;
+
+--
+-- Name: likes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: vitaliy
+--
+
+ALTER SEQUENCE likes_id_seq OWNED BY likes.id;
+
+
+--
+-- Name: logs; Type: TABLE; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+CREATE TABLE logs (
+    id integer NOT NULL,
+    user_id integer,
+    logable_type character varying(255),
+    logable_id integer,
+    viewed boolean DEFAULT false,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    owner_id integer
+);
+
+
+ALTER TABLE public.logs OWNER TO vitaliy;
+
+--
+-- Name: logs_id_seq; Type: SEQUENCE; Schema: public; Owner: vitaliy
+--
+
+CREATE SEQUENCE logs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.logs_id_seq OWNER TO vitaliy;
+
+--
+-- Name: logs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: vitaliy
+--
+
+ALTER SEQUENCE logs_id_seq OWNED BY logs.id;
+
+
+--
+-- Name: mentions; Type: TABLE; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+CREATE TABLE mentions (
+    id integer NOT NULL,
+    mentioner_type character varying(255),
+    mentioner_id integer,
+    mentionable_type character varying(255),
+    mentionable_id integer,
+    created_at timestamp without time zone
+);
+
+
+ALTER TABLE public.mentions OWNER TO vitaliy;
+
+--
+-- Name: mentions_id_seq; Type: SEQUENCE; Schema: public; Owner: vitaliy
+--
+
+CREATE SEQUENCE mentions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.mentions_id_seq OWNER TO vitaliy;
+
+--
+-- Name: mentions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: vitaliy
+--
+
+ALTER SEQUENCE mentions_id_seq OWNED BY mentions.id;
+
+
+--
+-- Name: messages; Type: TABLE; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+CREATE TABLE messages (
+    id integer NOT NULL,
+    theme character varying(255),
+    content text,
+    sender_id integer,
+    recipient_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    read boolean DEFAULT false
+);
+
+
+ALTER TABLE public.messages OWNER TO vitaliy;
+
+--
+-- Name: messages_id_seq; Type: SEQUENCE; Schema: public; Owner: vitaliy
+--
+
+CREATE SEQUENCE messages_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.messages_id_seq OWNER TO vitaliy;
+
+--
+-- Name: messages_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: vitaliy
+--
+
+ALTER SEQUENCE messages_id_seq OWNED BY messages.id;
+
+
+--
+-- Name: relationships; Type: TABLE; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+CREATE TABLE relationships (
+    id integer NOT NULL,
+    follower_id integer,
+    followed_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.relationships OWNER TO vitaliy;
+
+--
+-- Name: relationships_id_seq; Type: SEQUENCE; Schema: public; Owner: vitaliy
+--
+
+CREATE SEQUENCE relationships_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.relationships_id_seq OWNER TO vitaliy;
+
+--
+-- Name: relationships_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: vitaliy
+--
+
+ALTER SEQUENCE relationships_id_seq OWNED BY relationships.id;
+
+
+--
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+CREATE TABLE schema_migrations (
+    version character varying(255) NOT NULL
+);
+
+
+ALTER TABLE public.schema_migrations OWNER TO vitaliy;
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+CREATE TABLE users (
+    id integer NOT NULL,
+    email character varying(255) DEFAULT ''::character varying NOT NULL,
+    encrypted_password character varying(255) DEFAULT ''::character varying NOT NULL,
+    reset_password_token character varying(255),
+    reset_password_sent_at timestamp without time zone,
+    remember_created_at timestamp without time zone,
+    sign_in_count integer DEFAULT 0 NOT NULL,
+    current_sign_in_at timestamp without time zone,
+    last_sign_in_at timestamp without time zone,
+    current_sign_in_ip character varying(255),
+    last_sign_in_ip character varying(255),
+    confirmation_token character varying(255),
+    confirmed_at timestamp without time zone,
+    confirmation_sent_at timestamp without time zone,
+    unconfirmed_email character varying(255),
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    sex boolean,
+    hometown character varying(255),
+    first_name character varying(255),
+    last_name character varying(255),
+    avatar character varying(255),
+    provider character varying(255),
+    uid character varying(255),
+    paused boolean DEFAULT false,
+    about text,
+    born_date timestamp without time zone
+);
+
+
+ALTER TABLE public.users OWNER TO vitaliy;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: vitaliy
+--
+
+CREATE SEQUENCE users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_id_seq OWNER TO vitaliy;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: vitaliy
+--
+
+ALTER SEQUENCE users_id_seq OWNED BY users.id;
+
+
+--
+-- Name: views; Type: TABLE; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+CREATE TABLE views (
+    id integer NOT NULL,
+    article_id integer,
+    viewer_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.views OWNER TO vitaliy;
+
+--
+-- Name: views_id_seq; Type: SEQUENCE; Schema: public; Owner: vitaliy
+--
+
+CREATE SEQUENCE views_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.views_id_seq OWNER TO vitaliy;
+
+--
+-- Name: views_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: vitaliy
+--
+
+ALTER SEQUENCE views_id_seq OWNED BY views.id;
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: vitaliy
+--
+
+ALTER TABLE ONLY articles ALTER COLUMN id SET DEFAULT nextval('articles_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: vitaliy
+--
+
+ALTER TABLE ONLY ckeditor_assets ALTER COLUMN id SET DEFAULT nextval('ckeditor_assets_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: vitaliy
+--
+
+ALTER TABLE ONLY comments ALTER COLUMN id SET DEFAULT nextval('comments_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: vitaliy
+--
+
+ALTER TABLE ONLY follows ALTER COLUMN id SET DEFAULT nextval('follows_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: vitaliy
+--
+
+ALTER TABLE ONLY groups ALTER COLUMN id SET DEFAULT nextval('groups_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: vitaliy
+--
+
+ALTER TABLE ONLY identities ALTER COLUMN id SET DEFAULT nextval('identities_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: vitaliy
+--
+
+ALTER TABLE ONLY likes ALTER COLUMN id SET DEFAULT nextval('likes_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: vitaliy
+--
+
+ALTER TABLE ONLY logs ALTER COLUMN id SET DEFAULT nextval('logs_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: vitaliy
+--
+
+ALTER TABLE ONLY mentions ALTER COLUMN id SET DEFAULT nextval('mentions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: vitaliy
+--
+
+ALTER TABLE ONLY messages ALTER COLUMN id SET DEFAULT nextval('messages_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: vitaliy
+--
+
+ALTER TABLE ONLY relationships ALTER COLUMN id SET DEFAULT nextval('relationships_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: vitaliy
+--
+
+ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: vitaliy
+--
+
+ALTER TABLE ONLY views ALTER COLUMN id SET DEFAULT nextval('views_id_seq'::regclass);
+
+
+--
+-- Data for Name: articles; Type: TABLE DATA; Schema: public; Owner: vitaliy
+--
+
+COPY articles (id, user_id, content, created_at, updated_at, date, theme, photo, group_id, views_count, category) FROM stdin;
+3	4	BnahBnahBNahbaNBahbanUU scfsc J hjHB Sj BDVN	2014-03-17 23:01:49.780566	2014-03-17 23:13:22.726058	2014-03-24 00:00:00	Baad	\N	\N	0	Other
+45	11		2014-05-08 14:45:42.86053	2014-05-08 14:45:42.86053	\N	rata	\N	\N	0	Other
+47	11	<p>adsfasfadasd</p>\r\n	2014-05-08 14:48:27.873664	2014-05-08 14:51:51.546033	\N	rata	\N	\N	0	Other
+48	11		2014-05-08 14:49:24.221106	2014-05-08 14:49:24.221106	\N	rata	\N	\N	16	Other
+46	11		2014-05-08 14:45:48.514779	2014-05-08 14:45:48.514779	\N	rata_4	\N	\N	0	Other
+21	11	<h1 style="background-color: rgb(238, 238, 238); border: 1px solid rgb(204, 204, 204); padding: 5px 10px;"><span style="font-family:courier new,courier,monospace">Vitalka is ...&frac14;</span></h1>\r\n\r\n<table border="1" cellpadding="1" cellspacing="1" style="width:500px">\r\n\t<tbody>\r\n\t\t<tr>\r\n\t\t\t<td>N</td>\r\n\t\t\t<td>B</td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td>12</td>\r\n\t\t\t<td>35</td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td>35</td>\r\n\t\t\t<td>22</td>\r\n\t\t</tr>\r\n\t</tbody>\r\n</table>\r\n\r\n<p>&nbsp;</p>\r\n	2014-04-27 11:44:05.320309	2014-05-04 09:02:07.242157	\N	Vitalka	________________2014-04-12_19_49_11.png	\N	0	Other
+44	11		2014-05-08 14:44:51.314061	2014-05-08 14:44:51.314061	\N	rata_3	\N	\N	1	Other
+53	11	<p>isfdnigsdifnsdifnsdifnsdofewc</p>\r\n\r\n<p>wer</p>\r\n\r\n<p>gwer</p>\r\n\r\n<p>gt</p>\r\n\r\n<p>vcterwt</p>\r\n	2014-05-12 10:59:56.25837	2014-05-12 10:59:56.25837	\N	Jskdfskfsdf	\N	\N	0	Other
+20	11	<h2>My nice pic</h2>\r\n	2014-04-27 11:41:46.821897	2014-05-04 08:29:19.586828	\N	My pic	BSvwfB6Kxuc.jpg	\N	1	Other
+54	11	<p>efssdfsK &nbsp;yS dsgfmhs gfmj dhf sdjfsdmhfgmrfg eafwfe</p>\r\n	2014-05-15 10:51:33.958939	2014-05-15 10:51:33.958939	\N	How to build your own Linux distro	________________2014-04-12_19_49_11.png	\N	0	Other
+50	21	<p>udbsvkbdskvbdsnkjvbsdkvbdsiu fsudfuifyu fh fkjaw fk a sh fkuaysfukashgfhasmfasfg</p>\r\n\r\n<p>as</p>\r\n\r\n<p>f asdfjadshkfu adshkja</p>\r\n\r\n<p>grd</p>\r\n\r\n<p>s af</p>\r\n\r\n<p>sd</p>\r\n\r\n<p>fsa</p>\r\n\r\n<p>&nbsp;asdiuyfuka dsfasf</p>\r\n\r\n<p>as</p>\r\n\r\n<p>&nbsp;fasd fiusy dfukadsykfj ashdfskajdfsad</p>\r\n\r\n<p>f</p>\r\n\r\n<p>sad fioadsyfiuasdyf ukawf awy fjkaeh fku awshfkuahe khwfaw</p>\r\n\r\n<p>sefasdiu fyuaewoiuf awfawhfliawsjf liasujf laskfawl jfliaweufi;aejf aieshf oaewhfkasudhf awhf lkasfas&nbsp;</p>\r\n\r\n<p>ask fiuawyb fliaewjf liawuefoiaeflo ijewn lifwqae;lf ijwealf naew;ifmlorefjlawrdsj laisudjf krsdjfjasiduagfvc ewads</p>\r\n\r\n<p>f awsiozdfnkwasldj nfkwdcxj foaszkj mawsflvc. jwrem</p>\r\n	2014-05-11 17:26:45.250752	2014-05-11 17:26:45.250752	\N	sfdvhudsvbsku	\N	16	2	Other
+61	21	<p>&nbsp;jkshf dkjsdhf jmshdjfsdf sdsd fsd sdfs</p>\r\n	2014-05-16 16:46:33.130435	2014-05-16 18:35:39.544073	\N	sdf. sdf sdhfsdmfhsdmn hj	________________2014-03-15_22_07_55.png	16	0	Other
+59	21	<p>sdfsdfs sdf sdf sdfsdfsdfsf sfs fsfsdf&nbsp;</p>\r\n	2014-05-16 16:45:50.91824	2014-05-27 12:33:44.624111	\N	sesen	avatar.png	16	0	Other
+49	21	<p>HUAshuasasaaAAS</p>\r\n\r\n<p>request.referrer</p>\r\n	2014-05-11 08:24:13.297072	2014-05-11 08:41:08.991165	\N	Pacan	\N	16	158	Other
+58	21	<p>ddaadasdasdasdsadasd</p>\r\n	2014-05-15 11:52:24.994222	2014-05-15 11:52:24.994222	\N	ZSAASSAAASDSD	\N	16	0	Other
+51	21	<p>slddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gslddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,gv</p>\r\n	2014-05-11 17:27:22.956625	2014-05-12 13:36:16.740276	\N	slddngflsdbksd fkuyfiufrl gfiqreguihre g,kerh,werkgerjw,g	\N	16	3	Other
+60	21	<p>sdfdsfsdf sdf sd fsdsd</p>\r\n	2014-05-16 16:46:23.588079	2014-05-16 16:46:23.588079	\N	sdfsdfsdf	\N	16	0	Other
+62	21	<p>D UFHSJFKS HFJ</p>\r\n	2014-05-16 16:46:40.610566	2014-05-16 16:46:40.610566	\N	sd fsdfj sdfjksdh f mhgfd	\N	16	0	Other
+52	21	<ul>\r\n\t<li>saddfdsfsdfs</li>\r\n\t<li>dfsdfsdfsdfsdfsd</li>\r\n\t<li>fsdfdsfsdfsdfsd</li>\r\n\t<li>fsdfsdfsdfsdfsdfsdf</li>\r\n\t<li>sdfsdfsdfsdfsdfsdfsd</li>\r\n\t<li>fsdfsdfsdfdsfsfsdfsdf</li>\r\n\t<li>sdfdssfsfsdfsdfsdffsf</li>\r\n</ul>\r\n\r\n<p>asddasdasdasdadasd&nbsp;</p>\r\n	2014-05-12 09:53:45.252175	2014-05-12 09:53:45.252175	\N	Euromaidan	\N	16	0	Other
+63	21	<p>You still can use a custom class when you need it :</p>\r\n\r\n<pre>\r\n<code><span style="color:rgb(128, 0, 0)">&lt;div</span> <span style="color:rgb(255, 0, 0)">class</span>=<span style="color:rgb(0, 0, 255)">&quot;row&quot;</span><span style="color:rgb(128, 0, 0)">&gt;</span>\r\n    <span style="color:rgb(128, 0, 0)">&lt;div</span> <span style="color:rgb(255, 0, 0)">class</span>=<span style="color:rgb(0, 0, 255)">&quot;col-xs-5 col-md-3 col-lg-1 vcenter&quot;</span><span style="color:rgb(128, 0, 0)">&gt;</span>\r\n        <span style="color:rgb(128, 0, 0)">&lt;div</span> <span style="color:rgb(255, 0, 0)">style</span>=<span style="color:rgb(0, 0, 255)">&quot;</span><span style="color:rgb(0, 0, 139)">height</span>:<span style="color:rgb(128, 0, 0)">10em</span>;<span style="color:rgb(0, 0, 139)">border</span>:<span style="color:rgb(128, 0, 0)">1px</span> solid <span style="color:rgb(128, 0, 0)">#000</span><span style="color:rgb(0, 0, 255)">&quot;</span><span style="color:rgb(128, 0, 0)">&gt;</span>Big<span style="color:rgb(128, 0, 0)">&lt;/div&gt;</span>\r\n    <span style="color:rgb(128, 0, 0)">&lt;/div&gt;</span><span style="color:rgb(128, 128, 128)">&lt;!--\r\n    --&gt;</span><span style="color:rgb(128, 0, 0)">&lt;div</span> <span style="color:rgb(255, 0, 0)">class</span>=<span style="color:rgb(0, 0, 255)">&quot;col-xs-5 col-md-7 col-lg-9 vcenter&quot;</span><span style="color:rgb(128, 0, 0)">&gt;</span>\r\n        <span style="color:rgb(128, 0, 0)">&lt;div</span> <span style="color:rgb(255, 0, 0)">style</span>=<span style="color:rgb(0, 0, 255)">&quot;</span><span style="color:rgb(0, 0, 139)">height</span>:<span style="color:rgb(128, 0, 0)">3em</span>;<span style="color:rgb(0, 0, 139)">border</span>:<span style="color:rgb(128, 0, 0)">1px</span> solid <span style="color:rgb(128, 0, 0)">#F00</span><span style="color:rgb(0, 0, 255)">&quot;</span><span style="color:rgb(128, 0, 0)">&gt;</span>Small<span style="color:rgb(128, 0, 0)">&lt;/div&gt;</span>\r\n    <span style="color:rgb(128, 0, 0)">&lt;/div&gt;</span>\r\n<span style="color:rgb(128, 0, 0)">&lt;/div&gt;</span></code></pre>\r\n\r\n<pre>\r\n<code>.vcenter {\r\n    display: <span style="color:rgb(0, 0, 139)">inline</span>-block;\r\n    vertical-align: middle;\r\n    <span style="color:rgb(0, 0, 139)">float</span>: none;\r\n}</code></pre>\r\n\r\n<p><strong><a href="http://www.bootply.com/dFP81frbHk" style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; color: rgb(74, 107, 130); text-decoration: none; cursor: pointer; background: transparent;">Bootply</a></strong></p>\r\n\r\n<p><strong>2014-05-10 : Edited to fix the extra space issue</strong></p>\r\n\r\n<p>Using&nbsp;<code>inline-block</code>&nbsp;add extra space between blocks if you let a real space in your code (like&nbsp;<code>...&lt;/div&gt; &lt;/div&gt;...</code>). This extra space breaks our grid if column sizes add up to 12 :</p>\r\n\r\n<pre>\r\n<code><span style="color:rgb(128, 0, 0)">&lt;div</span> <span style="color:rgb(255, 0, 0)">class</span>=<span style="color:rgb(0, 0, 255)">&quot;row&quot;</span><span style="color:rgb(128, 0, 0)">&gt;</span>\r\n    <span style="color:rgb(128, 0, 0)">&lt;div</span> <span style="color:rgb(255, 0, 0)">class</span>=<span style="color:rgb(0, 0, 255)">&quot;col-xs-6 col-md-4 col-lg-2 vcenter&quot;</span><span style="color:rgb(128, 0, 0)">&gt;</span>\r\n        <span style="color:rgb(128, 0, 0)">&lt;div</span> <span style="color:rgb(255, 0, 0)">style</span>=<span style="color:rgb(0, 0, 255)">&quot;</span><span style="color:rgb(0, 0, 139)">height</span>:<span style="color:rgb(128, 0, 0)">10em</span>;<span style="color:rgb(0, 0, 139)">border</span>:<span style="color:rgb(128, 0, 0)">1px</span> solid <span style="color:rgb(128, 0, 0)">#000</span><span style="color:rgb(0, 0, 255)">&quot;</span><span style="color:rgb(128, 0, 0)">&gt;</span>Big<span style="color:rgb(128, 0, 0)">&lt;/div&gt;</span>\r\n    <span style="color:rgb(128, 0, 0)">&lt;/div&gt;</span>\r\n    <span style="color:rgb(128, 0, 0)">&lt;div</span> <span style="color:rgb(255, 0, 0)">class</span>=<span style="color:rgb(0, 0, 255)">&quot;col-xs-6 col-md-8 col-lg-10 vcenter&quot;</span><span style="color:rgb(128, 0, 0)">&gt;</span>\r\n        <span style="color:rgb(128, 0, 0)">&lt;div</span> <span style="color:rgb(255, 0, 0)">style</span>=<span style="color:rgb(0, 0, 255)">&quot;</span><span style="color:rgb(0, 0, 139)">height</span>:<span style="color:rgb(128, 0, 0)">3em</span>;<span style="color:rgb(0, 0, 139)">border</span>:<span style="color:rgb(128, 0, 0)">1px</span> solid <span style="color:rgb(128, 0, 0)">#F00</span><span style="color:rgb(0, 0, 255)">&quot;</span><span style="color:rgb(128, 0, 0)">&gt;</span>Small<span style="color:rgb(128, 0, 0)">&lt;/div&gt;</span>\r\n    <span style="color:rgb(128, 0, 0)">&lt;/div&gt;</span>\r\n<span style="color:rgb(128, 0, 0)">&lt;/div&gt;</span></code></pre>\r\n\r\n<p>Here, we&#39;ve got extra spaces between&nbsp;<code>&lt;div class=&quot;[...] col-lg-2&quot;&gt;</code>&nbsp;and&nbsp;<code>&lt;div class=&quot;[...] col-lg-10&quot;&gt;</code>&nbsp;(a carriage return and 2 tabs/8 spaces). And so...</p>\r\n\r\n<p><img alt="enter image description here" src="http://i.stack.imgur.com/2Yzby.png" style="background:transparent; border:0px; margin:0px; max-width:640px; padding:0px; vertical-align:baseline" /></p>\r\n\r\n<p>Let&#39;s kick this extra space !!</p>\r\n\r\n<pre>\r\n<code><span style="color:rgb(128, 0, 0)">&lt;div</span> <span style="color:rgb(255, 0, 0)">class</span>=<span style="color:rgb(0, 0, 255)">&quot;row&quot;</span><span style="color:rgb(128, 0, 0)">&gt;</span>\r\n    <span style="color:rgb(128, 0, 0)">&lt;div</span> <span style="color:rgb(255, 0, 0)">class</span>=<span style="color:rgb(0, 0, 255)">&quot;col-xs-6 col-md-4 col-lg-2 vcenter&quot;</span><span style="color:rgb(128, 0, 0)">&gt;</span>\r\n        <span style="color:rgb(128, 0, 0)">&lt;div</span> <span style="color:rgb(255, 0, 0)">style</span>=<span style="color:rgb(0, 0, 255)">&quot;</span><span style="color:rgb(0, 0, 139)">height</span>:<span style="color:rgb(128, 0, 0)">10em</span>;<span style="color:rgb(0, 0, 139)">border</span>:<span style="color:rgb(128, 0, 0)">1px</span> solid <span style="color:rgb(128, 0, 0)">#000</span><span style="color:rgb(0, 0, 255)">&quot;</span><span style="color:rgb(128, 0, 0)">&gt;</span>Big<span style="color:rgb(128, 0, 0)">&lt;/div&gt;</span>\r\n    <span style="color:rgb(128, 0, 0)">&lt;/div&gt;</span><span style="color:rgb(128, 128, 128)">&lt;!--\r\n    --&gt;</span><span style="color:rgb(128, 0, 0)">&lt;div</span> <span style="color:rgb(255, 0, 0)">class</span>=<span style="color:rgb(0, 0, 255)">&quot;col-xs-6 col-md-8 col-lg-10 vcenter&quot;</span><span style="color:rgb(128, 0, 0)">&gt;</span>\r\n        <span style="color:rgb(128, 0, 0)">&lt;div</span> <span style="color:rgb(255, 0, 0)">style</span>=<span style="color:rgb(0, 0, 255)">&quot;</span><span style="color:rgb(0, 0, 139)">height</span>:<span style="color:rgb(128, 0, 0)">3em</span>;<span style="color:rgb(0, 0, 139)">border</span>:<span style="color:rgb(128, 0, 0)">1px</span> solid <span style="color:rgb(128, 0, 0)">#F00</span><span style="color:rgb(0, 0, 255)">&quot;</span><span style="color:rgb(128, 0, 0)">&gt;</span>Small<span style="color:rgb(128, 0, 0)">&lt;/div&gt;</span>\r\n    <span style="color:rgb(128, 0, 0)">&lt;/div&gt;</span>\r\n<span style="color:rgb(128, 0, 0)">&lt;/div&gt;</span></code></pre>\r\n\r\n<p><img alt="enter image description here" src="http://i.stack.imgur.com/XZTJj.png" style="background:transparent; border:0px; margin:0px; max-width:640px; padding:0px; vertical-align:baseline" /></p>\r\n\r\n<p><em>Note : the Bootply have been updated</em></p>\r\n	2014-05-27 14:10:52.660906	2014-05-29 00:47:40.121474	\N	bootpy vcenter	________________2014-04-15_16_35_51.png	15	0	Other
+\.
+
+
+--
+-- Name: articles_id_seq; Type: SEQUENCE SET; Schema: public; Owner: vitaliy
+--
+
+SELECT pg_catalog.setval('articles_id_seq', 63, true);
+
+
+--
+-- Data for Name: ckeditor_assets; Type: TABLE DATA; Schema: public; Owner: vitaliy
+--
+
+COPY ckeditor_assets (id, data_file_name, data_content_type, data_file_size, assetable_id, assetable_type, type, width, height, created_at, updated_at) FROM stdin;
+1	blogging.jpg	image/jpeg	43497	3	User	Ckeditor::Picture	400	300	2014-03-22 15:45:46.017687	2014-03-22 15:45:46.017687
+2	blogging.jpg	image/jpeg	43497	3	User	Ckeditor::Picture	400	300	2014-03-22 15:48:02.353913	2014-03-22 15:48:02.353913
+3	________________2014-03-18_20_27_38.png	image/png	41616	3	User	Ckeditor::Picture	842	522	2014-03-22 15:50:49.526749	2014-03-22 15:50:49.526749
+4	________________2014-03-15_22_07_55.png	image/png	2193741	3	User	Ckeditor::Picture	3286	1080	2014-03-22 15:52:07.278915	2014-03-22 15:52:07.278915
+5	________________2014-03-15_18_59_16.png	image/png	107780	3	User	Ckeditor::Picture	1366	768	2014-03-22 15:53:45.744624	2014-03-22 15:53:45.744624
+6	________________2014-03-07_21_55_01.png	image/png	38523	3	User	Ckeditor::Picture	642	315	2014-03-22 15:54:44.267288	2014-03-22 15:54:44.267288
+\.
+
+
+--
+-- Name: ckeditor_assets_id_seq; Type: SEQUENCE SET; Schema: public; Owner: vitaliy
+--
+
+SELECT pg_catalog.setval('ckeditor_assets_id_seq', 6, true);
+
+
+--
+-- Data for Name: comments; Type: TABLE DATA; Schema: public; Owner: vitaliy
+--
+
+COPY comments (id, content, created_at, updated_at, user_id, article_id) FROM stdin;
+111	weqrerwrwer	2014-05-27 13:56:49.964488	2014-05-27 13:56:49.964488	21	62
+112	wfwefsdsfsd	2014-05-27 13:56:52.702217	2014-05-27 13:56:52.702217	21	62
+113	wefwfewfwef	2014-05-27 13:56:55.217271	2014-05-27 13:56:55.217271	21	62
+114	werfwwefew	2014-05-27 13:57:00.439146	2014-05-27 13:57:00.439146	21	62
+115	sdfsdsdfsdfsdf	2014-05-27 13:57:06.187745	2014-05-27 13:57:06.187745	21	62
+116	dsfgfgdfgdfgdf	2014-05-27 13:57:11.415968	2014-05-27 13:57:11.415968	21	62
+117	sdfsdvrereverve	2014-05-27 13:57:18.544271	2014-05-27 13:57:18.544271	21	62
+118	srvwwwevwe wer we rwer we rw	2014-05-27 13:57:28.442857	2014-05-27 13:57:28.442857	21	62
+119	sdscsdfsdf sfs d	2014-05-27 13:57:34.387425	2014-05-27 13:57:34.387425	21	62
+120	sdfsdfsdf	2014-05-27 13:58:01.27716	2014-05-27 13:58:01.27716	21	62
+49	adgsvgsg	2014-04-27 12:08:17.140691	2014-04-27 12:08:17.140691	11	21
+50	asdas	2014-04-29 21:46:40.956901	2014-04-29 21:46:40.956901	11	24
+51	fdfg	2014-05-04 09:46:46.173122	2014-05-04 09:46:46.173122	11	27
+52	Bacsk	2014-05-04 09:47:14.027005	2014-05-04 09:47:14.027005	11	27
+53	asadadasd	2014-05-04 09:47:17.9409	2014-05-04 09:47:17.9409	11	27
+54	asdasda	2014-05-04 09:47:20.809251	2014-05-04 09:47:20.809251	11	27
+55	asdasdasd	2014-05-04 09:47:23.641396	2014-05-04 09:47:23.641396	11	27
+61	hey now	2014-05-11 23:40:52.36678	2014-05-11 23:40:52.36678	21	45
+62	Hi ayusas	2014-05-11 23:58:47.077509	2014-05-11 23:58:47.077509	11	49
+64	Yellow is not blue	2014-05-12 00:35:29.106645	2014-05-12 00:35:29.106645	11	50
+66	Wow	2014-05-12 10:04:26.209305	2014-05-12 10:04:26.209305	11	52
+67	ZXCCXX	2014-05-12 10:04:46.918871	2014-05-12 10:04:46.918871	11	45
+68	fwiofhnwsd	2014-05-18 17:27:54.925704	2014-05-18 17:27:54.925704	21	53
+69	asdfafa	2014-05-18 17:29:07.561839	2014-05-18 17:29:07.561839	21	53
+\.
+
+
+--
+-- Name: comments_id_seq; Type: SEQUENCE SET; Schema: public; Owner: vitaliy
+--
+
+SELECT pg_catalog.setval('comments_id_seq', 120, true);
+
+
+--
+-- Data for Name: follows; Type: TABLE DATA; Schema: public; Owner: vitaliy
+--
+
+COPY follows (id, follower_type, follower_id, followable_type, followable_id, created_at) FROM stdin;
+\.
+
+
+--
+-- Name: follows_id_seq; Type: SEQUENCE SET; Schema: public; Owner: vitaliy
+--
+
+SELECT pg_catalog.setval('follows_id_seq', 1, false);
+
+
+--
+-- Data for Name: groups; Type: TABLE DATA; Schema: public; Owner: vitaliy
+--
+
+COPY groups (id, user_id, name, description, article_count, created_at, updated_at) FROM stdin;
+7	11	Beaty	UIHIuhbsducd	\N	2014-05-04 08:53:41.109426	2014-05-04 08:53:41.109426
+8	11	Rails	dcdsxvxvxcv	3	2014-05-04 09:34:45.554684	2014-05-04 09:34:45.554684
+6	11	Flowers	Banana	-1	2014-05-04 08:25:30.318039	2014-05-04 08:25:30.318039
+15	21	Ganana		\N	2014-05-27 11:22:10.155712	2014-05-27 11:22:10.155712
+16	21	Walter	Desription	\N	2014-05-27 11:22:28.478827	2014-05-27 11:22:28.478827
+\.
+
+
+--
+-- Name: groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: vitaliy
+--
+
+SELECT pg_catalog.setval('groups_id_seq', 16, true);
+
+
+--
+-- Data for Name: identities; Type: TABLE DATA; Schema: public; Owner: vitaliy
+--
+
+COPY identities (id, user_id, provider, uid, oauth_token, oauth_secret, oauth_expires_at, created_at, updated_at) FROM stdin;
+2	21	facebook	100005973152290	\N	\N	\N	2014-05-01 00:36:57.370423	2014-05-08 16:40:37.649938
+\.
+
+
+--
+-- Name: identities_id_seq; Type: SEQUENCE SET; Schema: public; Owner: vitaliy
+--
+
+SELECT pg_catalog.setval('identities_id_seq', 2, true);
+
+
+--
+-- Data for Name: likes; Type: TABLE DATA; Schema: public; Owner: vitaliy
+--
+
+COPY likes (id, liker_type, liker_id, likeable_type, likeable_id, created_at) FROM stdin;
+\.
+
+
+--
+-- Name: likes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: vitaliy
+--
+
+SELECT pg_catalog.setval('likes_id_seq', 1, false);
+
+
+--
+-- Data for Name: logs; Type: TABLE DATA; Schema: public; Owner: vitaliy
+--
+
+COPY logs (id, user_id, logable_type, logable_id, viewed, created_at, updated_at, owner_id) FROM stdin;
+51	\N	Article	53	f	2014-05-12 10:59:56.30257	2014-05-12 10:59:56.30257	\N
+56	\N	Relationship	464	t	2014-05-12 15:54:58.15206	2014-05-12 15:54:58.15206	\N
+57	\N	Relationship	465	t	2014-05-12 16:40:09.296811	2014-05-12 16:40:09.296811	\N
+62	\N	Relationship	470	f	2014-05-12 17:31:11.486905	2014-05-12 17:31:11.486905	\N
+64	\N	Relationship	472	f	2014-05-12 21:30:11.978355	2014-05-12 21:30:11.978355	\N
+70	21	View	17	t	2014-05-15 10:42:15.166654	2014-05-15 10:42:15.166654	\N
+71	21	View	18	t	2014-05-15 10:42:23.100589	2014-05-15 10:42:23.100589	\N
+72	21	View	19	t	2014-05-15 10:42:26.098974	2014-05-15 10:42:26.098974	\N
+73	\N	Article	54	f	2014-05-15 10:51:37.772457	2014-05-15 10:51:37.772457	\N
+78	\N	Relationship	481	f	2014-05-15 11:23:11.023831	2014-05-15 11:23:11.023831	\N
+82	\N	Article	58	f	2014-05-15 11:52:25.101618	2014-05-15 11:52:25.101618	\N
+83	\N	Article	59	f	2014-05-16 16:45:51.020881	2014-05-16 16:45:51.020881	\N
+84	\N	Article	60	f	2014-05-16 16:46:23.643606	2014-05-16 16:46:23.643606	\N
+85	\N	Article	61	f	2014-05-16 16:46:33.195362	2014-05-16 16:46:33.195362	\N
+86	\N	Article	62	f	2014-05-16 16:46:40.649709	2014-05-16 16:46:40.649709	\N
+74	21	View	20	t	2014-05-15 10:52:17.230178	2014-05-15 10:52:17.230178	\N
+87	21	View	21	t	2014-05-18 17:27:48.090605	2014-05-18 17:27:48.090605	\N
+88	21	Comment	69	t	2014-05-18 17:29:07.640012	2014-05-18 17:29:07.640012	\N
+91	\N	Relationship	484	f	2014-05-25 19:58:12.162018	2014-05-25 19:58:12.162018	\N
+112	\N	Article	63	f	2014-05-27 14:10:52.830901	2014-05-27 14:10:52.830901	\N
+\.
+
+
+--
+-- Name: logs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: vitaliy
+--
+
+SELECT pg_catalog.setval('logs_id_seq', 112, true);
+
+
+--
+-- Data for Name: mentions; Type: TABLE DATA; Schema: public; Owner: vitaliy
+--
+
+COPY mentions (id, mentioner_type, mentioner_id, mentionable_type, mentionable_id, created_at) FROM stdin;
+\.
+
+
+--
+-- Name: mentions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: vitaliy
+--
+
+SELECT pg_catalog.setval('mentions_id_seq', 1, false);
+
+
+--
+-- Data for Name: messages; Type: TABLE DATA; Schema: public; Owner: vitaliy
+--
+
+COPY messages (id, theme, content, sender_id, recipient_id, created_at, updated_at, read) FROM stdin;
+109			21	11	2014-05-15 10:27:27.747462	2014-05-15 10:27:27.747462	f
+110			21	11	2014-05-15 10:27:50.662364	2014-05-15 10:27:50.662364	f
+111			21	11	2014-05-15 10:28:45.446701	2014-05-15 10:28:45.446701	f
+112			21	11	2014-05-15 10:28:51.614778	2014-05-15 10:28:51.614778	f
+113			21	11	2014-05-15 10:30:01.251593	2014-05-15 10:30:01.251593	f
+114			21	11	2014-05-15 10:31:00.298753	2014-05-15 10:31:00.298753	f
+115			21	11	2014-05-15 10:33:18.232726	2014-05-15 10:33:18.232726	f
+116			21	11	2014-05-15 10:33:33.479156	2014-05-15 10:33:33.479156	f
+117			21	11	2014-05-15 10:33:47.918674	2014-05-15 10:33:47.918674	f
+118			21	11	2014-05-15 10:34:07.443367	2014-05-15 10:34:07.443367	f
+119			21	11	2014-05-15 10:34:25.636322	2014-05-15 10:34:25.636322	f
+120			21	11	2014-05-15 10:34:49.259427	2014-05-15 10:34:49.259427	f
+121			21	11	2014-05-15 10:35:57.773997	2014-05-15 10:35:57.773997	f
+122			21	11	2014-05-15 10:36:15.71092	2014-05-15 10:36:15.71092	f
+123			21	11	2014-05-15 10:36:38.141552	2014-05-15 10:36:38.141552	f
+124			21	11	2014-05-15 10:36:56.258619	2014-05-15 10:36:56.258619	f
+125			21	25	2014-05-15 11:25:00.909702	2014-05-15 11:25:00.909702	f
+126			21	25	2014-05-15 11:25:14.967168	2014-05-15 11:25:14.967168	f
+127			21	11	2014-05-15 11:31:39.222154	2014-05-15 11:31:39.222154	f
+87	ewrvrevee	vereverev	21	11	2014-05-15 10:14:52.290827	2014-05-18 17:30:28.158668	t
+86	wefwefwef	wefwefwef	21	11	2014-05-15 10:14:35.254097	2014-05-18 17:30:31.683835	t
+85	fwfwewef		21	11	2014-05-15 10:14:16.691646	2014-05-18 17:30:34.474628	t
+84	asdasdasdasd		21	11	2014-05-15 10:13:55.939205	2014-05-18 17:30:38.371965	t
+83	Hi, Bohdan		21	11	2014-05-15 10:13:32.091737	2014-05-18 17:30:41.268935	t
+79	Hi, Bohdan		21	11	2014-05-15 10:08:20.825567	2014-05-18 17:30:44.270701	t
+128	My name	Vavka v mene	21	26	2014-05-31 19:55:04.634398	2014-05-31 19:55:04.634398	f
+129	To myself	OK	21	21	2014-05-31 19:55:30.047523	2014-05-31 19:55:34.265887	t
+130	My name	efsdfsdfsf	21	21	2014-05-31 19:55:53.72017	2014-05-31 19:56:00.475115	t
+131	My name	Babanabnasbnasbansa	21	11	2014-05-31 20:03:09.284364	2014-05-31 20:03:09.284364	f
+69			21	22	2014-05-10 21:48:35.181416	2014-05-10 21:48:35.181416	f
+70	Привіт Іване		21	22	2014-05-11 07:48:39.993223	2014-05-11 07:48:39.993223	f
+71	Bogema	Wauway	21	16	2014-05-11 14:54:57.127979	2014-05-11 14:54:57.127979	f
+72	JInsdcdnc	insdivsivnsdinvsdv	11	21	2014-05-11 14:55:35.717085	2014-05-11 21:21:42.486965	t
+73	Привіт, чого не спиш	цьмок	21	16	2014-05-12 00:32:17.330449	2014-05-12 00:32:17.330449	f
+74	My name	if (log.get_recipient == self) && (!log.viewed)	21	11	2014-05-12 00:32:48.542139	2014-05-12 00:35:03.823863	t
+75	My name	if (log.get_recipient == self) && (!log.viewed)	11	21	2014-05-12 00:35:45.350146	2014-05-12 10:52:26.443218	t
+76	My name		21	11	2014-05-15 10:03:21.392673	2014-05-15 10:03:21.392673	f
+77	Hi, Bohdan		21	11	2014-05-15 10:05:43.12411	2014-05-15 10:05:43.12411	f
+78	ascascas		21	11	2014-05-15 10:06:34.033221	2014-05-15 10:06:34.033221	f
+80	Hi, Bohdan		21	11	2014-05-15 10:09:16.910048	2014-05-15 10:09:16.910048	f
+81	Hi, Bohdan		21	11	2014-05-15 10:10:14.427408	2014-05-15 10:10:14.427408	f
+82	Hi, Bohdan		21	11	2014-05-15 10:10:45.405342	2014-05-15 10:10:45.405342	f
+88	fsdfsdfsdfsd		21	11	2014-05-15 10:15:28.621247	2014-05-15 10:15:28.621247	f
+132	My name	dfdsdsfsdfsdf	21	21	2014-05-31 20:46:07.288937	2014-05-31 20:46:19.842533	t
+89	sdfsdfsdfsdf		21	11	2014-05-15 10:15:52.130838	2014-05-15 10:15:52.130838	f
+90	Hi, Bohdan		21	11	2014-05-15 10:16:09.073786	2014-05-15 10:16:09.073786	f
+91	Hi, Bohdan		21	11	2014-05-15 10:16:50.580889	2014-05-15 10:16:50.580889	f
+92	1213123123		21	11	2014-05-15 10:17:19.483579	2014-05-15 10:17:19.483579	f
+93	Hi, Bohdan		21	11	2014-05-15 10:17:53.525179	2014-05-15 10:17:53.525179	f
+94	wefewfwe		21	11	2014-05-15 10:18:07.679617	2014-05-15 10:18:07.679617	f
+95	asdsadasd		21	11	2014-05-15 10:19:39.420496	2014-05-15 10:19:39.420496	f
+96	1213123123		21	11	2014-05-15 10:20:08.440261	2014-05-15 10:20:08.440261	f
+97	Hi, Bohdan		21	11	2014-05-15 10:20:30.93821	2014-05-15 10:20:30.93821	f
+98	My name		21	11	2014-05-15 10:20:50.63675	2014-05-15 10:20:50.63675	f
+99	1213123123		21	11	2014-05-15 10:21:10.800946	2014-05-15 10:21:10.800946	f
+100	1213123123		21	11	2014-05-15 10:21:32.071328	2014-05-15 10:21:32.071328	f
+101	ascascas		21	11	2014-05-15 10:22:02.050237	2014-05-15 10:22:02.050237	f
+102	1213123123		21	11	2014-05-15 10:22:16.020718	2014-05-15 10:22:16.020718	f
+103	1213123123		21	11	2014-05-15 10:24:18.054279	2014-05-15 10:24:18.054279	f
+104	Hi, Bohdan		21	11	2014-05-15 10:25:19.080147	2014-05-15 10:25:19.080147	f
+105			21	11	2014-05-15 10:25:27.827166	2014-05-15 10:25:27.827166	f
+106	Hi, Bohdan		21	11	2014-05-15 10:25:47.707248	2014-05-15 10:25:47.707248	f
+107			21	11	2014-05-15 10:26:09.545257	2014-05-15 10:26:09.545257	f
+108			21	11	2014-05-15 10:26:35.875685	2014-05-15 10:26:35.875685	f
+\.
+
+
+--
+-- Name: messages_id_seq; Type: SEQUENCE SET; Schema: public; Owner: vitaliy
+--
+
+SELECT pg_catalog.setval('messages_id_seq', 132, true);
+
+
+--
+-- Data for Name: relationships; Type: TABLE DATA; Schema: public; Owner: vitaliy
+--
+
+COPY relationships (id, follower_id, followed_id, created_at, updated_at) FROM stdin;
+110	21	16	2014-05-11 06:22:06.250654	2014-05-11 06:22:06.250654
+464	11	21	2014-05-12 15:54:58.108888	2014-05-12 15:54:58.108888
+465	21	21	2014-05-12 16:40:09.235769	2014-05-12 16:40:09.235769
+470	21	23	2014-05-12 17:31:11.455909	2014-05-12 17:31:11.455909
+472	21	5	2014-05-12 21:30:11.95487	2014-05-12 21:30:11.95487
+13	5	4	2014-03-24 20:18:22.819276	2014-03-24 20:18:22.819276
+481	21	25	2014-05-15 11:23:11.007092	2014-05-15 11:23:11.007092
+484	21	22	2014-05-25 19:58:12.142849	2014-05-25 19:58:12.142849
+430	21	15	2014-05-12 00:53:48.337724	2014-05-12 00:53:48.337724
+432	21	24	2014-05-12 08:40:33.867326	2014-05-12 08:40:33.867326
+435	11	26	2014-05-12 08:43:09.673997	2014-05-12 08:43:09.673997
+439	26	4	2014-05-12 08:46:35.978938	2014-05-12 08:46:35.978938
+441	4	4	2014-05-12 08:48:04.511172	2014-05-12 08:48:04.511172
+324	21	26	2014-05-11 19:09:40.737921	2014-05-11 19:09:40.737921
+\.
+
+
+--
+-- Name: relationships_id_seq; Type: SEQUENCE SET; Schema: public; Owner: vitaliy
+--
+
+SELECT pg_catalog.setval('relationships_id_seq', 505, true);
+
+
+--
+-- Data for Name: schema_migrations; Type: TABLE DATA; Schema: public; Owner: vitaliy
+--
+
+COPY schema_migrations (version) FROM stdin;
+20140210170631
+20140212083417
+20140212122532
+20140214183416
+20140317212225
+20140322152610
+20140322161520
+20140322211401
+20140322211402
+20140322211403
+20140324180913
+20140325161310
+20140325161923
+20140326092010
+20140330082340
+20140430234434
+20140430234927
+20140503194634
+20140504092240
+20140511081138
+20140511125812
+20140511204747
+20140511214647
+20140515114145
+\.
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: vitaliy
+--
+
+COPY users (id, email, encrypted_password, reset_password_token, reset_password_sent_at, remember_created_at, sign_in_count, current_sign_in_at, last_sign_in_at, current_sign_in_ip, last_sign_in_ip, confirmation_token, confirmed_at, confirmation_sent_at, unconfirmed_email, created_at, updated_at, sex, hometown, first_name, last_name, avatar, provider, uid, paused, about, born_date) FROM stdin;
+4	freemail@ukr.net	$2a$10$RRG525CxTaAlGzGVU3rdW.t5KN3Qhfo1Pi5l5DM9HQnSEI/qmJpD.	\N	\N	\N	1	2014-03-17 22:58:29.525512	2014-03-17 22:58:29.525512	127.0.0.1	127.0.0.1	\N	\N	\N	\N	2014-03-17 22:58:29.442336	2014-03-17 22:58:29.527102	t	Ternopil	John	Bessil	blogging.jpg	\N	\N	f	\N	\N
+5	embox@ukr.net2	$2a$10$TYzl2EV3SgT0yKWD1.1NFuOm0iDOK6.1fF9J6qzWCuN58jGgm9KEy	\N	\N	\N	4	2014-03-28 19:13:47.834094	2014-03-28 18:52:21.06362	127.0.0.1	127.0.0.1	\N	\N	\N	\N	2014-03-24 19:27:05.576968	2014-03-28 19:13:47.835861	t		Bohdan	Marks	2013-07-Heart-Love-Water-3D-Full-HD-Wallpapers.jpg	\N	\N	f	\N	\N
+16	123@g.123	$2a$10$evVnkqYAhMagp1EgCG6pEeIAne6g4BwmxbrMg8HKgtC7iRxJU8pHS	\N	\N	\N	1	2014-05-08 15:20:55.474395	2014-05-08 15:20:55.474395	127.0.0.1	127.0.0.1	\N	\N	\N	\N	2014-05-08 15:20:55.45023	2014-05-08 16:18:14.710111	f		Світлана	Жулинська	________________2014-03-18_20_27_38.png	\N	\N	f		\N
+11	szhulinska@gmail.com	$2a$10$FXdChoUhBGI88Tl6BRAJeeqRTk4/98S983y0IZW3UvWstEwn5J1Eq	\N	\N	2014-05-18 17:29:51.879357	24	2014-05-18 17:29:51.908992	2014-05-15 10:42:40.512126	127.0.0.1	127.0.0.1	\N	\N	\N	\N	2014-03-30 15:44:25.261776	2014-05-18 17:30:50.568412	f	Ternopil	svitlana	Zhulinska	________________2014-04-19_21_33_55.png	\N	\N	f	I am Buhgalter nice buhgalter	1995-05-11 00:00:00
+21	embox@ukr.net	$2a$10$S57wFlNwGuD4Nuu0ivLbk.C7sgmjzhHDpB6vJWCu24O5VsUICR5da	\N	\N	\N	35	2014-05-31 19:34:49.983049	2014-05-31 15:55:56.603768	127.0.0.1	127.0.0.1	\N	\N	\N	\N	2014-05-08 16:40:37.618846	2014-05-31 21:01:47.752914	t	Lviv	Vitaliy	Krushelnitsky	Ben-Barnes-Actor-Brunette-Man-Handsome-1024x1280.jpg	\N	\N	f	Another easy way is to add your own validations. If you just want to validate that the password confirmation matches, you can add a validates_confirmation_of validation by adding this to your model	1995-09-10 00:00:00
+45	v5991@i.uaq	$2a$10$gxiueq2oPDdz.2wsO.HiIuFcEYK1HVEftRcO.aHRDga0b6fsAkaCe	\N	\N	\N	1	2014-05-31 15:56:41.428684	2014-05-31 15:56:41.428684	127.0.0.1	127.0.0.1	\N	\N	\N	\N	2014-05-31 15:56:41.375965	2014-05-31 17:10:54.870779	\N	\N	Bob	Krushelnitsky	\N	\N	\N	f	\N	\N
+22	123@g.123y	$2a$10$hf7XOLG6yFj6VnKWMqs3peqcDWU3ta9dj17u.E4eVXHvCjNO3LAJK	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	2014-05-10 20:05:01.122501	2014-05-10 20:05:01.122501	\N	\N	Bohdan	User	\N	\N	\N	f	\N	\N
+23	123@g.123yzx	$2a$10$4HIETC.7hrd5SvPLhPCED.DwWGC.DFUA/CcUJeI153ni2EMevMmfm	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	2014-05-10 20:06:22.396766	2014-05-10 20:06:22.396766	\N	\N	Bohdan	User	\N	\N	\N	f	\N	\N
+15	embox@ukr.netaaa	$2a$10$U3qR4s35SUN4y8OAzfNH8ePOCKBJBA4NGsB2lvknBNUOU4q08OaKG	\N	\N	\N	1	2014-05-08 15:20:15.154494	2014-05-08 15:20:15.154494	127.0.0.1	127.0.0.1	\N	\N	\N	\N	2014-05-08 15:20:14.933946	2014-05-08 15:20:15.155942	\N	\N	Svitlana	Two	\N	\N	\N	f	\N	\N
+24	123@g.123yzxzx	$2a$10$T2rwvuu.8zWUFwZmQlBxCO9Cm7JElqcWuJjnk1j1SaYsY9v38xjQK	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	2014-05-10 20:07:27.154728	2014-05-10 20:07:27.154728	\N	\N	Bohdan	User	\N	\N	\N	f	\N	\N
+25	123@g.123yzxzxvc	$2a$10$kCAf0BW4E2NFO/EZSPP5kO8cYmSLd3NGC1ZcTP3jYPRXuMIVq7Dem	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	2014-05-10 20:08:54.821318	2014-05-10 20:08:54.821318	\N	\N	Bohdan	User	\N	\N	\N	f	\N	\N
+26	vatalsooft@gmail.com	$2a$10$q8FBeI9/4mex.HoYL4TnSeydB5h1w3PzyUt4fE2ebFuzKoj9lONFm	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	2014-05-10 20:10:12.365784	2014-05-10 20:10:12.365784	\N	\N	User	Admin	\N	\N	\N	f	\N	\N
+\.
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: vitaliy
+--
+
+SELECT pg_catalog.setval('users_id_seq', 45, true);
+
+
+--
+-- Data for Name: views; Type: TABLE DATA; Schema: public; Owner: vitaliy
+--
+
+COPY views (id, article_id, viewer_id, created_at, updated_at) FROM stdin;
+1	49	26	2014-05-11 13:33:11.317924	2014-05-11 13:33:11.317924
+2	49	4	2014-05-11 14:24:30.713755	2014-05-11 14:24:30.713755
+4	49	21	2014-05-11 14:27:49.053716	2014-05-11 14:27:49.053716
+7	50	21	2014-05-11 17:26:45.532352	2014-05-11 17:26:45.532352
+8	51	21	2014-05-11 17:27:23.079171	2014-05-11 17:27:23.079171
+9	48	21	2014-05-11 18:19:49.713268	2014-05-11 18:19:49.713268
+10	20	21	2014-05-11 18:21:28.801605	2014-05-11 18:21:28.801605
+11	44	21	2014-05-11 20:00:09.577783	2014-05-11 20:00:09.577783
+12	51	11	2014-05-11 22:26:42.56688	2014-05-11 22:26:42.56688
+13	45	21	2014-05-11 23:40:21.933683	2014-05-11 23:40:21.933683
+14	49	11	2014-05-11 23:58:38.334005	2014-05-11 23:58:38.334005
+15	50	11	2014-05-12 00:35:19.117814	2014-05-12 00:35:19.117814
+16	52	11	2014-05-12 10:04:20.109641	2014-05-12 10:04:20.109641
+17	47	21	2014-05-15 10:42:15.090611	2014-05-15 10:42:15.090611
+18	46	21	2014-05-15 10:42:23.084007	2014-05-15 10:42:23.084007
+19	21	21	2014-05-15 10:42:26.080315	2014-05-15 10:42:26.080315
+20	54	21	2014-05-15 10:52:17.148115	2014-05-15 10:52:17.148115
+21	53	21	2014-05-18 17:27:48.013955	2014-05-18 17:27:48.013955
+\.
+
+
+--
+-- Name: views_id_seq; Type: SEQUENCE SET; Schema: public; Owner: vitaliy
+--
+
+SELECT pg_catalog.setval('views_id_seq', 21, true);
+
+
+--
+-- Name: articles_pkey; Type: CONSTRAINT; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+ALTER TABLE ONLY articles
+    ADD CONSTRAINT articles_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: ckeditor_assets_pkey; Type: CONSTRAINT; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+ALTER TABLE ONLY ckeditor_assets
+    ADD CONSTRAINT ckeditor_assets_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: comments_pkey; Type: CONSTRAINT; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+ALTER TABLE ONLY comments
+    ADD CONSTRAINT comments_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: follows_pkey; Type: CONSTRAINT; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+ALTER TABLE ONLY follows
+    ADD CONSTRAINT follows_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: groups_pkey; Type: CONSTRAINT; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+ALTER TABLE ONLY groups
+    ADD CONSTRAINT groups_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: identities_pkey; Type: CONSTRAINT; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+ALTER TABLE ONLY identities
+    ADD CONSTRAINT identities_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: likes_pkey; Type: CONSTRAINT; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+ALTER TABLE ONLY likes
+    ADD CONSTRAINT likes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: logs_pkey; Type: CONSTRAINT; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+ALTER TABLE ONLY logs
+    ADD CONSTRAINT logs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: mentions_pkey; Type: CONSTRAINT; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+ALTER TABLE ONLY mentions
+    ADD CONSTRAINT mentions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: messages_pkey; Type: CONSTRAINT; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+ALTER TABLE ONLY messages
+    ADD CONSTRAINT messages_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: relationships_pkey; Type: CONSTRAINT; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+ALTER TABLE ONLY relationships
+    ADD CONSTRAINT relationships_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: views_pkey; Type: CONSTRAINT; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+ALTER TABLE ONLY views
+    ADD CONSTRAINT views_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: fk_followables; Type: INDEX; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+CREATE INDEX fk_followables ON follows USING btree (followable_id, followable_type);
+
+
+--
+-- Name: fk_follows; Type: INDEX; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+CREATE INDEX fk_follows ON follows USING btree (follower_id, follower_type);
+
+
+--
+-- Name: fk_likeables; Type: INDEX; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+CREATE INDEX fk_likeables ON likes USING btree (likeable_id, likeable_type);
+
+
+--
+-- Name: fk_likes; Type: INDEX; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+CREATE INDEX fk_likes ON likes USING btree (liker_id, liker_type);
+
+
+--
+-- Name: fk_mentionables; Type: INDEX; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+CREATE INDEX fk_mentionables ON mentions USING btree (mentionable_id, mentionable_type);
+
+
+--
+-- Name: fk_mentions; Type: INDEX; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+CREATE INDEX fk_mentions ON mentions USING btree (mentioner_id, mentioner_type);
+
+
+--
+-- Name: idx_ckeditor_assetable; Type: INDEX; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+CREATE INDEX idx_ckeditor_assetable ON ckeditor_assets USING btree (assetable_type, assetable_id);
+
+
+--
+-- Name: idx_ckeditor_assetable_type; Type: INDEX; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+CREATE INDEX idx_ckeditor_assetable_type ON ckeditor_assets USING btree (assetable_type, type, assetable_id);
+
+
+--
+-- Name: index_identities_on_user_id; Type: INDEX; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+CREATE INDEX index_identities_on_user_id ON identities USING btree (user_id);
+
+
+--
+-- Name: index_relationships_on_followed_id; Type: INDEX; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+CREATE INDEX index_relationships_on_followed_id ON relationships USING btree (followed_id);
+
+
+--
+-- Name: index_relationships_on_follower_id; Type: INDEX; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+CREATE INDEX index_relationships_on_follower_id ON relationships USING btree (follower_id);
+
+
+--
+-- Name: index_relationships_on_follower_id_and_followed_id; Type: INDEX; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_relationships_on_follower_id_and_followed_id ON relationships USING btree (follower_id, followed_id);
+
+
+--
+-- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
+
+
+--
+-- Name: index_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_users_on_reset_password_token ON users USING btree (reset_password_token);
+
+
+--
+-- Name: index_views_on_article_id; Type: INDEX; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+CREATE INDEX index_views_on_article_id ON views USING btree (article_id);
+
+
+--
+-- Name: index_views_on_viewer_id; Type: INDEX; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+CREATE INDEX index_views_on_viewer_id ON views USING btree (viewer_id);
+
+
+--
+-- Name: index_views_on_viewer_id_and_article_id; Type: INDEX; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_views_on_viewer_id_and_article_id ON views USING btree (viewer_id, article_id);
+
+
+--
+-- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: vitaliy; Tablespace: 
+--
+
+CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
