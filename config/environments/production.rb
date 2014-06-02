@@ -93,7 +93,7 @@ config.action_mailer.smtp_settings = {
   :domain => "gmail.com",
   :authentication => "plain",
   :user_name => "vatalsooft@gmail.com",
-  :password => "jgtyjaasc2520"
+  :password => "jgtyjaasc2520",
   :enable_starttls_auto => true
 }
 end
