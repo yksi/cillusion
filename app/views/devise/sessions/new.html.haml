@@ -24,4 +24,6 @@
           %b.text-muted.pull-right
             Do not have a profile?
             = link_to "Sign up", new_user_registration_path
+            %br
+            = link_to "Forgot you password?", new_password_path('user'), :class => "login-link"
           %div= f.submit "Sign in", class: 'btn btn-success', "data-loading-text" => "Loading..."
