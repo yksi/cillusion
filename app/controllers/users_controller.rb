@@ -18,7 +18,7 @@ class UsersController < ApplicationController
 
 
   def show
-    I18n.locale = @user.prefer_lang
+    I18n.locale = current_user.prefer_lang if user_signed_in?
     @message = Message.new
 		@articles = @user.user_articles.order(created_at: :desc).paginate(page: params[:page], per_page: 9)
 		@user_created_at = @user.created_at.strftime("%d %B %Y")
