@@ -1,11 +1,11 @@
 class AvatarUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
-  if Rails.env.development?
-    storage :file
-  else
+  # if Rails.env.development?
+  #   storage :file
+  # else
     storage :fog
-  end
+  # end
 
   def store_dir
     "#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"

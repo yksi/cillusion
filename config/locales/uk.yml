@@ -1,0 +1,49 @@
+uk:
+  datetime:
+    distance_in_words:
+      less_than_x_minutes:
+        one: менше хвилини
+      x_minutes:
+        one: хвилина
+        other: "%{count} хвилин"
+      x_days:
+        one: день
+        other: "%{count} днів"
+      about_x_hours:
+        one: годину
+        other: "%{count} годин"
+  welcome_text: Ласкаво просимо до
+  search: Пошук
+  online: Зараз на сайті
+  last_activity: Остання активність
+  Article: Cтаття
+  Group: Блог
+  Browse_website: 'Перегляд веб-сервісу'
+  Messages: 'Повідомлення'
+  messages: 'повідомлення'
+  Timeline: 'Потік новин'
+  Groups: 'Блоги'
+  Articles: 'Статті'
+  Users: 'Користувачі'
+  articles: 'статті'
+  article: 'стаття'
+  My_account: 'Мій профіль'
+  Account_settings: 'Налаштування профілю'
+  My_calendar: 'Календар'
+  Sign_out: 'Вихід'
+  New_article_event: 'Нова стаття'
+  New_comment_event: 'Вашу статтю прокоментували'
+  New_view_event: Вашу статтю прочитали
+  New_follower_event: На вас підписались
+  ago: тому 
+  followed_you: підписався на вас
+  read_your_article: прочитав вашу статтю
+  commented_your_article: прокоментував вашу статтю
+  created_new_article: створив нову статтю
+  Private_message: Повідомлення
+  Edit_profile: Редагувати
+  Connected_with_facebook: пдключений до facebook
+  followers: підписники
+  followed: підписки
+  Follow: Підписатися
+  Unfollow: Відписатися  

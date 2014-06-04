@@ -18,6 +18,7 @@ class UsersController < ApplicationController
 
 
   def show
+    I18n.locale = @user.prefer_lang
     @message = Message.new
 		@articles = @user.user_articles.order(created_at: :desc).paginate(page: params[:page], per_page: 9)
 		@user_created_at = @user.created_at.strftime("%d %B %Y")
@@ -80,6 +81,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :avatar, :avatar_cache, :age, :sex, :hometown, :email, :password, :pasword_confirmation, :paused)
+    params.require(:user).permit(:first_name, :last_name, :avatar, :avatar_cache, :age, :sex, :hometown, :email, :password, :pasword_confirmation, :paused, :prefer_lang)
   end
 end

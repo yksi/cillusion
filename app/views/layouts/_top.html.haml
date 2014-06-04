@@ -9,11 +9,11 @@
       .collapse.navbar-collapse.NAVCOl
         .nav.navbar-left.navbar-nav
           - if user_signed_in?
-            %li.nav-btn{"data-toggle" => "tooltip", "data-placement" => "bottom", title: "Browse website"}
+            %li.nav-btn{"data-toggle" => "tooltip", "data-placement" => "bottom", title: t("Browse_website")}
               = link_to browse_articles_path do
                 .rounded-btn.animated.browse-btn.bounceInDown
                   %i.fa.fa-book.fa-2x
-            %li.nav-btn{"data-toggle" => "tooltip", "data-placement" => "bottom", title: "News timeline"}
+            %li.nav-btn{"data-toggle" => "tooltip", "data-placement" => "bottom", title: t('Timeline')}
               = link_to browse_timeline_path do
                 .rounded-btn.timeline-btn.animated.bounceInDown
                   %i.fa.fa-clock-o.fa-2x
@@ -21,7 +21,7 @@
                     #span.new_logs
                       %i.fa.fa-circle.text-danger
             %li.headerDivider
-            %li.nav-btn{"data-toggle" => "tooltip", "data-placement" => "bottom", title: "Messages"}
+            %li.nav-btn{"data-toggle" => "tooltip", "data-placement" => "bottom", title: t('Messages')}
               =link_to messages_path do
                 .rounded-btn.messages-btn.animated.bounceInDown
                   %i.fa.fa-envelope.fa-2x
@@ -31,13 +31,13 @@
                       - @count += 1
                   - if @count > 0
                     #span.new_messages= @count
-            %li.nav-btn{"data-toggle" => "tooltip", "data-placement" => "bottom", title: "Groups"}
+            %li.nav-btn{"data-toggle" => "tooltip", "data-placement" => "bottom", title: t("Groups")}
               = link_to groups_path do
                 .rounded-btn.groups-btn.animated.bounceInDown
                   %i.fa.fa-briefcase.fa-2x
             %li
               = form_tag browse_articles_path, method: 'get', style: "margin-top:20px;" do
-                = text_field_tag :search, params[:search], class: "nav-search form-control", placeholder: "Search"
+                = text_field_tag :search, params[:search], class: "nav-search form-control", placeholder: t('search')
         .nav.navbar-right.navbar-nav.animated.bounceInRight
           -if user_signed_in?
             %li.nav-btn
@@ -48,11 +48,11 @@
                 .pander.text-center
                   %li
                     = link_to new_article_path, class: 'btn btn-default btn-lg' do
-                      %i.fa.fa-book.text-success &nbsp;&nbsp;ARTICLE
+                      %i.fa.fa-book.text-success &nbsp;&nbsp;#{t('Article')}
                   %br
                   %li
                     = link_to new_group_path, class: 'btn btn-default btn-lg' do
-                      %i.fa.fa-briefcase.text-danger &nbsp;&nbsp;GROUP
+                      %i.fa.fa-briefcase.text-danger &nbsp;&nbsp;#{t('Group')}
             %li.dropdown.nav-btn
               %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
                 = image_tag current_user.avatar.small.url, class: 'img-circle', width: '48px'
@@ -61,16 +61,16 @@
               %ul.dropdown-menu
                 %li
                   = link_to current_user do
-                    %i.fa.fa-home= " My Account"
+                    %i.fa.fa-home= " #{t('My_account')}"
                 %li
                   = link_to edit_user_registration_path(current_user) do
-                    %i.fa.fa-gear= " Account settings"
+                    %i.fa.fa-gear= " #{t('Account_settings')}"
                 %li
                   = link_to articles_path do
-                    %i.fa.fa-calendar= " My Calendar"
+                    %i.fa.fa-calendar= " #{t('My_calendar')}"
                 %li
                   = link_to destroy_user_session_path, method: :delete do
-                    %i.fa.fa-times= " Sign out"
+                    %i.fa.fa-times= " #{t('Sign_out')}"
           -else
             %li
               .sign_up

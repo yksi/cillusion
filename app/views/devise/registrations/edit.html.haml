@@ -19,6 +19,9 @@
           = f.text_field :last_name, class: "form-control"
       Email:
       = f.email_field :email, :autofocus => true, class: "form-control"
+      %br
+      Interface language
+      = f.select :prefer_lang, ['en', 'uk'], class: "styled-select", selected: current_user.prefer_lang 
     .well
       %h2 Additional profile settings
       Choose your profile photo

@@ -3,11 +3,11 @@
     %i.fa.fa-lg.fa-eye
   .timeline-panel
     .timeline-body
-      %h3{style: 'margin-top:0px;'} You have got new reader
+      %h3{style: 'margin-top:0px;'}= t('New_view_event')
       .pander
         = link_to user do
           = image_tag user.avatar.small.url, class: 'img-circle'
           = user.fullname
-        read your article
+        = t('read_your_article')
         = link_to logable.article.theme, logable.article
-        %em.text-muted= "#{time_ago_in_words(logable.created_at)} ago."
+        %em.text-muted= "#{time_ago_in_words(logable.created_at)} #{t('ago')}."

@@ -3,10 +3,10 @@
     %i.fa.fa-lg.fa-users
   .timeline-panel
     .timeline-body
-      %h3{style: 'margin-top:0px;'} You have got new follower
+      %h3{style: 'margin-top:0px;'}= t('New_follower_event')
       .pander
         = link_to logable.follower do
           = image_tag logable.follower.avatar.small.url, class: 'img-circle'
           = logable.follower.fullname
-        followed you
-        %em.text-muted= "#{time_ago_in_words(logable.created_at)} ago."
+        = t('followed_you')
+        %em.text-muted= "#{time_ago_in_words(logable.created_at)} #{t('ago')}."

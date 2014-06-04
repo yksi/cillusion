@@ -16,35 +16,35 @@
             = render 'follow', user: @user
           %a.btn.btn-block.btn-primary{ data: { toggle: 'modal', target: '#modal-message' } }
             %i.fa.fa-envelope
-            &nbsp;Private message
+            &nbsp;#{t('Private_message')}
         - if @user == current_user
           .text-center{style: 'margin-left:24px'}
             = link_to edit_user_registration_path, class: 'btn btn-default' do
               %i.fa.fa-pencil
-              &nbsp;Edit profile
+              &nbsp;#{t('Edit_profile')}
       .col-md-10
         %h2{style: 'margin:0px;display:inline;'}
           = @user.fullname
-        = @user.online? ? 'online' : "last activity #{time_ago_in_words(@user.updated_at)} ago."
+        = @user.online? ? t('online') : "#{t('last_activity')} #{time_ago_in_words(@user.updated_at)} #{t('ago')}."
         .row.user-inform-pane
           .col-md-10.col-md-offset-2
             .row{style: 'color:white'}
               .col-md-4
                 .text-center
                   %h5
-                    %strong followers
+                    %strong= t('followers')
                   %a.counter{ href: '#', data: { toggle: 'modal', target: ('#modal-followers' if @followers.count > 0)}}
                     %h3.followers_counter{style:'margin-top:0px'}= @user.followers.count
               .col-md-4
                 .text-center
                   %h5
-                    %strong followed
+                    %strong= t('followed')
                   %a.counter{ href: '#', data: { toggle: 'modal', target: ('#modal-followed' if @followed.count > 0)}}
                     %h3{style:'margin-top:0px'}= @user.followed_users.count
               .col-md-4
                 .text-center
                   %h5
-                    %strong articles
+                    %strong= t('articles')
                   %h3.scrart{style:'margin-top:0px'}= @user.user_articles.count
         .row
           .col-md-7
@@ -63,7 +63,7 @@
             - if Identity.where(user_id: @user.id).any?
               .label.label-primary.label-lg
                 %i.fa.fa-facebook.fa-lg
-              &nbsp;Connected with facebook
+              &nbsp;#{t('Connected_with_facebook')}
         - if @user.about
           .row.about= "\"#{@user.about}\""
 
@@ -75,7 +75,7 @@
           .col-md-8
             %h1
               .label.label-success
-                Articles
+                = t('Articles')
           .col-md-4
             .pull-right
               .digg_pagination
