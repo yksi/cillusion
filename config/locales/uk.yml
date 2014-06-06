@@ -12,6 +12,12 @@ uk:
       about_x_hours:
         one: годину
         other: "%{count} годин"
+      x_months:
+        one: місяць
+        other: '%{count} місяців'
+      about_x_months:
+        one: блоизько місяця
+        other: 'близько %{count} місяців'
   welcome_text: Ласкаво просимо до
   search: Пошук
   online: Зараз на сайті

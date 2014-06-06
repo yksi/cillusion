@@ -8,6 +8,7 @@ Bundler.require(:default, Rails.env)
 
 module Illusion
   class Application < Rails::Application
+    config.assets.precompile += %w( ckeditor/**/*.js ckeditor/**/*.css )
     config.assets.initialize_on_precompile = false
     config.i18n.enforce_available_locales = true
     config.generators do |g|

@@ -1,10 +1,10 @@
 .pander-sm
-  %h1.text-center
-    = @group.name
-    %br
+  .text-center
+    %h1
+      = @group.name
+      %br
     - if user_signed_in? && @group.user == current_user
-      = link_to "add article", "#", class: "btn btn-default btn-xs", data: { toggle: "modal", target: "#add_article_to_group" }
-      = link_to "delete group", @group, method: :delete,  class: "btn btn-danger btn-xs", "data-confirm" => "Really want to delete this group?"
+      = render 'admin_panel', group: @group
   %h4.text-center
     %em.text-muted= @group.description
   %h5.text-center

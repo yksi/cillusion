@@ -21,6 +21,26 @@ class Group < ActiveRecord::Base
     views
   end
 
+  def views
+    views = []
+    articles.order(created_at: :asc).each do |article|
+      article.views.each do |view|
+        views << view
+      end
+    end
+    views
+  end
+
+  def comments
+    comments = []
+    articles.order(created_at: :asc).each do |article|
+      article.comments.each do |comment|
+        comments << comment
+      end
+    end
+    comments
+  end
+
   def self.search(search)
     if search
       self.where('lower(name) LIKE ?', "%#{search}%")

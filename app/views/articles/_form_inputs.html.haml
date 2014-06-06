@@ -2,34 +2,43 @@
 %br
 = form_for @article do |f|
   = f.hidden_field :group_id, value: params[:group_id] if params[:group_id].present?
-  .col-xs-12.col-sm-6.col-md-8.animated.bounceInLeft
+  .main-article-pane  
     - if @article.errors.any?
       .panel.panel-danger
         .panel-heading
           Errors
         .panel-body
-          -@article.errors.full_messages.each do |ue|
+          -@article.errors.full_messaes.each do |ue|
             %i.fa.fa-warning= "#{ue}"
-    .pull-left= link_to "Organize with groups", new_group_path, class: "btn btn-primary btn-sm"
     .text-right
-      %a.hide-side.btn.btn-default{ data: { show: 'true' } }
-        %i.fa.fa-arrow-right
+      - if !current_page?(new_article_path)
+        = link_to @article, method: :delete, class: "btn btn-danger", data: { confirm: 'Are you sure want to delete article ' }  do
+          %i.fa.fa-times
     %br
-    .pander
-      = f.text_field :theme, placeholder: "Theme...", class: "form-control article-theme", style: "width: 100%;", value: (params[:theme].present? ? params[:theme] : @article.theme )
+      = f.text_field :theme, placeholder: "Theme...", class: "article-theme",autocomplete: 'off' , style: "width: 100%;", value: (params[:theme].present? ? params[:theme] : @article.theme )
+    %br
+    .text-center= f.cktext_area :content, id: 'editor'
+    %br
+  .side-panel-article
+    = button_tag(type: "submit", class: "orange-d2 pull-left") do
+      %i.fa.fa-check.fa-lg= " Save"
+    %button.gray-d2.pull-right{href: '#', data: { toggle: 'modal', target: '#paste_html' } }
+      %i.fa.fa-code.fa-lg &nbsp;Paste html 
+    %br
+    .container-dial
       %br
-      = f.cktext_area :content, id: 'editor'
-    %br
-  .col-xs-6.col-md-4.animated.bounceInRight
-    - if !current_page?(new_article_path)
-      = link_to @article, method: :delete, class: "btn btn-danger btn-sm" do
-        %i.fa.fa-times= " Remove"
-    = button_tag(type: "submit", class: "btn btn-success btn-sm article-submit") do
-      %i.fa.fa-check= " Save"
-    %a.btn.btn-default.btn-sm{href: '#', data: { toggle: 'modal', target: '#paste_html' } } Paste html
-    %hr
-    = label_tag "Category:"
-    = f.select :category, @category, class: "styled-select"
-    %br= label_tag "Photo:"
-    = f.file_field :photo, id: "file-input"
-    #imagee= image_tag @article.photo.url
+      %br
+      .text-center= f.select :category, @category, included_blank: true, class: "styled-select"
+      = f.file_field :photo, id: "file-input"
+      %br
+      %br
+      .row
+        .col-md-10.col-md-offset-1  
+          - if @article.photo?
+            #imagee.get_cover= image_tag @article.photo.url, class: 'img-thumbnail'
+          - else
+            #imagee.get_cover
+              .text-center.pander
+                %i.fa.fa-5x.fa-upload
+                %h3 Choose article cover image
+          %br

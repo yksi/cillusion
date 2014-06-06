@@ -117,5 +117,12 @@ $(document).on("page:change", function() {
       $('.right-pane').css('right', '-300px'); 
       setTimeout (function() {$('.btn-hide-right-pane').show()}, 1000 )
     }
-});
+  });
+
+  $('.get_cover').click(function() {
+    $('#file-input').click();
+  }).show();
+
+  $('.select2-drop-mask').html('<i class="fa fa-book"></i>');
+
 });

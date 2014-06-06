@@ -11,7 +11,7 @@ html, body {
 }
 
 #imagee {
-  max-width: 200px;
+  max-width: 300px;
 }
 
 textarea {
@@ -500,4 +500,69 @@ img.miniature {
 .btn-hide-right-pane:hover {
   background-color: #6576A2;
   color: #fff;
+}
+
+.side-panel-article {
+  background-color: #1B945D;
+  color: white;
+  padding: 0px;
+  position: fixed;
+  height: 100%;
+  right: 0;
+  top: 78px;
+  width: 300px;
+}
+
+.orange-d2 {
+  background-color: orange;
+  width: 50%;
+  border: none;
+  padding: 20px 10px;
+}
+
+.gray-d2 { 
+  background-color: gray;
+  width: 50%;
+  border: none;
+  padding: 20px 10px;
+}
+
+#file-input { 
+  display: none;
+}
+
+.container-dial {
+  padding: 20px;
+}
+
+.get_cover {
+  color: silver;
+  cursor: pointer;
+  transition: color 0.3s ease-in;
+}
+
+.get_cover:hover {
+  color: gray;
+}
+
+.main-article-pane {
+  padding-top: 20px;
+  padding-left: 30px;
+  padding-right: 330px;
+  background-color: #ABFAA2;
+  position: absolute;
+  top: 78px;
+}
+
+.article-theme {
+  background-color: transparent;
+  border: none;
+  font-size: 25px;
+  font-weight: bold; 
+  height: 50px;
+  padding: 15px;
+}
+
+.article-theme:focus {
+    outline: none;
 }

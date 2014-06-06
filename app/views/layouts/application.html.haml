@@ -43,10 +43,10 @@
                         Don't know, what is
                         %strong CILLUSION
                         ?
-                    %br/
+                    %br
                     %h3
                       %span Use info links below.
-                    %br/
+                    %br
                     %div
                       %a.btn.btn-theme.btn-sm.btn-min-block{href: "#", data: { toggle: "modal", target: "#modal-video" } } Info video
                       %a.btn.btn-theme.btn-sm.btn-min-block{href: "http://illusion.wikia.com/wiki/Main_Page"} Wiki
@@ -56,10 +56,10 @@
                   .col-md-12.text-center
                     %h2
                       %span Have any ideas
-                    %br/
+                    %br
                     %h3
                       %span To make better Cillusion together.
-                    %br/
+                    %br
                     %div
                       %a.btn.btn-theme.btn-sm.btn-min-block{href: "mailto:embox@ukr.net"} Send feedback to developer
             %a.left.carousel-control{"data-slide" => "prev", href: "#carousel-example-generic"}
@@ -82,7 +82,7 @@
                 - image = '/assets/warning.png'
               = js add_gritter("#{msg}", image: image, title: title)
         %br
-        .container
+        %div{  class: "#{'container' if !['new', 'edit'].include?(params[:action]) }"  } 
           - if !user_signed_in? || !current_user.paused
             = yield
           - else
