@@ -1,11 +1,22 @@
 class UsersController < ApplicationController
-  before_action :find_user, only: [:show, :edit, :follows, :followers, :follow, :unfollow]
+  before_action :find_user, only: [:show, :edit, :follows, :follow, :unfollow, :followers, :followed]
 
   def update
     @user = User.find(current_user.id)
     if @user.update_attributes(user_params)
     end
     redirect_to root_path
+  end
+
+  def unique
+    uid = params[:uid]
+    respond_to do |format|
+      if User.find_by_uid(uid).nil?
+        format.js { render text: "avialible" }
+      else
+        format.js { render text: "already taken" }
+      end
+    end
   end
 
   def index
@@ -52,10 +63,6 @@ class UsersController < ApplicationController
     current_user.follow(@user)
   end
 
-  def followers
-    @users = @user.followers
-  end
-
   def follow
     rel = current_user.follow!(@user)
     rel.track_log(current_user)
@@ -72,15 +79,31 @@ class UsersController < ApplicationController
     end
   end
 
+  def followers
+    @followers = @user.followers
+    if @followers.any?
+      render json: { html: render_to_string(partial: "users/followers", formats: [:html]) }
+    end
+  end
+
+  def followed
+    @followed = @user.followed_users
+    if @followed.any?
+      render json: { html: render_to_string(partial: "users/followed", formats: [:html]) }
+    end
+  end
+
   private
 
   def find_user
-    get_params = params[:id].split('_')
-    p get_params
-    @user = (get_params.length > 2) ? User.find(get_params[2]) : User.find(:first, conditions: ["lower(first_name) LIKE ? AND lower(last_name) LIKE ?", get_params[0].downcase.mb_chars.downcase.to_s, get_params[1].downcase.mb_chars.downcase.to_s] )
+    if User.find_by_uid(params[:id])
+      @user = User.find_by_uid(params[:id])
+    else
+      @user = User.find(params[:id].split('id')[1])
+    end
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :avatar, :avatar_cache, :age, :sex, :hometown, :email, :password, :pasword_confirmation, :paused, :prefer_lang)
+    params.require(:user).permit(:first_name, :last_name, :avatar, :avatar_cache, :age, :sex, :hometown, :email, :password, :pasword_confirmation, :paused, :prefer_lang, :uid)
   end
 end

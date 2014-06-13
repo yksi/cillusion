@@ -33,13 +33,13 @@
                 .text-center
                   %h5
                     %strong= t('followers')
-                  %a.counter{ href: '#', data: { toggle: 'modal', target: ('#modal-followers' if @followers.count > 0)}}
+                  = link_to users_followers_path(id: @user), remote: true, class: 'counter followers-btn' do
                     %h3.followers_counter{style:'margin-top:0px'}= @user.followers.count
               .col-md-4
                 .text-center
                   %h5
                     %strong= t('followed')
-                  %a.counter{ href: '#', data: { toggle: 'modal', target: ('#modal-followed' if @followed.count > 0)}}
+                  = link_to users_followed_path(id: @user), remote: true, class: 'counter followed-btn' do
                     %h3{style:'margin-top:0px'}= @user.followed_users.count
               .col-md-4
                 .text-center
@@ -48,7 +48,7 @@
                   %h3.scrart{style:'margin-top:0px'}= @user.user_articles.count
         .row
           .col-md-7
-            - if !@user.sex.nil?
+            - if @user.sex.present?
               %i.fa.fa-lg{class: "fa-#{@user.gender}"}
               = @user.gender
               %br
@@ -81,14 +81,9 @@
               .digg_pagination
                 .page-info= page_entries_info @articles if @articles.total_pages > 1
                 = will_paginate @articles
-
         .row.user_articles
           - @articles.each do |article|
             .col-md-4= render 'articles/article', article: article
       - else
         %h1.text-center.text-muted= "#{@user.first_name} has no created any articles yet"
-  = render "followers"
-  = render "followed"
-  = render "avatar_modal"
-  = render "messages/form"
 

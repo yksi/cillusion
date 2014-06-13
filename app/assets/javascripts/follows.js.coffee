@@ -25,3 +25,15 @@ $(document).on 'click', '.btn-unfollow', (e) ->
       $('.followers_counter').html($num-1)
       $('.btn-unfollow').removeClass('btn-unfollow').addClass('btn-follow').html('<i class="fa fa-thumbs-up pull-left follows-icon"></i> Follow')
       $('.followers_counter').html($num-1)
+
+$(document).on 'ajax:success', '.followers-btn', (e, data) ->
+  $('.modal').modal('hide')
+  $(data.html).modal('show')
+
+$(document).on 'ajax:success', '.followed-btn', (e, data) ->
+  $('.modal').modal('hide')
+  $(data.html).modal('show')
+
+$(document).on 'mousedown', '.followers-btn, .followed-btn', (key) ->
+  window.oncontextmenu = ->
+    false

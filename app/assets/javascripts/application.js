@@ -12,6 +12,7 @@
 //= require select
 //= require helps
 //= require select2
+//= require validator
 
 
 

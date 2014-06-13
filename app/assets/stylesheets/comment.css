@@ -5,13 +5,9 @@
   float: right;
   border-radius: 0px;
   border-bottom: solid black;
-
   border: 4px #AAA solid;
-
   background-color: rgba(255, 255, 255, 0.6);
-
   padding: 14px;
   margin-bottom: 5px;
-
   word-wrap: break-word;
 }

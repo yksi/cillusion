@@ -21,7 +21,11 @@
       = f.email_field :email, :autofocus => true, class: "form-control"
       %br
       Interface language
-      = f.select :prefer_lang, ['en', 'uk'], class: "styled-select", selected: current_user.prefer_lang 
+      = f.select :prefer_lang, ['en', 'uk'], class: "styled-select", selected: current_user.prefer_lang
+      %br
+      Username:
+      = f.text_field :uid, :autofocus => true, class: "form-control", pattern: '^[A-Za-z0-9_]{4,20}$'
+      #username_message
     .well
       %h2 Additional profile settings
       Choose your profile photo

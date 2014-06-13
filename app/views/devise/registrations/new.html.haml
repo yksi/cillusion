@@ -18,14 +18,14 @@
           %i.fa.fa-facebook.fa-lg
     %br
     .row
-      .col-md-6=f.text_field :first_name, class: 'form-control', placeholder: "*Enter your firsname...", pattern: "[a-zA-Z]+"
-      .col-md-6=f.text_field :last_name, class: 'form-control', placeholder: "Enter your lastname..."
+      .col-md-6=f.text_field :first_name, class: 'form-control', placeholder: "Firsname"
+      .col-md-6=f.text_field :last_name, class: 'form-control', placeholder: "Lastname"
     %br
-    = f.email_field :email, :autofocus => true, class: 'form-control', placeholder: "*Enter your email..."
+    = f.email_field :email, :autofocus => true, class: 'form-control', placeholder: "Email"
     %br
-    = f.password_field :password, class: 'form-control', placeholder: "*Enter your password..."
+    = f.password_field :password, class: 'form-control', placeholder: "Password"
     %br
-    = f.password_field :password_confirmation, class: 'form-control', placeholder: "*Confirm your password..."
+    = f.password_field :password_confirmation, class: 'form-control', placeholder: "Password confirm"
     %br
     %b.text-muted.pull-right
       Already have a profile?

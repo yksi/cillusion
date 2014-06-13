@@ -5,7 +5,7 @@ $(document).on("page:change", function() {
       e.target.files[0],
       function (img) {
         img.setAttribute("width", "100%");
-        img.setAttribute("height", "auto%");
+        img.setAttribute("height", "auto");
         $('#imagee').fadeIn().html(img);
       },
       { maxWidth: 300 }
@@ -113,8 +113,8 @@ $(document).on("page:change", function() {
 
   $('body').click(function(e) {
     var mouseR = $(document).width() - e.pageX
-    if( mouseR > 300 ) { 
-      $('.right-pane').css('right', '-300px'); 
+    if( mouseR > 300 ) {
+      $('.right-pane').css('right', '-300px');
       setTimeout (function() {$('.btn-hide-right-pane').show()}, 1000 )
     }
   });
@@ -124,5 +124,4 @@ $(document).on("page:change", function() {
   }).show();
 
   $('.select2-drop-mask').html('<i class="fa fa-book"></i>');
-
 });

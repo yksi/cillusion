@@ -7,23 +7,22 @@ Illusion::Application.routes.draw do
   get "browse/articles"
   get 'browse/groups'
   get "articles/search"
-  root "users#index"
-  get "users/index"
-  get "comments/show"
+  root to: "users#index"
+  get 'users/followers'
+  get 'users/followed'
+  get 'users/unique'
 
   scope controller: :terms, path: 'lead' ,only: [] do
     get :eula
   end
 
   devise_for :users, controllers: { registrations: 'users/registrations', omniauth_callbacks: "users/omniauth_callbacks"}
-
-  # resources :users
-  # resources :users, path: '/', only: [:show, :index]
+  resources :users, only: [:show, :index], shallow: true
 
   resources :articles
   resources :follows, only: [:create, :destroy]
   resources :comments
-  resources :groups, only: [:create, :new, :show]
+  resources :groups, path_names: { root: 'my' }
 
 
   resources :users do

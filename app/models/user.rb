@@ -25,12 +25,12 @@ class User < ActiveRecord::Base
                                    class_name:  "View",
                                    dependent:   :destroy
   has_many :refered_logs, class_name: 'Log', foreign_key: 'owner_id'
-  validates :first_name, presence: true, length: {in: 2..30}
-  validates :last_name, presence: true, length: {in: 2..30}
-
+  validates :first_name, presence: true, length: { in: 2..30 }
+  validates :last_name, presence: true, length: { in: 2..30 }
+  validates :uid, length: { in: 4..20 }, uniqueness: { case_sensitive: false }
 
   def fullname
-    return "#{self.first_name} #{self.last_name}"
+    "#{self.first_name} #{self.last_name}"
   end
 
   def is_all_fields_filled?
@@ -100,11 +100,10 @@ class User < ActiveRecord::Base
   end
 
   def to_param
-    username = self.fullname.gsub(' ','_').downcase
-    if User.where(first_name: self.first_name).first == self
-      "#{username}"
+    if uid.nil?
+      "id#{id}"
     else
-      "#{username}_#{self.id}"
+      uid
     end
   end
 
