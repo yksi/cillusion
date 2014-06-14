@@ -3,7 +3,7 @@ $(document).on 'click', '.btn-follow', (e) ->
   $num = parseInt($('.followers_counter').html())
   console.log($num)
   $.ajax({
-    url: '/users/__' + $id + '/follow'
+    url: '/users/id' + $id + '/follow'
     type: 'post'
     dataType: 'json'})
     .done (data) ->
@@ -17,7 +17,7 @@ $(document).on 'click', '.btn-unfollow', (e) ->
   $num = parseInt($('.followers_counter').html())
   console.log($id)
   $.ajax({
-    url: '/users/__' + $id + '/unfollow'
+    url: '/users/id' + $id + '/unfollow'
     type: 'post'
     dataType: 'json'})
     .done (data) ->
