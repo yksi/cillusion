@@ -23,7 +23,6 @@ $(document).on("page:change", function() {
       var reader = new FileReader();
       reader.onload = (function(theFile) {
         return function(e) {
-          alert(reader.height + ":" + reader.width)
           var span = document.createElement('span');
           $('.pander-prof').css('background-image', 'url(' + e.target.result + ')');
           $('.select-cover').remove();
