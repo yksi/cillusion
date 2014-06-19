@@ -273,6 +273,10 @@ figure.photo:hover .btn-pick-photo {
   background-color: #3FDFAA;
 }
 
+.pander-prof {
+  text-shadow: 0px 0px 6px rgba(255, 255, 255, 1);
+  font-weight: bold;
+}
 .group-thumb {
   min-height: 200px;
 }

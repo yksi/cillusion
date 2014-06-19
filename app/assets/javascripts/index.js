@@ -1,4 +1,38 @@
 $(document).on("page:change", function() {
+  $save_cover = document.createElement('input');
+  $save_cover.setAttribute('type', 'submit');
+  $save_cover.setAttribute('value', 'Save cover');
+  $save_cover.setAttribute('class', 'btn btn-success btn-sm');
+  $('.select-cover').click(function() {
+    $('.cover-image').click();
+  }).show();
+
+  $('.cover-image').change(function(e) {
+    if($(this).val()){
+      handleFileSelect(e);
+    }
+  });
+
+  function handleFileSelect(evt) {
+    var files = evt.target.files;
+    for (var i = 0, f; f = files[i]; i++) {
+      if (!f.type.match('image.*')) {
+        continue;
+      }
+
+      var reader = new FileReader();
+      reader.onload = (function(theFile) {
+        return function(e) {
+          alert(reader.height + ":" + reader.width)
+          var span = document.createElement('span');
+          $('.pander-prof').css('background-image', 'url(' + e.target.result + ')');
+          $('.select-cover').remove();
+          $('.edit_user').append($save_cover);
+        };
+      })(f);
+      reader.readAsDataURL(f);
+    }
+  }
 
   $('#file-input').change(function(e) {
     loadImage(
@@ -120,8 +154,12 @@ $(document).on("page:change", function() {
   });
 
   $('.get_cover').click(function() {
-    $('#file-input').click();
+    alert('yes')
   }).show();
 
   $('.select2-drop-mask').html('<i class="fa fa-book"></i>');
 });
+
+function triggers_s (argument) {
+  $('.edit_cover_form').submit();
+}

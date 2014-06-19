@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   TEMP_EMAIL_REGEX = /change@me.com/
 
   mount_uploader :avatar, AvatarUploader
+  mount_uploader :cover, CoverUploader
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   devise :omniauthable, :omniauth_providers => [:facebook]

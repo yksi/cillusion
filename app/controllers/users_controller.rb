@@ -27,6 +27,9 @@ class UsersController < ApplicationController
     end
   end
 
+  def cover
+    current_user.update_column(:cover, params[:cover])
+  end
 
   def show
     I18n.locale = current_user.prefer_lang if user_signed_in?
@@ -104,6 +107,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :avatar, :avatar_cache, :age, :sex, :hometown, :email, :password, :pasword_confirmation, :paused, :prefer_lang, :uid)
+    params.require(:user).permit(:first_name, :last_name, :avatar, :cover, :avatar_cache, :age, :sex, :hometown, :email, :password, :pasword_confirmation, :paused, :prefer_lang, :uid)
   end
 end

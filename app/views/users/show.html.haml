@@ -2,7 +2,15 @@
 - if @user.paused
   %h1 #{@user.fullname} has been suspended his/her profile
 - else
-  .pander-prof
+  .pander-prof{style: "background: linear-gradient(to bottom, rgba(255,255,255,0.5) 0%,rgba(255,255,255,0.5) 100%), url(#{@user.cover.url}) repeat 0 0;"}
+    - if @user == current_user
+      .text-right
+        .btn.btn-info.btn-sm.select-cover
+          %i.fa.fa-file
+          Edit cover
+        = form_for current_user, url: { action: 'cover' } do |f|
+          = f.file_field :cover, class: 'cover-image', style: 'display:none'
+
     .row
       .col-md-2{ style: 'z-index:800' }
         %a.text-center{ href: ("#" if @user.avatar?), data: { toggle: 'modal', target: ("#modal-avatar" if @user.avatar?) } }
@@ -64,9 +72,8 @@
               .label.label-primary.label-lg
                 %i.fa.fa-facebook.fa-lg
               &nbsp;#{t('Connected_with_facebook')}
-        - if @user.about
+        - if @user.about.present?
           .row.about= "\"#{@user.about}\""
-
 
   %br
     .pander-sm
@@ -86,4 +93,5 @@
             .col-md-4= render 'articles/article', article: article
       - else
         %h1.text-center.text-muted= "#{@user.first_name} has no created any articles yet"
+= render 'messages/form'
 
