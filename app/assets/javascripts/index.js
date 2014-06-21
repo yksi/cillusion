@@ -153,7 +153,7 @@ $(document).on("page:change", function() {
   });
 
   $('.get_cover').click(function() {
-    alert('yes')
+    $('#file-input').click();
   }).show();
 
   $('.select2-drop-mask').html('<i class="fa fa-book"></i>');
