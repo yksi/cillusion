@@ -14,6 +14,12 @@ Illusion::Application.routes.draw do
   get 'users/cover'
   get 'api/get_user'
   get 'api/get_my_articles'
+  get 'api/get_article_image'
+  get 'api/get_followers'
+  get 'api/get_all_users'
+  get 'api/get_user_articles'
+  get 'api/get_fullname'
+  get 'api/get_article_comments'
 
   scope controller: :terms, path: 'lead' ,only: [] do
     get :eula

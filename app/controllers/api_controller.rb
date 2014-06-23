@@ -17,4 +17,63 @@ class ApiController < ApplicationController
       render text: 'access denieded'
     end
   end
+
+  def get_article_image
+    article = Article.find(params[:a])
+    render text: article.photo.url
+  end
+
+  def get_followers
+    email = params[:e]
+    password = params[:p]
+    user = User.find_by_email(email)
+    if user && user.valid_password?(password)
+      render json: user.followers
+    else
+      render text: 'access denieded'
+    end
+  end
+
+  def get_all_users
+    email = params[:e]
+    password = params[:p]
+    user = User.find_by_email(email)
+    if user && user.valid_password?(password)
+      render json: User.all
+    else
+      render text: 'access denieded'
+    end
+  end
+
+  def get_user_articles
+    email = params[:e]
+    password = params[:p]
+    user = User.find_by_email(email)
+    reguest_user = User.find(params[:u])
+    if user && user.valid_password?(password)
+      render json: reguest_user.user_articles
+    else
+      render text: 'access denieded'
+    end
+  end
+
+  def get_fullname
+    if params[:u].present?
+      render text: User.find(params[:u]).fullname
+    else
+      render text: 'Undefined'
+    end
+  end
+
+  def get_article_comments
+    email = params[:e]
+    password = params[:p]
+    user = User.find_by_email(email)
+    article = Article.find(params[:a])
+    if user && user.valid_password?(password)
+      render json: article.comments
+    else
+      render text: 'access denieded'
+    end
+  end
 end
