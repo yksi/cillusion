@@ -76,4 +76,22 @@ class ApiController < ApplicationController
       render text: 'access denieded'
     end
   end
+
+  def get_user_avatar
+    user = User.find(params[:u])
+    version = params[:v]
+    render text: user.avatar.url(check_version(version))
+  end
+
+  private
+
+  def check_version version
+    if version == "small"
+      :small
+    elsif version == "thumb"
+      :thumb
+    else
+      nil
+    end
+  end
 end

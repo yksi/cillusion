@@ -13,6 +13,7 @@ Illusion::Application.routes.draw do
   get 'users/unique'
   get 'users/cover'
   get 'api/get_user'
+  get 'api/get_user_avatar'
   get 'api/get_my_articles'
   get 'api/get_article_image'
   get 'api/get_followers'
