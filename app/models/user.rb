@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   TEMP_EMAIL = 'change@me.com'
   TEMP_EMAIL_REGEX = /change@me.com/
 
+  before_create :set_uid
+
   mount_uploader :avatar, AvatarUploader
   mount_uploader :cover, CoverUploader
   devise :database_authenticatable, :registerable,
@@ -28,7 +30,7 @@ class User < ActiveRecord::Base
   has_many :refered_logs, class_name: 'Log', foreign_key: 'owner_id'
   validates :first_name, presence: true, length: { in: 2..30 }
   validates :last_name, presence: true, length: { in: 2..30 }
-  validates :uid, length: { in: 4..20 }, uniqueness: { case_sensitive: false }
+  validate :uid, length: { in: 4..20 }, uniqueness: { case_sensitive: false }
 
   def fullname
     "#{self.first_name} #{self.last_name}"
@@ -140,6 +142,12 @@ class User < ActiveRecord::Base
         log.update_column(:viewed, true)
       end
     end
+  end
+
+  private
+
+  def set_uid
+    self.uid = Digest::SHA1.hexdigest([Time.now, rand].join)
   end
 
 end

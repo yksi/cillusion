@@ -8,6 +8,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def create
     @user = User.new(sign_up_params)
+    @candidate = "#{@user.first_name} #{@user.last_name} #{@user.id}".parameterize
     if @user.save
       UserMailer.welcome_email(@user).deliver
       sign_up(:user, @user)
