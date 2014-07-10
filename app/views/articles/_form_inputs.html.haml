@@ -2,7 +2,7 @@
 %br
 = form_for @article do |f|
   = f.hidden_field :group_id, value: params[:group_id] if params[:group_id].present?
-  .main-article-pane  
+  .main-article-pane
     - if @article.errors.any?
       .panel.panel-danger
         .panel-heading
@@ -23,7 +23,7 @@
     = button_tag(type: "submit", class: "orange-d2 pull-left") do
       %i.fa.fa-check.fa-lg= " Save"
     %button.gray-d2.pull-right{href: '#', data: { toggle: 'modal', target: '#paste_html' } }
-      %i.fa.fa-code.fa-lg &nbsp;Paste html 
+      %i.fa.fa-code.fa-lg &nbsp;Paste html
     %br
     .container-dial
       %br
@@ -33,7 +33,7 @@
       %br
       %br
       .row
-        .col-md-10.col-md-offset-1  
+        .col-md-10.col-md-offset-1
           - if @article.photo?
             #imagee.get_cover= image_tag @article.photo.url, class: 'img-thumbnail'
           - else

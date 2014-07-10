@@ -9,7 +9,7 @@ test:
   encoding: utf8
   database: illusion_test
   pool: 5
-  
+
 production:
   adapter: postgresql
   encoding: unicode

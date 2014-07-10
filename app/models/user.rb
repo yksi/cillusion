@@ -82,7 +82,6 @@ class User < ActiveRecord::Base
         user = User.new(
           first_name: auth.extra.raw_info.first_name,
           last_name: auth.extra.raw_info.last_name,
-          #username: auth.info.nickname || auth.uid,
           email: auth.info.email.blank? ? TEMP_EMAIL : auth.info.email,
           password: Devise.friendly_token[0,20]
         )
