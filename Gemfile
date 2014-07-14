@@ -12,7 +12,7 @@ gem "watu_table_builder", :require => "table_builder"
 gem 'rails_12factor'
 gem 'carrierwave'
 gem 'fog'
-gem "mini_magick", "~> 3.6.0"
+gem "mini_magick"
 gem "mailcatcher"
 gem 'unf'
 gem 'turbolinks'

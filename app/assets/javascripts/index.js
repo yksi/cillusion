@@ -33,17 +33,17 @@ $(document).on("page:change", function() {
     }
   }
 
-  $('#file-input').change(function(e) {
-    loadImage(
-      e.target.files[0],
-      function (img) {
-        img.setAttribute("width", "100%");
-        img.setAttribute("height", "auto");
-        $('#imagee').fadeIn().html(img);
-      },
-      { maxWidth: 300 }
-    );
-  });
+  // $('#file-input').change(function(e) {
+  //   loadImage(
+  //     e.target.files[0],
+  //     function (img) {
+  //       img.setAttribute("width", "100%");
+  //       img.setAttribute("height", "auto");
+  //       $('#imagee').fadeIn().html(img);
+  //     },
+  //     { maxWidth: 300 }
+  //   );
+  // });
 
   $( "#target" ).click(function() {
     document.getElementById("divq").className = "";
@@ -152,9 +152,9 @@ $(document).on("page:change", function() {
     }
   });
 
-  $('.get_cover').click(function() {
-    $('#file-input').click();
-  }).show();
+  // $('.get_cover').click(function() {
+  //   $('#file-input').click();
+  // }).show();
 
   $('.select2-drop-mask').html('<i class="fa fa-book"></i>');
 });
