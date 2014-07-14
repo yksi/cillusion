@@ -5,6 +5,10 @@ class MessagesController < ApplicationController
     @resieved_messages = current_user.recieved_messages.order(created_at: :desc)
     @sent_messages = current_user.sent_messages.order(created_at: :desc)
     @new_message = Message.new
+    respond_to do |format|
+      format.html
+      format.json { render text: current_user.unread_messages }
+    end
   end
 
   def create

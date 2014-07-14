@@ -143,6 +143,16 @@ class User < ActiveRecord::Base
     end
   end
 
+  def unread_messages
+    count = 0
+    recieved_messages.each do |m|
+      if !m.read
+        count += 1
+      end
+    end
+    count
+  end
+
   private
 
   def set_uid

@@ -17,20 +17,14 @@
               = link_to browse_timeline_path do
                 .rounded-btn.timeline-btn.animated.bounceInDown
                   %i.fa.fa-clock-o.fa-2x
-                  - if current_user.has_new_logs?
-                    #span.new_logs
-                      %i.fa.fa-circle.text-danger
+                  #span.new_logs
+                    %i.fa.fa-circle.text-danger
             %li.headerDivider
             %li.nav-btn{"data-toggle" => "tooltip", "data-placement" => "bottom", title: t('Messages')}
               =link_to messages_path do
                 .rounded-btn.messages-btn.animated.bounceInDown
                   %i.fa.fa-envelope.fa-2x
-                  - @count = 0
-                  - current_user.recieved_messages.each do |m|
-                    - if m.read == false
-                      - @count += 1
-                  - if @count > 0
-                    #span.new_messages= @count
+                  #span.new_messages= current_user.unread_messages
             %li.nav-btn{"data-toggle" => "tooltip", "data-placement" => "bottom", title: t("Groups")}
               = link_to groups_path do
                 .rounded-btn.groups-btn.animated.bounceInDown
@@ -61,7 +55,7 @@
               %ul.dropdown-menu
                 %li
                   = link_to current_user do
-                    %i.fa.fa-home= " #{t('My_account')}"
+                    %i.fa.fa-home= t('My_account')
                 %li
                   = link_to edit_user_registration_path(current_user) do
                     %i.fa.fa-gear= " #{t('Account_settings')}"

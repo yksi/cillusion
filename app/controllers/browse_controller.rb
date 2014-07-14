@@ -6,7 +6,10 @@ class BrowseController < ApplicationController
 
   def timeline
     @logs = Log.order(created_at: :desc)
-    current_user.read_news!
+    respond_to do |format|
+      format.html { current_user.read_news! }
+      format.json { render text: current_user.has_new_logs? }
+    end
   end
 
   def articles

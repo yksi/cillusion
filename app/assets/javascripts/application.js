@@ -13,6 +13,6 @@
 //= require helps
 //= require select2
 //= require validator
-
+//= require news_loader
 
 

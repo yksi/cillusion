@@ -129,10 +129,10 @@ $(document).on("page:change", function() {
     allowClear: true
   });
 
-  $('#message_recipient_id').select2({
-    placeholder: "Select an Article",
-    allowClear: true
-  });
+  // $('#message_recipient_id').select2({
+  //   placeholder: "Select an Article",
+  //   allowClear: true
+  // });
 
   $('select').select2({
     placeholder: "Select an Article",
@@ -159,6 +159,6 @@ $(document).on("page:change", function() {
   $('.select2-drop-mask').html('<i class="fa fa-book"></i>');
 });
 
-function triggers_s (argument) {
-  $('.edit_cover_form').submit();
-}
+// function triggers_s (argument) {
+//   $('.edit_cover_form').submit();
+// }

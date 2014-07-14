@@ -192,7 +192,7 @@ figure.photo:hover .btn-pick-photo {
 }
 
 .new_messages {
-  display: inline;
+  display: none;
   min-width: 10px;
   padding: 3px 7px;
   font-size: 12px;
@@ -206,11 +206,11 @@ figure.photo:hover .btn-pick-photo {
   border-radius: 10px;
   position: absolute;
   background-color: red;
-  top: 1px;
+  top: 4px;
 }
 
 .new_logs {
-  display: inline;
+  display: none;
   min-width: 10px;
   font-weight: bold;
   color: #FFF;
@@ -524,14 +524,14 @@ img.miniature {
   padding: 20px 10px;
 }
 
-.gray-d2 { 
+.gray-d2 {
   background-color: gray;
   width: 50%;
   border: none;
   padding: 20px 10px;
 }
 
-#file-input { 
+#file-input {
   display: none;
 }
 
@@ -562,7 +562,7 @@ img.miniature {
   background-color: transparent;
   border: none;
   font-size: 25px;
-  font-weight: bold; 
+  font-weight: bold;
   height: 50px;
   padding: 15px;
 }
