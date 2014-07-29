@@ -40,18 +40,23 @@ class UsersController < ApplicationController
     @followed = @user.followed_users
     @complete = 20
     @date = params[:month] ? Date.parse(params[:month]) : Date.today
+
     if @user.hometown
       @complete += 20
     end
+
     if @user.born_date
       @complete += 20
     end
+
     if @user.avatar?
       @complete += 20
     end
+
     if @user.about
       @complete += 20
     end
+
 	end
 
 	def edit

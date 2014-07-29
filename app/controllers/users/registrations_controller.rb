@@ -26,6 +26,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     @user = User.find(current_user.id)
     if @user.update_attributes(user_params)
+      p 'UPDATING'
       set_flash_message :notice, :updated
       sign_in @user, :bypass => true
       redirect_to after_update_path_for(@user)

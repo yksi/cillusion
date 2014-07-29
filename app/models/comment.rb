@@ -13,9 +13,9 @@ class Comment < ActiveRecord::Base
 
   def cut_content
     if self.content.length > 20
-      return "#{self.content[0..20]}..."
+      "#{self.content[0..20]}..."
     else
-      return self.content
+      self.content
     end
   end
 
