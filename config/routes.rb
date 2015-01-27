@@ -22,6 +22,8 @@ Illusion::Application.routes.draw do
   get 'api/get_fullname'
   get 'api/get_article_comments'
 
+  resources :dashboard
+
   scope controller: :terms, path: 'lead' ,only: [] do
     get :eula
   end

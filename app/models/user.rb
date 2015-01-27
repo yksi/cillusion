@@ -113,13 +113,22 @@ class User < ActiveRecord::Base
     updated_at > 10.minutes.ago
   end
 
+  def is_admin?
+    role == 3
+  end
+
   def gender
     self.sex ? 'male' : 'female'
   end
 
   def self.search(search)
     if search
-      self.where('lower(first_name) LIKE ? OR lower(last_name) LIKE ?', "%#{search}%", "%#{search}%")
+      inCase = search.split(' ')
+      if inCase.count > 1
+        self.where('lower(first_name) LIKE ? OR lower(last_name) LIKE ? OR lower(first_name) LIKE ? OR lower(last_name) LIKE ?', "%#{inCase[0]}%", "%#{inCase[1]}%", "%#{inCase[1]}%", "%#{inCase[0]}%")
+      else
+        self.where('lower(first_name) LIKE ? OR lower(last_name) LIKE ?', "%#{search}%", "%#{search}%")
+      end
     else
       self.order(updated_at: :desc)
     end
@@ -158,5 +167,4 @@ class User < ActiveRecord::Base
   def set_uid
     self.uid = Digest::SHA1.hexdigest([Time.now, rand].join)
   end
-
 end

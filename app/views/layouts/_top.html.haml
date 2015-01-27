@@ -53,6 +53,10 @@
                 = current_user.first_name
                 %b.caret
               %ul.dropdown-menu
+                - if current_user.is_admin?
+                  %li
+                    = link_to dashboard_index_path do
+                      %i.fa.fa-home= t('Dashboard')
                 %li
                   = link_to current_user do
                     %i.fa.fa-home= t('My_account')

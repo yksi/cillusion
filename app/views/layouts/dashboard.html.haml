@@ -1,0 +1,13 @@
+!!!
+%html{lang: "en"}
+  %head
+    %meta{charset: "utf-8"}
+    %title= "#{yield(:title)} cillusion"
+    = stylesheet_link_tag  "admin"
+    = javascript_include_tag "admin"
+    = csrf_meta_tag
+  %body
+    = render 'dashboard/top'
+    %hr
+    .container
+      = yield
